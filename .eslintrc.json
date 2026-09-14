@@ -1,0 +1,1 @@
+{ "extends": ["next/core-web-vitals", "next/typescript"], "ignorePatterns": ["archive/**", "src/components/Layout.tsx", "src/components/BlogCard.tsx", "src/components/CreatorCard.tsx", "src/components/JobCard.tsx", "src/components/RoadmapStep.tsx", "src/data/**", "src/types/**"] }

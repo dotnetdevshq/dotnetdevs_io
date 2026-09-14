@@ -1,0 +1,32 @@
+{
+  "name": "dotnetdevs-io",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "node scripts/validate-config.mjs && next build && node scripts/check-export.mjs",
+    "start": "node scripts/preview.mjs",
+    "preview": "node scripts/preview.mjs",
+    "dev:preview": "node scripts/dev-preview.mjs",
+    "assets": "node scripts/generate-assets.cjs",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "15.3.5",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "lucide-react": "^0.460.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "15.3.5",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.0.0"
+  }
+}

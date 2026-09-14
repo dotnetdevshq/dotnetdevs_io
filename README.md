@@ -1,165 +1,74 @@
 # dotnetdevs.io
 
-The ultimate platform for .NET developers - Find jobs, discover creators, stay updated with the latest news, and advance your career with comprehensive roadmaps.
+A static community link page for C#, .NET, and the developer ecosystem, with The .NET Insider newsletter and ten owner-confirmed social destinations.
 
-## Features
+## Local preview
 
-- **Job Board**: Browse .NET jobs with advanced filtering by technology, location, and job type
-- **Creator Showcase**: Discover amazing .NET developers and content creators
-- **Blog/News Aggregator**: Stay updated with the latest .NET news and articles
-- **Learning Roadmaps**: Structured learning paths for .NET developers
-- **Tools & Resources**: Essential tools and resources for .NET development
+Use Node 24 and the existing lockfile:
 
-## Tech Stack
-
-- **Frontend**: React 18 with TypeScript
-- **Framework**: Next.js 15 with App Router
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Development**: Modern development environment with hot reload
-
-## Project Structure
-
-```
-src/
-├── app/                 # Next.js app router pages
-│   ├── globals.css     # Global styles
-│   ├── layout.tsx      # Root layout component
-│   ├── page.tsx        # Homepage
-│   ├── jobs/           # Jobs page
-│   ├── creators/       # Creators page
-│   ├── blog/           # Blog page
-│   ├── roadmaps/       # Roadmaps page
-│   └── tools/          # Tools page
-├── components/         # Reusable React components
-│   ├── Layout.tsx      # Main layout component
-│   ├── JobCard.tsx     # Job card component
-│   ├── CreatorCard.tsx # Creator card component
-│   ├── BlogCard.tsx    # Blog post card component
-│   └── RoadmapStep.tsx # Roadmap step component
-├── data/               # Mock data
-│   └── mockData.ts     # Sample data for all features
-└── types/              # TypeScript type definitions
-    └── index.ts        # All interface definitions
+```sh
+npm ci
+npm run build
+npm run preview
 ```
 
-## Getting Started
+Open http://localhost:3000. The preview serves the actual production export from `out/`, bound to the local machine. Stop it with Ctrl+C. For editing with automatic refresh, use `npm run dev` instead (stop the preview first if both use port 3000).
 
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+This machine's `npm` PowerShell shim currently points to a missing global npm installation. The working alternative used during implementation is:
 
-2. **Run the development server**:
-   ```bash
-   npm run dev
-   ```
+```powershell
+node "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js" run build
+node scripts/preview.mjs
+```
 
-3. **Open your browser**:
-   Navigate to [http://localhost:3000](http://localhost:3000) (or the port shown in terminal)
+`npm run dev:preview` opens a separate developer-only design mode at http://localhost:3001. Missing social URLs render as clearly marked, non-clickable samples there. Production builds always omit those samples. With all ten current URLs configured, all ten cards are real links in either mode.
 
-## Key Components
+## Edit content
 
-### JobCard
-- Displays job information with company, location, salary, and tags
-- Featured job highlighting
-- Direct application links
+`src/config/site.json` contains the brand, description, page title, canonical URL, newsletter copy and destination, social labels/URLs/order/enabled flags, header logo (`logo`), app icon (`icon`), sharing-image path, and optional contact destination.
 
-### CreatorCard
-- Shows creator profile with follower count and specialties
-- Social media links integration
-- Featured creator highlighting
+- Add or edit a social URL using the exact HTTPS profile/channel destination.
+- Change `order` to reorder links; lower numbers come first.
+- Set `enabled` to `false` to hide a destination, or remove its entry.
+- Set `url` to `null` or an empty string when unknown. It is omitted in production.
+- New platform identifiers require a matching local SVG in `public/icons/`.
+- Contact is optional. Set `contact.url` to a real HTTPS or mailto destination; never invent an address.
+- Rebuild after configuration edits. Content and links are present in the exported HTML and work without JavaScript.
 
-### BlogCard
-- Blog post preview with read time and publication date
-- Source attribution
-- Tag-based categorization
+External destinations consistently open in the same tab. Cards are single links, with visible platform labels and decorative icons. No forms, accounts, analytics, or backend are needed.
 
-### RoadmapStep
-- Interactive roadmap steps with expandable resources
-- Progress tracking
-- Resource type categorization
+## Design and assets
 
-## Features in Detail
+`src/app/globals.css` holds the proposed warm neutral/violet design and CSS variables. `src/components/CommunityPage.tsx` contains layout, and `BrandMark.tsx` contains the original code mark.
 
-### Job Board
-- Advanced filtering by technology, location, and job type
-- Real-time search functionality
-- Responsive grid layout
-- Featured job promotions
+Light and dark palettes follow the visitor's system preference by default. The moon/sun button in the header saves an explicit choice in local storage. `ThemeToggle.tsx` handles that control; `src/lib/theme.ts` applies saved choices before paint. Without JavaScript, the page still follows the system theme and all destination links work. Clear the `dotnetdevs-theme` local-storage entry to resume automatic system preference after an override.
 
-### Creator Showcase
-- Filter by specialties and expertise
-- Social media integration
-- Follower metrics
-- Featured creator highlighting
+The supplied `NET devs` mark is stored unchanged at its original 500 × 500 resolution in `public/logo.png`. Both `logo` and `icon` reference this full square image. The header displays it at 64 × 64 pixels (56 × 56 on mobile), with CSS rounded corners and no crop. The sharing image also uses the full square logo. To replace it, put an appropriately licensed asset in `public/` and update those root-relative paths. The text `dotnetdevs.io` wordmark remains visible beside the logo.
 
-### Blog/News Feed
-- Content aggregation from multiple sources
-- Tag-based filtering
-- Sort by date or read time
-- Featured article highlighting
+The original sharing image is `public/social-card.png`, exactly 1200 × 630 pixels. Replace it with a PNG at those dimensions or change `sharingImage` and rebuild. Run `npm run assets` to regenerate the supplied typographic artwork from configuration. The generator has its own palette constants to update if changing the site colors; it intentionally does not overwrite custom assets during every build. See [asset sources](docs/ASSETS.md).
 
-### Learning Roadmaps
-- Structured learning paths
-- Interactive step-by-step guidance
-- Resource recommendations
-- Progress tracking
+## Build and checks
 
-### Tools & Resources
-- Curated tool collections
-- Category-based organization
-- Popularity indicators
-- Direct tool access links
+```sh
+npm run assets       # Only after changing branding / to regenerate the original artwork
+npm run build        # Validates configuration, builds, typechecks/lints, verifies the export
+npm run typecheck
+npm run lint
+npm run preview
+```
 
-## Customization
+Deploy **only `out/`**. Next.js static export is enabled, so no Next.js server is required. Do not deploy `.next/`, source files, or the archived prototype. A lightweight preview server is included; it is not intended as a public hosting service. The footer year is set at build time; rebuild in a new year.
 
-### Adding New Content
-1. **Jobs**: Add new job objects to `mockJobs` array in `src/data/mockData.ts`
-2. **Creators**: Add new creator objects to `mockCreators` array
-3. **Blog Posts**: Add new blog post objects to `mockBlogPosts` array
-4. **Roadmaps**: Add new roadmap objects to `mockRoadmaps` array
-5. **Tools**: Add new tool objects to `mockTools` array
+Optional browser regression checks: `node scripts/verify-browser.cjs` uses an already installed Playwright, or takes its absolute package path as the first argument. It writes screenshots and a report to ignored `.qa/`; it does not install browser dependencies. See [verification results](docs/VERIFICATION.md).
 
-### Styling
-- Modify `tailwind.config.js` for custom colors and themes
-- Update `src/app/globals.css` for global styles
-- Component-specific styles use Tailwind utility classes
+## Hosting and domain
 
-### Configuration
-- Update `next.config.js` for Next.js configuration
-- Modify `tsconfig.json` for TypeScript settings
+Cloudflare Pages is the recommended default, pending your hosting preference. Set build command `npm run build`, output `out`, production branch `main`. The included `_headers` and `.nojekyll` support static hosting. [Deployment notes](docs/DEPLOYMENT.md) compare Cloudflare Pages and GitHub Pages using current official documentation and explain HTTPS, apex/www behavior, staging noindex, and DNS preservation.
 
-## Build and Deploy
+No publishing or DNS changes have been made. Next step: approve the local page and hosting choice, then create/connect the Pages project and review its assigned deployment before attaching `dotnetdevs.io`. Preserve all email and unrelated DNS records.
 
-1. **Build the project**:
-   ```bash
-   npm run build
-   ```
+## Preserved work and handoff
 
-2. **Start production server**:
-   ```bash
-   npm start
-   ```
+The old app routes and README/config are in `archive/prototype/`; old components and mock data remain unused in `src/`. None of that content is public. [Implementation decisions](docs/DECISIONS.md) record the scope and URL provenance for future sessions.
 
-3. **Deploy**: The project is ready for deployment on platforms like Vercel, Netlify, or any hosting service that supports Next.js.
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Support
-
-For support, please open an issue in the GitHub repository or contact the maintainers.
-
----
-
-Built with ❤️ for the .NET developer community
+All ten social destinations and the header logo were supplied by the owner. Established brand colors, an optional contact destination, and the final hosting preference remain optional inputs.

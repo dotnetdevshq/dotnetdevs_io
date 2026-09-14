@@ -1,0 +1,96 @@
+{
+  "brand": "dotnetdevs.io",
+  "mastheadNote": "A shared love of .NET.",
+  "description": "C#, .NET, and the developer ecosystem. News, practical articles, and tools for .NET developers.",
+  "eyebrow": "The .NET developer community",
+  "canonicalUrl": "https://dotnetdevs.io/",
+  "title": "dotnetdevs.io — C#, .NET & The .NET Insider",
+  "logo": "/logo.png",
+  "icon": "/logo.png",
+  "sharingImage": "/social-card.png",
+  "newsletter": {
+    "title": "The .NET Insider",
+    "description": "Explore .NET updates, practical articles, and developer tools in our curated newsletter.",
+    "label": "Read The .NET Insider",
+    "url": "https://dotnet.news",
+    "eyebrow": "Our newsletter"
+  },
+  "socialHeading": "Find your community",
+  "socialDescription": "Follow along on your favorite platforms.",
+  "socials": [
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/company/dotnetdevs",
+      "order": 10,
+      "enabled": true
+    },
+    {
+      "id": "facebook",
+      "label": "Facebook",
+      "url": "https://www.facebook.com/dotnetdevsio",
+      "order": 20,
+      "enabled": true
+    },
+    {
+      "id": "instagram",
+      "label": "Instagram",
+      "url": "https://www.instagram.com/dotnetdevs_io",
+      "order": 30,
+      "enabled": true
+    },
+    {
+      "id": "x",
+      "label": "X",
+      "url": "https://x.com/dotnetdevs_io",
+      "order": 40,
+      "enabled": true
+    },
+    {
+      "id": "threads",
+      "label": "Threads",
+      "url": "https://www.threads.net/@dotnetdevs_io",
+      "order": 50,
+      "enabled": true
+    },
+    {
+      "id": "bluesky",
+      "label": "Bluesky",
+      "url": "https://bsky.app/profile/dotnetdevs.io",
+      "order": 60,
+      "enabled": true
+    },
+    {
+      "id": "tiktok",
+      "label": "TikTok",
+      "url": "https://tiktok.com/@dotnetdevs",
+      "order": 70,
+      "enabled": true
+    },
+    {
+      "id": "youtube",
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@dotnetdevs_io",
+      "order": 80,
+      "enabled": true
+    },
+    {
+      "id": "whatsapp",
+      "label": "WhatsApp Channel",
+      "url": "https://whatsapp.com/channel/0029Va5mU3G002T88puriR0p",
+      "order": 90,
+      "enabled": true
+    },
+    {
+      "id": "telegram",
+      "label": "Telegram Channel",
+      "url": "https://t.me/dotnetdevs_io",
+      "order": 100,
+      "enabled": true
+    }
+  ],
+  "contact": {
+    "label": "Contact",
+    "url": null
+  }
+}
