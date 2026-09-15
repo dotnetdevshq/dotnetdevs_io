@@ -32,6 +32,12 @@ The owner-supplied GA4 ID is `G-FJLBMHRY60`, configured as `googleAnalyticsId` i
 
 Analytics runs only in indexable production builds and only when the browser hostname matches the canonical domain. Localhost and Vercel review hostnames do not load the remote tag or create analytics events. Set the ID to an empty string to disable it. The browser verification intercepts Google's script request and checks the command queue without sending test visits to Google. After deployment, verify reception in GA4 Realtime or [Tag Assistant](https://tagassistant.google.com/); local testing does not confirm account-side ingestion.
 
+## Vercel Web Analytics
+
+Vercel's Analytics dashboard is separate from the Google Analytics property. The official `@vercel/analytics/next` component is mounted through `VercelAnalytics` in the root layout. It uses the same indexable-production-build and canonical-hostname restrictions as Google Analytics, with no custom events or duplicate manual page views. Local and review hosts do not load its tracking script.
+
+Deploy the updated package and lockfile to Vercel with Web Analytics enabled for this project. Then visit `https://dotnetdevs.io/` and check the Vercel Analytics dashboard. Visits to the assigned `vercel.app` alias are intentionally excluded by the hostname policy. Vercel supplies the tracking endpoint on deployment; the local static server does not host it. Google Analytics remains enabled separately. See [Vercel's setup guide](https://vercel.com/docs/analytics/quickstart).
+
 ## Verification
 
 Every `npm run build` runs `scripts/check-seo.mjs` against the actual export: metadata, graph relationships, real social links, robots, canonical sitemap, llms.txt, 404 exclusions, and analytics presence/absence. Both preview and production modes must pass. Browser regression checks cover visible content without JavaScript and responsive layouts. `scripts/verify-analytics.cjs` checks production initialization, duplicate prevention, and exclusion of review/local hosts using intercepted requests.

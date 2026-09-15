@@ -15,9 +15,13 @@ async function main() {
   try {
     for (const hostname of [canonicalHost, 'review.vercel.app', 'localhost']) {
       const context = await browser.newContext({ colorScheme: 'light' });
-      const tagRequests = [], unexpected = [], errors = [];
+      const tagRequests = [], vercelRequests = [], unexpected = [], errors = [];
       await context.route('**/*', async route => {
         const url = new URL(route.request().url());
+        if (url.hostname === hostname && url.pathname === '/_vercel/insights/script.js') {
+          vercelRequests.push(url.href);
+          return route.fulfill({ contentType: 'text/javascript', body: 'window.__vercelTagStubLoaded = true;' });
+        }
         if (url.hostname === 'www.googletagmanager.com' && url.pathname === '/gtag/js') {
           tagRequests.push(url.href);
           return route.fulfill({ contentType: 'text/javascript', body: 'window.__googleTagStubLoaded = true;' });
@@ -44,7 +48,15 @@ async function main() {
       const state = await page.evaluate(() => ({
         queue: (window.dataLayer || []).map(args => Array.from(args)),
         tags: document.querySelectorAll('script[src^="https://www.googletagmanager.com/gtag/js"]').length,
+        vercelQueue: window.vaq || [],
+        vercelTags: document.querySelectorAll('script[src="/_vercel/insights/script.js"]').length,
       }));
+      const vercelEnabled = hostname === canonicalHost && !preview;
+      assert.equal(vercelRequests.length, vercelEnabled ? 1 : 0, `${hostname}: unexpected Vercel requests`);
+      assert.equal(state.vercelTags, vercelEnabled ? 1 : 0, `${hostname}: duplicate Vercel loader`);
+      const vercelPageviews = state.vercelQueue.filter(args => args[0] === 'pageview');
+      assert.equal(vercelPageviews.length, vercelEnabled ? 1 : 0, `${hostname}: unexpected Vercel page views`);
+      if (vercelEnabled) assert.deepEqual(vercelPageviews[0][1], { route: '/', path: '/' });
       assert.equal(tagRequests.length, enabled ? 1 : 0, `${hostname}: unexpected tag requests`);
       assert.equal(state.tags, enabled ? 1 : 0, `${hostname}: duplicate or unexpected loader`);
       if (enabled) {
@@ -57,7 +69,7 @@ async function main() {
       assert.deepEqual(errors, [], 'No browser errors');
       await context.close();
     }
-    console.log(`Analytics checks passed (${preview ? 'preview excluded' : 'production enabled'}): correct ID, one initialization, no review/local tracking, no real analytics requests.`);
+    console.log(`Google and Vercel Analytics checks passed (${preview ? 'preview excluded' : 'production enabled'}): one initialization/page view, no review/local tracking, no real analytics requests.`);
   } finally { await browser.close(); }
 }
 main().catch(error => { console.error(error); process.exit(1); });

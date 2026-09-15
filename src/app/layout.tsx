@@ -3,6 +3,7 @@ import Script from 'next/script';
 import { site, isIndexable } from '@/lib/site';
 import { themeInitScript } from '@/lib/theme';
 import { analyticsInitScript } from '@/lib/analytics';
+import { VercelAnalytics } from '@/components/VercelAnalytics';
 import './globals.css';
 const image = new URL(site.sharingImage, site.canonicalUrl).href;
 export const metadata: Metadata = {
@@ -29,6 +30,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       {children}
       {isIndexable && process.env.NODE_ENV === 'production' && site.googleAnalyticsId &&
         <Script id="google-analytics" strategy="afterInteractive">{analyticsInitScript}</Script>}
+      {isIndexable && process.env.NODE_ENV === 'production' &&
+        <VercelAnalytics hostname={new URL(site.canonicalUrl).hostname} />}
     </body>
   </html>;
 }
