@@ -1,5 +1,14 @@
 # Verification — September 15, 2026
 
+## SEO and Analytics follow-up — September 16, 2026
+
+- Production and Vercel Preview builds passed compilation, lint/type checks, export checks, and the new SEO assertions. The preview build also exercised optional Google/Bing verification tokens; these test tokens were not present in the final production export.
+- Verified metadata, JSON-LD graph relationships, official profile links, canonical-only sitemap contents, production crawler access, preview exclusion, llms.txt, and 404 noindex/canonical behavior in the exported files.
+- Analytics browser checks passed against both builds using intercepted network requests: the real measurement ID initializes once on the canonical hostname, no additional manual page view is queued, and local/review hosts do not load the Google tag. Test traffic was not sent to Google.
+- Responsive, keyboard, JavaScript-disabled, and dark-mode browser checks passed against the final production export without browser errors.
+- The live canonical homepage, robots.txt, and sitemap.xml returned HTTP 200 with appropriate content types and no X-Robots-Tag header. These checks observed the deployment that existed before this update; they do not confirm that the new local files are published.
+- Search-console verification/submission, final deployment, and GA4 account-side ingestion remain outside the completed local checks. See `docs/SEO.md` for the exact follow-up steps.
+
 ## Completed
 
 - Initially restored the existing locked dependencies with `npm ci` after the previous installation was found to be missing Next.js type files. The later security upgrade is documented below.
@@ -34,7 +43,7 @@ These outcomes do not show that the links are broken. Check the profiles/channel
 
 Run `npm run build`, then `npm run preview`. With Playwright and Chrome installed, run `node scripts/verify-browser.cjs`; an absolute Playwright package path may be supplied as the first argument. `PLAYWRIGHT_CHANNEL=edge` can select an installed Edge browser. Reports/screenshots go to ignored `.qa/`. The implementation session used the bundled Playwright package and Chrome.
 
-Next reports approximately 113 kB of first-load JavaScript after the security upgrade. The page remains functional without it; most is the retained framework's runtime. A small theme initializer and toggle are the only custom client behavior. No trackers, external fonts, or network data fetching were added. No Lighthouse score or screen-reader certification is claimed.
+Next reported approximately 113 kB of first-load JavaScript after the security upgrade. The page remains functional without it; most is the retained framework's runtime. The initial version used only a theme initializer and toggle, with no trackers. The owner subsequently requested Google Analytics on September 16; see `docs/SEO.md` for its production-only behavior. No Lighthouse score or screen-reader certification is claimed.
 
 ## Vercel security upgrade follow-up
 

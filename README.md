@@ -35,7 +35,7 @@ node scripts/preview.mjs
 - Contact is optional. Set `contact.url` to a real HTTPS or mailto destination; never invent an address.
 - Rebuild after configuration edits. Content and links are present in the exported HTML and work without JavaScript.
 
-External destinations consistently open in the same tab. Cards are single links, with visible platform labels and decorative icons. No forms, accounts, analytics, or backend are needed.
+External destinations consistently open in the same tab. Cards are single links, with visible platform labels and decorative icons. No forms, accounts, or backend are needed. The owner-supplied Google Analytics tag runs only on the canonical production hostname.
 
 ## Design and assets
 
@@ -65,9 +65,11 @@ Optional browser regression checks: `node scripts/verify-browser.cjs` uses an al
 
 ## Hosting and domain
 
+Search metadata, community JSON-LD, `/robots.txt`, `/sitemap.xml`, and `/llms.txt` are generated during the build. Preview builds are excluded from indexing automatically on Vercel. GA4 uses `googleAnalyticsId` in the content configuration. See [SEO and analytics setup](docs/SEO.md) for crawler policy, search-console verification/submission, environment variables, and checks.
+
 Vercel is the current deployment target. Use the Next.js framework preset, install command `npm ci`, build command `npm run build`, and automatic output-directory setting. The configuration enables static export. Next.js and its ESLint configuration are pinned to 15.5.25 to address the vulnerable-version deployment block; commit the updated lockfile alongside `package.json`. [Deployment notes](docs/DEPLOYMENT.md) explain Vercel recovery and the alternative Cloudflare Pages/GitHub Pages setups.
 
-The owner attempted a Vercel deployment; successful publication and DNS have not been verified here. Deploy the updated commit and review the assigned deployment before attaching `dotnetdevs.io`. Preserve all email and unrelated DNS records.
+The live canonical homepage, robots.txt, and sitemap.xml returned HTTP 200 on September 16, 2026. Deploy these latest local changes, then verify the production metadata and Analytics reception. Preserve all email and unrelated DNS records.
 
 ## Preserved work and handoff
 

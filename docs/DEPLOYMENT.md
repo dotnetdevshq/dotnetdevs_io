@@ -1,6 +1,6 @@
 # Deployment preparation
 
-The owner's Vercel production deployment was blocked because the original Next.js 15.3.5 dependency was vulnerable. No successful hosted deployment or DNS change has been verified in this workspace.
+The owner's initial Vercel deployment was blocked by Next.js 15.3.5; the security upgrade below resolved the local dependency issue. On September 16, 2026, live HTTP checks returned 200 for the canonical homepage, robots.txt, and sitemap.xml, with no X-Robots-Tag header. This does not verify deployment of subsequent local changes or search-engine indexing. No DNS changes were made here.
 
 ## Vercel deployment recovery
 
@@ -9,7 +9,7 @@ Next.js and `eslint-config-next` are pinned to 15.5.25, with the updated depende
 1. Commit and push both `package.json` and `package-lock.json` to the connected production branch, `main`. Deploy the new commit; redeploying the old failed commit will retain its vulnerable dependency.
 2. Keep Vercel's **Next.js** framework preset. Use `npm ci` for installation and `npm run build` as the build command so the repository's configuration and export checks run. Keep the framework's automatic output-directory setting. `next.config.js` already enables static export to `out/`.
 3. Confirm the new build log reports Next.js 15.5.25 and finishes successfully. Check the homepage, full rounded logo, theme toggle, newsletter, and all ten social links on the assigned deployment URL.
-4. Set `SITE_NOINDEX=1` for the Vercel Preview environment only and leave it unset in Production. The existing build-time flag generates staging robots metadata. Cloudflare's `public/_headers` file is not a Vercel header configuration.
+4. `VERCEL_ENV=preview` now excludes Vercel previews from indexing automatically. `SITE_NOINDEX=1` is an optional explicit override; leave it unset in Production. See `docs/SEO.md` for sitemap submission and GA4 verification after deployment. Cloudflare's `public/_headers` file is not a Vercel header configuration.
 
 References: [Next.js on Vercel](https://vercel.com/docs/frameworks/full-stack/nextjs), [Next.js static exports](https://nextjs.org/docs/app/guides/static-exports).
 

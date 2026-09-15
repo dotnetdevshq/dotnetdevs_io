@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/validate-config.mjs && next build && node scripts/check-export.mjs",
+    "build": "node scripts/validate-config.mjs && next build && node scripts/check-export.mjs && node scripts/check-seo.mjs",
     "start": "node scripts/preview.mjs",
     "preview": "node scripts/preview.mjs",
     "dev:preview": "node scripts/dev-preview.mjs",
