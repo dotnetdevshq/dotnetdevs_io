@@ -1,10 +1,21 @@
 # Deployment preparation
 
-No site has been published and no DNS records have been changed.
+The owner's Vercel production deployment was blocked because the original Next.js 15.3.5 dependency was vulnerable. No successful hosted deployment or DNS change has been verified in this workspace.
+
+## Vercel deployment recovery
+
+Next.js and `eslint-config-next` are pinned to 15.5.25, with the updated dependency graph in `package-lock.json`. This exceeds the 15.5.24 patch identified in the [August 2026 Next.js security release](https://nextjs.org/blog/august-2026-security-release). React 18 remains compatible; no application migration or security bypass is needed.
+
+1. Commit and push both `package.json` and `package-lock.json` to the connected production branch, `main`. Deploy the new commit; redeploying the old failed commit will retain its vulnerable dependency.
+2. Keep Vercel's **Next.js** framework preset. Use `npm ci` for installation and `npm run build` as the build command so the repository's configuration and export checks run. Keep the framework's automatic output-directory setting. `next.config.js` already enables static export to `out/`.
+3. Confirm the new build log reports Next.js 15.5.25 and finishes successfully. Check the homepage, full rounded logo, theme toggle, newsletter, and all ten social links on the assigned deployment URL.
+4. Set `SITE_NOINDEX=1` for the Vercel Preview environment only and leave it unset in Production. The existing build-time flag generates staging robots metadata. Cloudflare's `public/_headers` file is not a Vercel header configuration.
+
+References: [Next.js on Vercel](https://vercel.com/docs/frameworks/full-stack/nextjs), [Next.js static exports](https://nextjs.org/docs/app/guides/static-exports).
 
 ## Hosting choice
 
-Recommended default: Cloudflare Pages with Git integration. The output is a static Next.js export, so no Workers runtime, backend, secrets, or paid database are required. GitHub Pages is also suitable for this community link page. Keep GitHub Pages if retaining an existing DNS provider without moving nameservers is a priority.
+Vercel is the owner's current deployment target. The following comparison documents the previously proposed alternatives. The output is a static Next.js export, so no Workers runtime, backend, secrets, or paid database are required.
 
 | Need | Cloudflare Pages | GitHub Pages |
 | --- | --- | --- |

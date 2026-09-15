@@ -63,12 +63,12 @@ Optional browser regression checks: `node scripts/verify-browser.cjs` uses an al
 
 ## Hosting and domain
 
-Cloudflare Pages is the recommended default, pending your hosting preference. Set build command `npm run build`, output `out`, production branch `main`. The included `_headers` and `.nojekyll` support static hosting. [Deployment notes](docs/DEPLOYMENT.md) compare Cloudflare Pages and GitHub Pages using current official documentation and explain HTTPS, apex/www behavior, staging noindex, and DNS preservation.
+Vercel is the current deployment target. Use the Next.js framework preset, install command `npm ci`, build command `npm run build`, and automatic output-directory setting. The configuration enables static export. Next.js and its ESLint configuration are pinned to 15.5.25 to address the vulnerable-version deployment block; commit the updated lockfile alongside `package.json`. [Deployment notes](docs/DEPLOYMENT.md) explain Vercel recovery and the alternative Cloudflare Pages/GitHub Pages setups.
 
-No publishing or DNS changes have been made. Next step: approve the local page and hosting choice, then create/connect the Pages project and review its assigned deployment before attaching `dotnetdevs.io`. Preserve all email and unrelated DNS records.
+The owner attempted a Vercel deployment; successful publication and DNS have not been verified here. Deploy the updated commit and review the assigned deployment before attaching `dotnetdevs.io`. Preserve all email and unrelated DNS records.
 
 ## Preserved work and handoff
 
 The old app routes and README/config are in `archive/prototype/`; old components and mock data remain unused in `src/`. None of that content is public. [Implementation decisions](docs/DECISIONS.md) record the scope and URL provenance for future sessions.
 
-All ten social destinations and the header logo were supplied by the owner. Established brand colors, an optional contact destination, and the final hosting preference remain optional inputs.
+All ten social destinations and the header logo were supplied by the owner. Established brand colors and an optional contact destination remain optional inputs.
