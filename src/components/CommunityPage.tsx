@@ -13,14 +13,14 @@ export function CommunityPage() {
     <header className="masthead">
       <Link href="/" className="wordmark" aria-label={`${site.brand} home`}>
         {site.logo ? <Image className="brand-logo" src={site.logo} alt="" width={500} height={500} unoptimized /> : <BrandMark />}
-        <span>{site.brand}</span>
+        {!site.logo && <span>{site.brand}</span>}
       </Link>
       <div className="masthead-actions"><span className="masthead-note">{site.mastheadNote}</span><ThemeToggle /></div>
     </header>
     <main id="main" tabIndex={-1}>
       <section className="intro" aria-labelledby="page-title">
         <p className="eyebrow">{site.eyebrow}</p>
-        <h1 id="page-title">{site.brand}</h1>
+        <h1 id="page-title">Your .NET community.</h1>
         <p className="intro-copy">{site.description}</p>
       </section>
       <section aria-labelledby="newsletter-title" className="newsletter-section">
