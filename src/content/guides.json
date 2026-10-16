@@ -1,0 +1,73 @@
+[
+  {
+    "slug": "ai-agents-mcp",
+    "title": "AI agents and MCP in .NET",
+    "description": "A reading path through the articles featured in The .NET Insider on building AI features, MCP servers and agents with .NET.",
+    "reviewed": "2026-10-16",
+    "reviewedLabel": "October 2026",
+    "intro": "The .NET AI stack has moved quickly. This page puts the most useful articles we have featured into an order that makes sense to read them in: the building blocks first, then MCP servers, then agents, then putting agents in front of users and shipping them responsibly. Every link goes to the original article.",
+    "sections": [
+      {
+        "title": "Start with the building blocks",
+        "intro": "The abstractions and learning material the rest of the stack builds on.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/dotnet-ai-essentials-the-core-building-blocks-explained/",
+          "https://devblogs.microsoft.com/dotnet/generative-ai-with-large-language-models-in-dotnet-and-csharp/",
+          "https://devblogs.microsoft.com/dotnet/vector-data-in-dotnet-building-blocks-for-ai-part-2/",
+          "https://devblogs.microsoft.com/dotnet/generative-ai-for-beginners-dotnet-version-2-on-dotnet-10/"
+        ]
+      },
+      {
+        "title": "Build an MCP server",
+        "intro": "From a first server in C# to the official SDK releases and hosting on Azure Functions.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/build-a-model-context-protocol-mcp-server-in-csharp/",
+          "https://devblogs.microsoft.com/dotnet/release-v10-of-the-official-mcp-csharp-sdk/",
+          "https://devblogs.microsoft.com/dotnet/announcing-v20-of-the-official-mcp-csharp-sdk/",
+          "https://devblogs.microsoft.com/dotnet/build-mcp-remote-servers-with-azure-functions/",
+          "https://devblogs.microsoft.com/azure-sdk/long-running-mcp-tools-azure-functions/",
+          "https://devblogs.microsoft.com/azure-sdk/mcp-as-easy-as-1-2-3-introducing-the-fluent-api-for-mcp-apps/"
+        ]
+      },
+      {
+        "title": "Build agents with Microsoft Agent Framework",
+        "intro": "The framework itself, durable workflows, agent skills, and a complete example that combines Agent Framework, Foundry, MCP and Aspire.",
+        "links": [
+          "https://devblogs.microsoft.com/foundry/introducing-microsoft-agent-framework-the-open-source-engine-for-agentic-ai-apps/",
+          "https://devblogs.microsoft.com/dotnet/microsoft-agent-framework-building-blocks-for-ai-part-3/",
+          "https://devblogs.microsoft.com/dotnet/durable-workflows-in-microsoft-agent-framework/",
+          "https://devblogs.microsoft.com/agent-framework/agent-skills-for-net-is-now-released/",
+          "https://devblogs.microsoft.com/agent-framework/discover-agent-skills-from-mcp-servers-in-net/",
+          "https://developer.microsoft.com/blog/build-a-real-world-example-with-microsoft-agent-framework-microsoft-foundry-mcp-and-aspire"
+        ]
+      },
+      {
+        "title": "Put agents in front of users",
+        "intro": "Streaming agent output into user interfaces, from the AG-UI protocol to experimental Blazor components.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/ag-ui-dotnet-sdk/",
+          "https://devblogs.microsoft.com/dotnet/build-agentic-ui-blazor/"
+        ]
+      },
+      {
+        "title": "Test, evaluate and govern",
+        "intro": "Checking what agents and models actually do before you ship them.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/start-using-the-microsoft-ai-evaluations-library-today/",
+          "https://devblogs.microsoft.com/dotnet/evaluating-ai-content-safety/",
+          "https://developer.microsoft.com/blog/how-to-test-agent-skills-without-hitting-real-apis/",
+          "https://devblogs.microsoft.com/dotnet/announcing-agent-governance-toolkit-mcp-extensions-for-dotnet/"
+        ]
+      },
+      {
+        "title": "Use AI on your own codebase",
+        "intro": "Getting better results from coding agents in .NET projects.",
+        "links": [
+          "https://antondevtips.com/blog/how-to-make-ai-write-high-quality-code-in-dotnet",
+          "https://devblogs.microsoft.com/dotnet/extend-your-coding-agent-with-dotnet-skills/",
+          "https://devblogs.microsoft.com/dotnet/ten-months-with-cca-in-dotnet-runtime/"
+        ]
+      }
+    ]
+  }
+]

@@ -4,7 +4,7 @@ import { ArrowUpRight, ArrowRight, BookOpen } from 'lucide-react';
 import { SiteChrome } from './SiteChrome';
 import { LinkCard } from './LinkCard';
 import { site, socialLinks, isDesignPreview, validDestination } from '@/lib/site';
-import { latestIssue, links, issueUrl, formatDate } from '@/lib/content';
+import { latestIssue, links, issueUrl, formatDate, guides } from '@/lib/content';
 
 export function CommunityPage() {
   const socials = isDesignPreview ? [...site.socials].filter(link => link.enabled).sort((a, b) => a.order - b.order) : socialLinks;
@@ -53,6 +53,16 @@ export function CommunityPage() {
         <Link className="section-link" href="/links/">Browse the link library<ArrowRight size={15} aria-hidden="true" /></Link>
       </div>
       <div className="link-list">{recentPicks.map(link => <LinkCard key={link.url} link={link} />)}</div>
+    </section>}
+    {guides.length > 0 && <section className="content-section" aria-labelledby="guides-title">
+      <div className="section-heading">
+        <h2 id="guides-title">Guides</h2>
+        <Link className="section-link" href="/guides/">All guides<ArrowRight size={15} aria-hidden="true" /></Link>
+      </div>
+      {guides.slice(0, 2).map(guide => <Link key={guide.slug} className="callout-card" href={`/guides/${guide.slug}/`}>
+        <span><strong>{guide.title}</strong><p>{guide.description}</p></span>
+        <ArrowRight size={18} aria-hidden="true" />
+      </Link>)}
     </section>}
     {socials.length > 0 && <section className="social-section" aria-labelledby="social-title">
       <div className="section-heading"><h2 id="social-title">{site.socialHeading}</h2><p>{site.socialDescription}</p></div>

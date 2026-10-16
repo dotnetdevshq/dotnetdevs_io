@@ -16,7 +16,7 @@ for (const file of ['404.html', 'robots.txt', 'sitemap.xml', 'favicon.svg', 'log
 for (const route of ['jobs', 'creators', 'blog', 'tools', 'roadmaps']) assert(!existsSync(`out/${route}`), `Prototype route exported: ${route}`);
 const png = readFileSync('out/social-card.png');
 assert.equal(png.readUInt32BE(16), 1200); assert.equal(png.readUInt32BE(20), 630);
-for (const route of ['newsletter', 'links', 'sponsor']) {
+for (const route of ['newsletter', 'links', 'sponsor', 'guides', 'posts']) {
   assert(existsSync(`out/${route}/index.html`), `Missing page: /${route}/`);
   const page = readFileSync(`out/${route}/index.html`, 'utf8');
   assert(page.includes(`rel="canonical" href="${new URL(`/${route}/`, config.canonicalUrl).href}"`), `/${route}/ canonical missing`);
@@ -28,4 +28,19 @@ for (const link of links) assert(library.includes(`href="${escape(link.url)}"`),
 const issues = JSON.parse(readFileSync('src/content/issues.json', 'utf8'));
 const archive = readFileSync('out/newsletter/index.html', 'utf8');
 for (const issue of issues) assert(archive.includes(`/p/${issue.slug}`), `Archive missing issue ${issue.number}`);
+const guides = JSON.parse(readFileSync('src/content/guides.json', 'utf8'));
+const linkUrls = new Set(links.map(link => link.url));
+for (const guide of guides) {
+  const page = readFileSync(`out/guides/${guide.slug}/index.html`, 'utf8');
+  for (const section of guide.sections) for (const url of section.links) {
+    assert(linkUrls.has(url), `Guide ${guide.slug} references a URL missing from links.json: ${url}`);
+    assert(page.includes(`href="${escape(url)}"`), `Guide ${guide.slug} page missing ${url}`);
+  }
+}
+const posts = JSON.parse(readFileSync('src/content/posts.json', 'utf8'));
+const postsPage = readFileSync('out/posts/index.html', 'utf8');
+for (const post of posts) {
+  assert(existsSync(`out${post.image}`), `Missing post image ${post.image}`);
+  assert(postsPage.includes(`href="${escape(post.source.url)}"`), `Posts page missing source for ${post.slug}`);
+}
 console.log('Export verified: static links, metadata, 1200×630 sharing image, assets, and no prototype or preview content.');

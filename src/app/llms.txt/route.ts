@@ -1,5 +1,5 @@
 import { site, socialLinks, isIndexable } from '@/lib/site';
-import { issues, issueUrl, topics, activeTopics } from '@/lib/content';
+import { issues, issueUrl, topics, activeTopics, guides } from '@/lib/content';
 
 export const dynamic = 'force-static';
 
@@ -16,6 +16,8 @@ export function GET() {
     `- [Newsletter archive](${page('/newsletter/')}): Every issue of ${site.newsletter.title}.`,
     `- [Link library](${page('/links/')}): Curated articles and releases featured in ${site.newsletter.title}, with author credit.`,
     ...activeTopics.map(topic => `- [${topics[topic].label} links](${page(`/links/${topic}/`)}): ${topics[topic].description}`),
+    ...guides.map(guide => `- [${guide.title}](${page(`/guides/${guide.slug}/`)}): ${guide.description}`),
+    `- [Posts](${page('/posts/')}): Visual explainers from our social channels, with links to the original articles.`,
     `- [Sponsor](${page('/sponsor/')}): Audience figures and sponsorship options.`,
     '',
     '## Newsletter',
