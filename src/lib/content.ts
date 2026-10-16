@@ -1,6 +1,8 @@
 import issuesData from '@/content/issues.json';
 import linksData from '@/content/links.json';
 import mediaKitData from '@/content/media-kit.json';
+import guidesData from '@/content/guides.json';
+import postsData from '@/content/posts.json';
 import { site } from '@/lib/site';
 
 export type Issue = { number: number; date: string; slug: string; tags: string[]; summary?: string };
@@ -21,6 +23,8 @@ export const topics: Record<string, { label: string; description: string }> = {
   architecture: { label: 'Architecture', description: 'Design patterns, domain modelling and code quality.' },
   performance: { label: 'Performance', description: 'Runtime performance, Native AOT and trimming.' },
   security: { label: 'Security', description: 'Authentication, tokens, supply chain and security updates.' },
+  observability: { label: 'Observability', description: 'Logging, tracing, metrics and diagnostics for .NET apps.' },
+  clients: { label: 'MAUI & desktop', description: 'Cross-platform and Windows client apps with .NET MAUI, WinUI and WinForms.' },
 };
 
 export const issues: Issue[] = [...issuesData].sort((a, b) => b.number - a.number);
@@ -49,3 +53,16 @@ export const formatDate = (iso: string) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
 export const pageUrl = (path: string) => new URL(path, site.canonicalUrl).href;
+
+export type GuideSection = { title: string; intro: string; links: string[] };
+export type Guide = { slug: string; title: string; description: string; reviewed: string; reviewedLabel: string; intro: string; sections: GuideSection[] };
+export const guides: Guide[] = guidesData;
+export const guideBySlug = (slug: string) => guides.find(guide => guide.slug === slug);
+export const linkByUrl = (url: string) => links.find(link => link.url === url);
+
+export type Post = {
+  slug: string; title: string; image: string; imageAlt: string; topics: string[];
+  source: { title: string; url: string; author: string; published: string };
+  summary: string; caveats?: string;
+};
+export const posts: Post[] = postsData;

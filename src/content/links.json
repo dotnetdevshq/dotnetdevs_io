@@ -1,40 +1,3513 @@
 [
-  { "title": "A faster, lighter C# Dev Kit", "url": "https://devblogs.microsoft.com/dotnet/faster-lighter-csharp-dev-kit/", "author": "Drew Noakes", "issue": 30, "topics": ["tooling", "performance"], "note": "Version 11.0 rebuilds the extension as one Native AOT process with cached project loading. In Microsoft's benchmark on the 407-project Aspire repo, full solution load drops from 84 s to 3 s and memory from about 2 GB to 316 MB; it's in pre-release for now." },
-  { "title": "Aspire 13.6: Your dashboard gets memory", "url": "https://devblogs.microsoft.com/aspire/whats-new-aspire-13-6/", "author": "Maddy Montaquila", "issue": 30, "topics": ["aspire"], "note": "The dashboard now keeps traces, logs and resource state after you stop the AppHost (up to 10 runs, stored locally in SQLite). You can go back to the run where a bug showed up, and the new opt-in WithRepl() opens a signed-in database shell right in the dashboard." },
-  { "title": "Microsoft is updating its NuGet author-signing certificate", "url": "https://devblogs.microsoft.com/dotnet/microsoft-author-signing-certificate-update-2026/", "author": "NuGet Team", "issue": 30, "topics": ["security", "tooling"], "note": "If you enforce trusted signers or run dotnet nuget verify with Microsoft fingerprints, installs fail with NU3034 until you add the new certificate fingerprint." },
-  { "title": "AG-UI Protocol now has a first-class .NET SDK", "url": "https://devblogs.microsoft.com/dotnet/ag-ui-dotnet-sdk/", "author": "Daniel Roth", "issue": 30, "topics": ["ai"], "note": "Microsoft and CopilotKit released an MIT-licensed .NET SDK for AG-UI, the open protocol for streaming agent events to user-facing apps. Any .NET service can now expose or consume agent endpoints that work with TypeScript and Python clients." },
-  { "title": "Build Agentic UI with the new Blazor AI components", "url": "https://devblogs.microsoft.com/dotnet/build-agentic-ui-blazor/", "author": "Daniel Roth", "issue": 30, "topics": ["ai", "aspnet-core"], "note": "The experimental Microsoft.AspNetCore.Components.AI package renders streamed agent output, tool calls, approval prompts and shared state as Blazor components, on top of any IChatClient. Try it with the .NET 11 RC1 SDK and the AgenticUI sample." },
-  { "title": "Visual Studio September Update", "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-september-update-power-your-workflow-with-your-model/", "author": "Mark Downie", "issue": 30, "topics": ["tooling", "ai"], "note": "Bring Your Own Model (preview) now runs on the new Agent (Preview), with Foundry, OpenAI, Anthropic and Ollama. The old BYOM flow is gone and Ollama models need re-adding." },
-  { "title": "UWP and WinUI 3 apps: UI testing with MSTest", "url": "https://devblogs.microsoft.com/dotnet/testing-uwp-and-winui-3-apps-with-mstest/", "author": "Amaury Levé", "issue": 30, "topics": ["testing"], "note": "MSTest 4.5 can run UWP and WinUI 3 tests on the app's real UI dispatcher, across packaged, unpackaged and AppContainer hosts. Packaged hosts need Developer Mode, so check your CI agent first." },
-  { "title": "Experimental support for Device Bound Session Credentials (DBSC) in ASP.NET Core", "url": "https://andrewlock.net/exploring-the-dotnet-11-preview-8-experimental-support-for-device-bound-session-credentials-in-aspnetcore/", "author": "Andrew Lock", "issue": 30, "topics": ["aspnet-core", "security"], "note": ".NET 11 adds experimental DBSC support to ASP.NET Core with one call, AddDeviceBoundSession(...). It ties a login session to a key in the device's TPM, so a stolen auth cookie stops working quickly." },
-  { "title": "File-based apps can reference other C# files", "url": "https://medium.com/@denmaklucky/file-based-apps-can-reference-other-c-files-65ffa06f7894", "author": "Denis Makarenko", "issue": 30, "topics": ["csharp"], "note": "The new #:ref directive lets a dotnet run app.cs program pull in a second C# file. On .NET 11 RC1 it's still behind an experimental property." },
-  { "title": "What's Inside That Bearer Token? A Practical Guide to Encrypted JWTs (JWE) in .NET", "url": "https://medium.com/@robertdennyson/whats-inside-that-bearer-token-a-practical-guide-to-encrypted-jwts-jwe-in-net-6ef1af7c198b", "author": "Robert Dennyson", "issue": 30, "topics": ["security", "aspnet-core"], "note": "A walkthrough of spotting, inspecting and decrypting encrypted JWTs with JsonWebTokenHandler. Decryption and validation are separate steps, and any token pasted into a chat or log should be treated as exposed." },
-  { "title": "How to Make AI Write High-Quality Code in .NET", "url": "https://antondevtips.com/blog/how-to-make-ai-write-high-quality-code-in-dotnet", "author": "Anton Martyniuk", "issue": 30, "topics": ["ai", "architecture"], "note": "Rules written in prompts fade as an agent's context fills up, so the article moves them into the build with TreatWarningsAsErrors, analyzers, .editorconfig and Central Package Management." },
-  { "title": "Stripping extra dependencies in .NET NativeAOT apps using linker substitutions", "url": "https://andrewlock.net/stripping-extra-dependencies-in-.net-nativeaot-apps-using-linker-substitutions/", "author": "Andrew Lock", "issue": 30, "topics": ["performance"], "note": "An ILLink.Substitutions.xml file turns a runtime check into a constant, so the linker can remove code it couldn't prove was unused. In Andrew's case that cut a NativeAOT binary by 22 to 25 percent." },
-
-  { "title": "Announcing .NET 11 Release Candidate 1", "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-rc-1/", "author": null, "issue": 29, "topics": ["releases"], "note": null },
-  { "title": "Performance Improvements in .NET 11", "url": "https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/", "author": null, "issue": 29, "topics": ["performance", "releases"], "note": null },
-  { "title": "Use C# unions and closed hierarchies in ASP.NET Core", "url": "https://devblogs.microsoft.com/dotnet/unions-and-closed-hierarchies-in-aspnetcore/", "author": null, "issue": 29, "topics": ["csharp", "aspnet-core"], "note": null },
-  { "title": ".NET and .NET Framework September 2026 servicing releases updates", "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-september-2026-servicing-updates/", "author": null, "issue": 29, "topics": ["releases", "security"], "note": null },
-  { "title": "Build Your Own AI Agent Harness in C#, the MafClaw Live Series", "url": "https://devblogs.microsoft.com/dotnet/build-your-own-ai-agent-harness-in-csharp-the-maf-claw-live-series/", "author": null, "issue": 29, "topics": ["ai"], "note": null },
-  { "title": "Optimistic vs Pessimistic Concurrency in .NET", "url": "https://antondevtips.com/blog/optimistic-vs-pessimistic-concurrency-in-dot-net", "author": null, "issue": 29, "topics": ["data"], "note": null },
-  { "title": "Pipeline vs Chain of Responsibility vs ASP.NET Core Middleware", "url": "https://www.devleader.ca/2026/09/07/pipeline-vs-chain-of-responsibility-vs-aspnet-core-middleware", "author": null, "issue": 29, "topics": ["architecture", "aspnet-core"], "note": null },
-  { "title": "Smart Enums in ASP.NET Core", "url": "https://www.nikolatech.net/blogs/smart-enums-in-asp-dotnet-core", "author": null, "issue": 29, "topics": ["csharp", "aspnet-core"], "note": null },
-  { "title": "10 Rare SQL Features Every Developer Should Know", "url": "https://antondevtips.com/blog/10-rare-sql-features-every-developer-should-know", "author": null, "issue": 29, "topics": ["data"], "note": null },
-  { "title": "AI Is Changing How We Code. It's Also Changing How We Learn.", "url": "https://devblogs.microsoft.com/visualstudio/ai-is-changing-how-we-code-its-also-changing-how-we-learn/", "author": null, "issue": 29, "topics": ["ai"], "note": null },
-
-  { "title": ".NET 11 Preview 7 is now available!", "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-preview-7/", "author": null, "issue": 28, "topics": ["releases"], "note": null },
-  { "title": "Explore new features available in C# 15 preview", "url": "https://devblogs.microsoft.com/dotnet/explore-csharp-15/", "author": null, "issue": 28, "topics": ["csharp", "releases"], "note": null },
-  { "title": ".NET and .NET Framework August 2026 servicing releases updates", "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-august-2026-servicing-updates/", "author": null, "issue": 28, "topics": ["releases", "security"], "note": null },
-  { "title": "Test what you ship: MSTest and Native AOT", "url": "https://devblogs.microsoft.com/dotnet/mstest-source-generation/", "author": null, "issue": 28, "topics": ["testing", "performance"], "note": null },
-  { "title": "Azure DevOps Remote MCP Server is generally available", "url": "https://devblogs.microsoft.com/devops/azure-devops-remote-mcp-server-ga/", "author": null, "issue": 28, "topics": ["ai", "tooling"], "note": null },
-  { "title": "Strengthening NuGet Supply Chain Security: Reducing API Key Lifetime", "url": "https://devblogs.microsoft.com/dotnet/strengthening-nuget-supply-chain-security-reducing-api-key-lifetime/", "author": null, "issue": 28, "topics": ["security", "tooling"], "note": null },
-  { "title": "How Uno Platform uses .NET, MCP, and AI to build high-quality apps", "url": "https://devblogs.microsoft.com/dotnet/how-uno-platform-uses-dotnet-mcp-ai-to-build-high-quality-apps/", "author": null, "issue": 28, "topics": ["ai"], "note": null },
-  { "title": "From generated code to trusted code with a unit-test agent", "url": "https://devblogs.microsoft.com/dotnet/polyglot-unit-testing-agent/", "author": null, "issue": 28, "topics": ["testing", "ai"], "note": null },
-  { "title": "Beyond Chat: live Speech-to-Text with Foundry Local and C#", "url": "https://devblogs.microsoft.com/dotnet/foundry-local-live-speech-to-text-csharp/", "author": null, "issue": 28, "topics": ["ai"], "note": null },
-  { "title": "Intelligent Terminal 0.2 is here with local model support", "url": "https://devblogs.microsoft.com/commandline/intelligent-terminal-0-2-is-here-with-local-model-support/", "author": null, "issue": 28, "topics": ["tooling", "ai"], "note": null },
-  { "title": "Instructions Hygiene: What Frontier Models Still Need You to Say", "url": "https://devblogs.microsoft.com/dotnet/instructions-hygiene-what-frontier-models-still-need-you-to-say/", "author": null, "issue": 28, "topics": ["ai"], "note": null },
-  { "title": "Use Aspire to implement and deploy the BFF security architecture", "url": "https://damienbod.com/2026/08/17/use-aspire-to-implement-and-deploy-the-bff-security-architecture/", "author": "Damien Bowden", "issue": 28, "topics": ["aspire", "security"], "note": null },
-  { "title": "Review GitHub Pull Requests Without Leaving Visual Studio", "url": "https://devblogs.microsoft.com/visualstudio/today-i-will-review-github-prs/", "author": null, "issue": 28, "topics": ["tooling"], "note": null },
-  { "title": "Value Objects in .NET", "url": "https://www.nikolatech.net/blogs/value-objects-in-dotnet", "author": null, "issue": 28, "topics": ["architecture", "csharp"], "note": null }
+ {
+  "title": "A faster, lighter C# Dev Kit",
+  "url": "https://devblogs.microsoft.com/dotnet/faster-lighter-csharp-dev-kit/",
+  "author": "Drew Noakes",
+  "issue": 30,
+  "topics": [
+   "tooling",
+   "performance"
+  ],
+  "note": "Version 11.0 rebuilds the extension as one Native AOT process with cached project loading. In Microsoft's benchmark on the 407-project Aspire repo, full solution load drops from 84 s to 3 s and memory from about 2 GB to 316 MB; it's in pre-release for now."
+ },
+ {
+  "title": "Aspire 13.6: Your dashboard gets memory",
+  "url": "https://devblogs.microsoft.com/aspire/whats-new-aspire-13-6/",
+  "author": "Maddy Montaquila",
+  "issue": 30,
+  "topics": [
+   "aspire"
+  ],
+  "note": "The dashboard now keeps traces, logs and resource state after you stop the AppHost (up to 10 runs, stored locally in SQLite). You can go back to the run where a bug showed up, and the new opt-in WithRepl() opens a signed-in database shell right in the dashboard."
+ },
+ {
+  "title": "Microsoft is updating its NuGet author-signing certificate",
+  "url": "https://devblogs.microsoft.com/dotnet/microsoft-author-signing-certificate-update-2026/",
+  "author": "NuGet Team",
+  "issue": 30,
+  "topics": [
+   "security",
+   "tooling"
+  ],
+  "note": "If you enforce trusted signers or run dotnet nuget verify with Microsoft fingerprints, installs fail with NU3034 until you add the new certificate fingerprint."
+ },
+ {
+  "title": "AG-UI Protocol now has a first-class .NET SDK",
+  "url": "https://devblogs.microsoft.com/dotnet/ag-ui-dotnet-sdk/",
+  "author": "Daniel Roth",
+  "issue": 30,
+  "topics": [
+   "ai"
+  ],
+  "note": "Microsoft and CopilotKit released an MIT-licensed .NET SDK for AG-UI, the open protocol for streaming agent events to user-facing apps. Any .NET service can now expose or consume agent endpoints that work with TypeScript and Python clients."
+ },
+ {
+  "title": "Build Agentic UI with the new Blazor AI components",
+  "url": "https://devblogs.microsoft.com/dotnet/build-agentic-ui-blazor/",
+  "author": "Daniel Roth",
+  "issue": 30,
+  "topics": [
+   "ai",
+   "aspnet-core"
+  ],
+  "note": "The experimental Microsoft.AspNetCore.Components.AI package renders streamed agent output, tool calls, approval prompts and shared state as Blazor components, on top of any IChatClient. Try it with the .NET 11 RC1 SDK and the AgenticUI sample."
+ },
+ {
+  "title": "Visual Studio September Update",
+  "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-september-update-power-your-workflow-with-your-model/",
+  "author": "Mark Downie",
+  "issue": 30,
+  "topics": [
+   "tooling",
+   "ai"
+  ],
+  "note": "Bring Your Own Model (preview) now runs on the new Agent (Preview), with Foundry, OpenAI, Anthropic and Ollama. The old BYOM flow is gone and Ollama models need re-adding."
+ },
+ {
+  "title": "UWP and WinUI 3 apps: UI testing with MSTest",
+  "url": "https://devblogs.microsoft.com/dotnet/testing-uwp-and-winui-3-apps-with-mstest/",
+  "author": "Amaury Levé",
+  "issue": 30,
+  "topics": [
+   "testing"
+  ],
+  "note": "MSTest 4.5 can run UWP and WinUI 3 tests on the app's real UI dispatcher, across packaged, unpackaged and AppContainer hosts. Packaged hosts need Developer Mode, so check your CI agent first."
+ },
+ {
+  "title": "Experimental support for Device Bound Session Credentials (DBSC) in ASP.NET Core",
+  "url": "https://andrewlock.net/exploring-the-dotnet-11-preview-8-experimental-support-for-device-bound-session-credentials-in-aspnetcore/",
+  "author": "Andrew Lock",
+  "issue": 30,
+  "topics": [
+   "aspnet-core",
+   "security"
+  ],
+  "note": ".NET 11 adds experimental DBSC support to ASP.NET Core with one call, AddDeviceBoundSession(...). It ties a login session to a key in the device's TPM, so a stolen auth cookie stops working quickly."
+ },
+ {
+  "title": "File-based apps can reference other C# files",
+  "url": "https://medium.com/@denmaklucky/file-based-apps-can-reference-other-c-files-65ffa06f7894",
+  "author": "Denis Makarenko",
+  "issue": 30,
+  "topics": [
+   "csharp"
+  ],
+  "note": "The new #:ref directive lets a dotnet run app.cs program pull in a second C# file. On .NET 11 RC1 it's still behind an experimental property."
+ },
+ {
+  "title": "What's Inside That Bearer Token? A Practical Guide to Encrypted JWTs (JWE) in .NET",
+  "url": "https://medium.com/@robertdennyson/whats-inside-that-bearer-token-a-practical-guide-to-encrypted-jwts-jwe-in-net-6ef1af7c198b",
+  "author": "Robert Dennyson",
+  "issue": 30,
+  "topics": [
+   "security",
+   "aspnet-core"
+  ],
+  "note": "A walkthrough of spotting, inspecting and decrypting encrypted JWTs with JsonWebTokenHandler. Decryption and validation are separate steps, and any token pasted into a chat or log should be treated as exposed."
+ },
+ {
+  "title": "How to Make AI Write High-Quality Code in .NET",
+  "url": "https://antondevtips.com/blog/how-to-make-ai-write-high-quality-code-in-dotnet",
+  "author": "Anton Martyniuk",
+  "issue": 30,
+  "topics": [
+   "ai",
+   "architecture"
+  ],
+  "note": "Rules written in prompts fade as an agent's context fills up, so the article moves them into the build with TreatWarningsAsErrors, analyzers, .editorconfig and Central Package Management."
+ },
+ {
+  "title": "Stripping extra dependencies in .NET NativeAOT apps using linker substitutions",
+  "url": "https://andrewlock.net/stripping-extra-dependencies-in-.net-nativeaot-apps-using-linker-substitutions/",
+  "author": "Andrew Lock",
+  "issue": 30,
+  "topics": [
+   "performance"
+  ],
+  "note": "An ILLink.Substitutions.xml file turns a runtime check into a constant, so the linker can remove code it couldn't prove was unused. In Andrew's case that cut a NativeAOT binary by 22 to 25 percent."
+ },
+ {
+  "title": "Announcing .NET 11 Release Candidate 1",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-rc-1/",
+  "author": null,
+  "issue": 29,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Performance Improvements in .NET 11",
+  "url": "https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/",
+  "author": null,
+  "issue": 29,
+  "topics": [
+   "performance",
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Use C# unions and closed hierarchies in ASP.NET Core",
+  "url": "https://devblogs.microsoft.com/dotnet/unions-and-closed-hierarchies-in-aspnetcore/",
+  "author": null,
+  "issue": 29,
+  "topics": [
+   "csharp",
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework September 2026 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-september-2026-servicing-updates/",
+  "author": null,
+  "issue": 29,
+  "topics": [
+   "releases",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Build Your Own AI Agent Harness in C#, the MafClaw Live Series",
+  "url": "https://devblogs.microsoft.com/dotnet/build-your-own-ai-agent-harness-in-csharp-the-maf-claw-live-series/",
+  "author": null,
+  "issue": 29,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Optimistic vs Pessimistic Concurrency in .NET",
+  "url": "https://antondevtips.com/blog/optimistic-vs-pessimistic-concurrency-in-dot-net",
+  "author": "Anton Martyniuk",
+  "issue": 29,
+  "topics": [
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "Pipeline vs Chain of Responsibility vs ASP.NET Core Middleware",
+  "url": "https://www.devleader.ca/2026/09/07/pipeline-vs-chain-of-responsibility-vs-aspnet-core-middleware",
+  "author": "Nick Cosentino",
+  "issue": 29,
+  "topics": [
+   "architecture",
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Smart Enums in ASP.NET Core",
+  "url": "https://www.nikolatech.net/blogs/smart-enums-in-asp-dotnet-core",
+  "author": "Nikola Knežević",
+  "issue": 29,
+  "topics": [
+   "csharp",
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "10 Rare SQL Features Every Developer Should Know",
+  "url": "https://antondevtips.com/blog/10-rare-sql-features-every-developer-should-know",
+  "author": "Anton Martyniuk",
+  "issue": 29,
+  "topics": [
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "AI Is Changing How We Code. It's Also Changing How We Learn.",
+  "url": "https://devblogs.microsoft.com/visualstudio/ai-is-changing-how-we-code-its-also-changing-how-we-learn/",
+  "author": null,
+  "issue": 29,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 11 Preview 7 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-preview-7/",
+  "author": null,
+  "issue": 28,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Explore new features available in C# 15 preview",
+  "url": "https://devblogs.microsoft.com/dotnet/explore-csharp-15/",
+  "author": null,
+  "issue": 28,
+  "topics": [
+   "csharp",
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework August 2026 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-august-2026-servicing-updates/",
+  "author": null,
+  "issue": 28,
+  "topics": [
+   "releases",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Test what you ship: MSTest and Native AOT",
+  "url": "https://devblogs.microsoft.com/dotnet/mstest-source-generation/",
+  "author": null,
+  "issue": 28,
+  "topics": [
+   "testing",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Azure DevOps Remote MCP Server is generally available",
+  "url": "https://devblogs.microsoft.com/devops/azure-devops-remote-mcp-server-ga/",
+  "author": null,
+  "issue": 28,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "How Uno Platform uses .NET, MCP, and AI to build high-quality apps",
+  "url": "https://devblogs.microsoft.com/dotnet/how-uno-platform-uses-dotnet-mcp-ai-to-build-high-quality-apps/",
+  "author": null,
+  "issue": 28,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Intelligent Terminal 0.2 is here with local model support",
+  "url": "https://devblogs.microsoft.com/commandline/intelligent-terminal-0-2-is-here-with-local-model-support/",
+  "author": null,
+  "issue": 28,
+  "topics": [
+   "tooling",
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Instructions Hygiene: What Frontier Models Still Need You to Say",
+  "url": "https://devblogs.microsoft.com/dotnet/instructions-hygiene-what-frontier-models-still-need-you-to-say/",
+  "author": null,
+  "issue": 28,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Use Aspire to implement and deploy the BFF security architecture",
+  "url": "https://damienbod.com/2026/08/17/use-aspire-to-implement-and-deploy-the-bff-security-architecture/",
+  "author": "Damien Bowden",
+  "issue": 28,
+  "topics": [
+   "aspire",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Review GitHub Pull Requests Without Leaving Visual Studio",
+  "url": "https://devblogs.microsoft.com/visualstudio/today-i-will-review-github-prs/",
+  "author": null,
+  "issue": 28,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Value Objects in .NET",
+  "url": "https://www.nikolatech.net/blogs/value-objects-in-dotnet",
+  "author": "Nikola Knežević",
+  "issue": 28,
+  "topics": [
+   "architecture",
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Strengthening NuGet Supply Chain Security: Reducing API Key Lifetime",
+  "url": "https://devblogs.microsoft.com/dotnet/strengthening-nuget-supply-chain-security-reducing-api-key-lifetime/",
+  "author": null,
+  "issue": 27,
+  "topics": [
+   "security",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "From generated code to trusted code with a unit-test agent",
+  "url": "https://devblogs.microsoft.com/dotnet/polyglot-unit-testing-agent/",
+  "author": null,
+  "issue": 27,
+  "topics": [
+   "testing",
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Beyond Chat: live Speech-to-Text with Foundry Local and C#",
+  "url": "https://devblogs.microsoft.com/dotnet/foundry-local-live-speech-to-text-csharp/",
+  "author": null,
+  "issue": 27,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Announcing v2.0 of the official MCP C# SDK",
+  "url": "https://devblogs.microsoft.com/dotnet/announcing-v20-of-the-official-mcp-csharp-sdk/",
+  "author": null,
+  "issue": 27,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Discover Agent Skills from MCP servers in .NET",
+  "url": "https://devblogs.microsoft.com/agent-framework/discover-agent-skills-from-mcp-servers-in-net/",
+  "author": null,
+  "issue": 27,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Analyze MSBuild Binary Logs with Copilot in VS Code",
+  "url": "https://devblogs.microsoft.com/dotnet/msbuild-binlog-analyzer-vscode/",
+  "author": null,
+  "issue": 27,
+  "topics": [
+   "ai",
+   "tooling",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Annual .NET target updates for the AWS SDK for .NET",
+  "url": "https://aws.amazon.com/blogs/developer/annual-net-target-updates-for-the-aws-sdk-for-net/",
+  "author": null,
+  "issue": 27,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to Optimize SQL Queries: 20 Proven Best Practices",
+  "url": "https://antondevtips.com/blog/how-to-optimize-sql-queries-20-proven-best-practices",
+  "author": "Anton Martyniuk",
+  "issue": 27,
+  "topics": [
+   "data",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Unit of Work Pattern in .NET",
+  "url": "https://www.nikolatech.net/blogs/unit-of-work-pattern-in-dotnet",
+  "author": "Nikola Knežević",
+  "issue": 27,
+  "topics": [
+   "data",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "Query Performance Tuning in Azure DocumentDB: A Practical Guide",
+  "url": "https://devblogs.microsoft.com/documentdb/query-performance-tuning-guide/",
+  "author": null,
+  "issue": 27,
+  "topics": [
+   "data",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Adding a Clone method to a C# record",
+  "url": "https://www.meziantou.net/adding-a-clone-method-to-a-csharp-record.htm",
+  "author": "Gérald Barré",
+  "issue": 27,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Understanding the Fetch Metadata HTTP headers: Sec-Fetch-Site and friends",
+  "url": "https://andrewlock.net/understanding-the-fetch-metadata-http-headers-sec-fetch-site-and-friends/",
+  "author": "Andrew Lock",
+  "issue": 27,
+  "topics": [
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Multi-Tenant .NET: Shared Database with Schema Separation",
+  "url": "https://barretblake.dev/posts/development/2026/07/multi-tenant-part-2/",
+  "author": null,
+  "issue": 27,
+  "topics": [
+   "data",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 11 Performance Edition",
+  "url": "https://steven-giesel.com/blogPost/86620358-bb91-4295-84fc-a1329b2567ae",
+  "author": "Steven Giesel",
+  "issue": 27,
+  "topics": [
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Visual Studio July Update: Meet the New Agent, Powered by the GitHub Copilot SDK",
+  "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-july-update-meet-the-new-agent-powered-by-copilot-sdk/",
+  "author": null,
+  "issue": 26,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 11 Preview 6 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-preview-6/",
+  "author": null,
+  "issue": 26,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Agent Skills for .NET Is Now Released",
+  "url": "https://devblogs.microsoft.com/agent-framework/agent-skills-for-net-is-now-released/",
+  "author": null,
+  "issue": 26,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "CoreCLR Progress and the Mono Timeline for .NET MAUI",
+  "url": "https://devblogs.microsoft.com/dotnet/coreclr-progress-and-mono-timeline-dotnet-maui/",
+  "author": null,
+  "issue": 26,
+  "topics": [
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework July 2026 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-july-2026-servicing-updates/",
+  "author": null,
+  "issue": 26,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Modernize .NET applications in the GitHub Copilot app",
+  "url": "https://devblogs.microsoft.com/dotnet/modernize-dotnet-in-github-copilot-app/",
+  "author": null,
+  "issue": 26,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to build long-running MCP tools on Azure Functions",
+  "url": "https://devblogs.microsoft.com/azure-sdk/long-running-mcp-tools-azure-functions/",
+  "author": null,
+  "issue": 26,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to test agent skills without hitting real APIs",
+  "url": "https://developer.microsoft.com/blog/how-to-test-agent-skills-without-hitting-real-apis/",
+  "author": null,
+  "issue": 26,
+  "topics": [
+   "ai",
+   "testing"
+  ],
+  "note": null
+ },
+ {
+  "title": "MSSQL Extension for VS Code: Shortcuts Configuration, Enhanced Results Grid Experience, and More",
+  "url": "https://devblogs.microsoft.com/azure-sql/vscode-mssql-july2026/",
+  "author": null,
+  "issue": 26,
+  "topics": [
+   "data",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "From Noisy Queries to Precise Frames: Query Decomposition for Media Asset Search",
+  "url": "https://devblogs.microsoft.com/ise/from_noisy_queries_to_precise_frames/",
+  "author": null,
+  "issue": 26,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 11 Preview 5 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-preview-5/",
+  "author": null,
+  "issue": 25,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework June 2026 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-june-2026-servicing-updates/",
+  "author": null,
+  "issue": 25,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "AI-Powered MSBuild Investigation with the Microsoft Binlog MCP Server",
+  "url": "https://devblogs.microsoft.com/dotnet/msbuild-binlog-mcp-server/",
+  "author": null,
+  "issue": 25,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Stop overloading your skills",
+  "url": "https://developer.microsoft.com/blog/stop-overloading-your-skills",
+  "author": null,
+  "issue": 25,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Intelligent Terminal 0.1.1 is here: bash support, new slash commands, and more customization",
+  "url": "https://devblogs.microsoft.com/commandline/intelligent-terminal-0-1-1-is-here-bash-support-new-slash-commands-and-customization/",
+  "author": null,
+  "issue": 25,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Improving token efficiency for GitHub Copilot in VS Code",
+  "url": "https://code.visualstudio.com/blogs/2026/06/17/improving-token-efficiency-in-github-copilot",
+  "author": null,
+  "issue": 25,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "EF Core in Clean Architecture the Pragmatic Way",
+  "url": "https://antondevtips.com/blog/ef-core-in-clean-architecture-the-pragmatic-way",
+  "author": "Anton Martyniuk",
+  "issue": 25,
+  "topics": [
+   "data",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "Coravel Task Scheduling in .NET",
+  "url": "https://www.nikolatech.net/blogs/coravel-task-scheduling-dotnet",
+  "author": "Nikola Knežević",
+  "issue": 25,
+  "topics": [
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 8 and .NET 9 will reach End of Support on November 10, 2026",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-8-9-end-of-support/",
+  "author": null,
+  "issue": 25,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Packaging and Package Identity for .NET apps with WinApp CLI on Windows",
+  "url": "https://devblogs.microsoft.com/dotnet/packaging-dotnet-apps-winapp/",
+  "author": null,
+  "issue": 25,
+  "topics": [
+   "tooling",
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "Entity Framework Extensions Options",
+  "url": "https://www.nikolatech.net/blogs/entity-framework-extensions-options",
+  "author": "Nikola Knežević",
+  "issue": 25,
+  "topics": [
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "10 Tools That Will Make Developers More Productive in 2026",
+  "url": "https://antondevtips.com/blog/10-tools-that-will-make-developers-more-productive-in-2026",
+  "author": "Anton Martyniuk",
+  "issue": 25,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "MCP Beyond the Chat Window: Build Diagnostics in CI",
+  "url": "https://devblogs.microsoft.com/dotnet/mcp-build-diagnostics-workflows/",
+  "author": null,
+  "issue": 25,
+  "topics": [
+   "ai",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 11 Preview 4 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-preview-4/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Improving C# Memory Safety",
+  "url": "https://devblogs.microsoft.com/dotnet/improving-csharp-memory-safety/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "csharp",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Plan Before You Build: Introducing the Plan agent in Visual Studio",
+  "url": "https://devblogs.microsoft.com/visualstudio/plan-before-you-build-introducing-the-plan-agent-in-visual-studio/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Announcing Agent Governance Toolkit MCP Extensions for .NET",
+  "url": "https://devblogs.microsoft.com/dotnet/announcing-agent-governance-toolkit-mcp-extensions-for-dotnet/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Agent Skills in Visual Studio: Teach Copilot How Your Team Works",
+  "url": "https://devblogs.microsoft.com/visualstudio/agent-skills-in-visual-studio/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET MAUI Moves to CoreCLR in .NET 11",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-maui-moves-to-coreclr-in-dotnet-11/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "What's New in Aspire 13.3",
+  "url": "https://devblogs.microsoft.com/aspire/whats-new-aspire-13-3/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "Process API Improvements in .NET 11",
+  "url": "https://devblogs.microsoft.com/dotnet/process-api-improvements-in-dotnet-11/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "NuGet Package Pruning: Cleaner Dependencies and Actionable Vulnerability Reports",
+  "url": "https://devblogs.microsoft.com/dotnet/nuget-package-pruning-in-dotnet-10/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "tooling",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to Build Production-Ready Projects With Claude Code",
+  "url": "https://antondevtips.com/blog/how-to-build-production-ready-projects-with-claude-code",
+  "author": "Anton Martyniuk",
+  "issue": 24,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Clean Architecture in ASP.NET Core",
+  "url": "https://www.nikolatech.net/blogs/clean-architecture-in-aspnet-core",
+  "author": "Nikola Knežević",
+  "issue": 24,
+  "topics": [
+   "aspnet-core",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "SQL query generation from natural language",
+  "url": "https://devblogs.microsoft.com/ise/llm-sql-query-generation/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "data",
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Introducing dotnet new WinUI templates",
+  "url": "https://devblogs.microsoft.com/ifdef-windows/introducing-dotnet-new-templates-for-winui/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "tooling",
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "Copilot Studio gets faster with .NET 10 on WebAssembly",
+  "url": "https://devblogs.microsoft.com/dotnet/copilot-studio-dotnet-10-migration/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "ai",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework May 2026 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-may-2026-servicing-updates/",
+  "author": null,
+  "issue": 24,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "VSTest is Removing its Newtonsoft.Json Dependency",
+  "url": "https://devblogs.microsoft.com/dotnet/vs-test-is-removing-its-newtonsoft-json-dependency/",
+  "author": null,
+  "issue": 23,
+  "topics": [
+   "testing"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to Add JWT Authentication to SignalR Hubs in ASP.NET Core",
+  "url": "https://antondevtips.com/blog/how-to-add-jwt-authentication-to-signalr-hubs-in-aspnetcore",
+  "author": "Anton Martyniuk",
+  "issue": 23,
+  "topics": [
+   "aspnet-core",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Job Scheduling with TickerQ in ASP.NET Core",
+  "url": "https://www.nikolatech.net/blogs/tickerq-dotnet-job-scheduler-aspnet-core",
+  "author": "Nikola Knežević",
+  "issue": 23,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Welcome to SkiaSharp 4.0 Preview 1",
+  "url": "https://devblogs.microsoft.com/dotnet/welcome-to-skia-sharp-40-preview1/",
+  "author": null,
+  "issue": 23,
+  "topics": [
+   "releases",
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "High-Performance Distributed Caching with .NET and Postgres on Azure",
+  "url": "https://devblogs.microsoft.com/dotnet/high-performance-distributed-caching-dotnet-postgres-azure/",
+  "author": null,
+  "issue": 23,
+  "topics": [
+   "data",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Aspire 13.2: Bun Support and Container Enhancements",
+  "url": "https://devblogs.microsoft.com/aspire/aspire-bun-support-and-container-enhancements/",
+  "author": null,
+  "issue": 23,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "What's new for .NET in Ubuntu 26.04",
+  "url": "https://devblogs.microsoft.com/dotnet/whats-new-for-dotnet-in-ubuntu-2604/",
+  "author": null,
+  "issue": 23,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 10.0.7 Out-of-Band Security Update",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-10-0-7-oob-security-update/",
+  "author": null,
+  "issue": 23,
+  "topics": [
+   "releases",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Durable Workflows in the Microsoft Agent Framework",
+  "url": "https://devblogs.microsoft.com/dotnet/durable-workflows-in-microsoft-agent-framework/",
+  "author": null,
+  "issue": 23,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "API Versioning Should Be Your Last Resort",
+  "url": "https://www.milanjovanovic.tech/blog/api-versioning-should-be-your-last-resort",
+  "author": "Milan Jovanović",
+  "issue": 23,
+  "topics": [
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "The Real Cost of Returning the Identity Value in EF Core",
+  "url": "https://antondevtips.com/blog/the-real-cost-of-returning-the-identity-value-in-ef-core",
+  "author": "Anton Martyniuk",
+  "issue": 23,
+  "topics": [
+   "data",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "AES Encryption in .NET",
+  "url": "https://www.nikolatech.net/blogs/aes-encryption-in-dotnet",
+  "author": "Nikola Knežević",
+  "issue": 23,
+  "topics": [
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Microsoft Agent Framework: Building Blocks for AI Part 3",
+  "url": "https://devblogs.microsoft.com/dotnet/microsoft-agent-framework-building-blocks-for-ai-part-3/",
+  "author": null,
+  "issue": 23,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Building an AI-Powered Conference App with .NET's Composable AI Stack",
+  "url": "https://devblogs.microsoft.com/dotnet/building-ai-conference-app-dotnet-composable-stack/",
+  "author": null,
+  "issue": 23,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "What Invariants Are (and Why a Domain Model Is the Best Place to Enforce Them)",
+  "url": "https://www.milanjovanovic.tech/blog/what-invariants-are-and-why-a-domain-model-is-the-best-place-to-enforce-them",
+  "author": "Milan Jovanović",
+  "issue": 23,
+  "topics": [
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 11 Preview 3 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-preview-3/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework April 2026 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-april-2026-servicing-updates/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "MCP Apps now available in Copilot chat",
+  "url": "https://devblogs.microsoft.com/microsoft365dev/mcp-apps-now-available-in-copilot-chat/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "MCP as Easy as 1-2-3: Introducing the Fluent API for MCP Apps",
+  "url": "https://devblogs.microsoft.com/azure-sdk/mcp-as-easy-as-1-2-3-introducing-the-fluent-api-for-mcp-apps/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Introducing SQL MCP Server",
+  "url": "https://devblogs.microsoft.com/azure-sql/introducing-sql-mcp-server/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "data",
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Generative AI for Beginners .NET: Version 2 on .NET 10",
+  "url": "https://devblogs.microsoft.com/dotnet/generative-ai-for-beginners-dotnet-version-2-on-dotnet-10/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Agentic development aspirations: build, run, observe, without more Markdown",
+  "url": "https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "aspire",
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Aspire Docs in Your Terminal (and Your AI's Brain)",
+  "url": "https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "aspire",
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Aspire 13.2: Dashboard Gets Smarter Export and Telemetry",
+  "url": "https://devblogs.microsoft.com/aspire/aspire-dashboard-improvements-export-and-telemetry/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "aspire",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Explore union types in C# 15",
+  "url": "https://devblogs.microsoft.com/dotnet/csharp-15-union-types/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Ten Months with Copilot Coding Agent in dotnet/runtime",
+  "url": "https://devblogs.microsoft.com/dotnet/ten-months-with-cca-in-dotnet-runtime/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Writing Node.js addons with .NET Native AOT",
+  "url": "https://devblogs.microsoft.com/dotnet/writing-nodejs-addons-with-dotnet-native-aot",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Pin Clustering in .NET MAUI Maps",
+  "url": "https://devblogs.microsoft.com/dotnet/pin-clustering-in-dotnet-maui-maps/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "General Availability: Social Identity Providers for Native Authentication via Browser-Delegated Flows in Microsoft Entra External ID",
+  "url": "https://devblogs.microsoft.com/identity/native-auth-social-idps-web-view-ga/",
+  "author": null,
+  "issue": 22,
+  "topics": [
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Event Sourcing in .NET with Marten and PostgreSQL",
+  "url": "https://antondevtips.com/blog/getting-started-with-event-sourcing-in-dotnet-with-marten-and-postgresql",
+  "author": "Anton Martyniuk",
+  "issue": 21,
+  "topics": [
+   "data",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "Implementing the Saga Pattern with Wolverine",
+  "url": "https://www.milanjovanovic.tech/blog/implementing-the-saga-pattern-with-wolverine",
+  "author": "Milan Jovanović",
+  "issue": 21,
+  "topics": [
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "CQRS Command Pattern in ASP.NET Core",
+  "url": "https://www.nikolatech.net/blogs/cqrs-kommand-aspnet-core",
+  "author": "Nikola Knežević",
+  "issue": 21,
+  "topics": [
+   "aspnet-core",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "Synchronous vs Asynchronous Communication in Microservices",
+  "url": "https://antondevtips.com/blog/synchronous-vs-asynchronous-communication-in-microservices",
+  "author": "Anton Martyniuk",
+  "issue": 21,
+  "topics": [
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "ASP.NET Core Output Cache: Speed Up Your API",
+  "url": "https://antondevtips.com/blog/aspnetcore-output-cache-how-to-speed-up-your-api-with-in-memory-cache-and-redis",
+  "author": "Anton Martyniuk",
+  "issue": 21,
+  "topics": [
+   "aspnet-core",
+   "data",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Dapper nvarchar Performance Trap",
+  "url": "https://consultwithgriff.com/dapper-nvarchar-implicit-conversion-performance-trap/",
+  "author": null,
+  "issue": 21,
+  "topics": [
+   "data",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Your Migration's Source of Truth: The Modernization Assessment",
+  "url": "https://devblogs.microsoft.com/dotnet/your-migrations-source-of-truth-the-modernization-assessment/",
+  "author": null,
+  "issue": 21,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Speed Up .NET CI with Test Sharding",
+  "url": "https://www.meziantou.net/split-dotnet-test-projects-into-shards-with-meziantou-shardedtest.htm",
+  "author": "Gérald Barré",
+  "issue": 21,
+  "topics": [
+   "testing",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "URL Pattern Matching in .NET",
+  "url": "https://www.meziantou.net/url-pattern-matching-in-dotnet.htm",
+  "author": "Gérald Barré",
+  "issue": 21,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "ASP.NET Core 2.3 end of support announcement",
+  "url": "https://devblogs.microsoft.com/dotnet/aspnet-core-2-3-end-of-support/",
+  "author": null,
+  "issue": 21,
+  "topics": [
+   "releases",
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 11 Preview 2 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-preview-2/",
+  "author": null,
+  "issue": 20,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework March 2026 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-march-2026-servicing-updates/",
+  "author": null,
+  "issue": 20,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Extend your coding agent with .NET Skills",
+  "url": "https://devblogs.microsoft.com/dotnet/extend-your-coding-agent-with-dotnet-skills/",
+  "author": null,
+  "issue": 20,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Modernize .NET Anywhere with GitHub Copilot",
+  "url": "https://devblogs.microsoft.com/dotnet/modernize-dotnet-anywhere-with-ghcp/",
+  "author": null,
+  "issue": 20,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Build a real-world example with Microsoft Agent Framework, Microsoft Foundry, MCP and Aspire",
+  "url": "https://developer.microsoft.com/blog/build-a-real-world-example-with-microsoft-agent-framework-microsoft-foundry-mcp-and-aspire",
+  "author": null,
+  "issue": 20,
+  "topics": [
+   "aspire",
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Get started with GitHub Copilot CLI: A free, hands-on course",
+  "url": "https://developer.microsoft.com/blog/get-started-with-github-copilot-cli-a-free-hands-on-course",
+  "author": null,
+  "issue": 20,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Visual Studio Dev Essentials: Free, Practical Tools for Every Developer",
+  "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-dev-essentials-free-practical-tools-for-every-developer/",
+  "author": null,
+  "issue": 20,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Windows Terminal Preview 1.25 Release",
+  "url": "https://devblogs.microsoft.com/commandline/windows-terminal-preview-1-25-release/",
+  "author": null,
+  "issue": 20,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Querying and Performing Transactions Across Multiple Database Schemas in a Modular Monolith",
+  "url": "https://antondevtips.com/blog/querying-and-performing-transactions-across-multiple-database-schemas-in-a-modular-monolith",
+  "author": "Anton Martyniuk",
+  "issue": 20,
+  "topics": [
+   "data",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "Anemic vs Rich Models in ASP.NET Core",
+  "url": "https://www.nikolatech.net/blogs/anemic-vs-rich-models-aspnet-core",
+  "author": "Nikola Knežević",
+  "issue": 20,
+  "topics": [
+   "aspnet-core",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "Visual Studio February Update: Productivity & AI Improvements",
+  "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-february-update/",
+  "author": null,
+  "issue": 19,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "MCP C# SDK v1.0 Released: Build AI Agents and Context-Aware Apps in .NET",
+  "url": "https://devblogs.microsoft.com/dotnet/release-v10-of-the-official-mcp-csharp-sdk/",
+  "author": null,
+  "issue": 19,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Vector Data in .NET: Building Blocks for AI (Part 2)",
+  "url": "https://devblogs.microsoft.com/dotnet/vector-data-in-dotnet-building-blocks-for-ai-part-2/",
+  "author": null,
+  "issue": 19,
+  "topics": [
+   "data",
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Using Scoped Services Inside Singleton in ASP.NET Core",
+  "url": "https://www.nikolatech.net/blogs/scoped-services-in-singleton-aspnet-core",
+  "author": "Nikola Knežević",
+  "issue": 19,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Using YARP as an API Gateway in .NET",
+  "url": "https://antondevtips.com/blog/yarp-as-api-gateway-in-dotnet",
+  "author": "Anton Martyniuk",
+  "issue": 19,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Recording Metrics In-Process Using MeterListener in .NET",
+  "url": "https://andrewlock.net/recording-metrics-in-process-using-meterlistener/",
+  "author": "Andrew Lock",
+  "issue": 19,
+  "topics": [
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Solving Distributed Cache Invalidation with Redis & HybridCache in .NET",
+  "url": "https://www.milanjovanovic.tech/blog/solving-the-distributed-cache-invalidation-problem-with-redis-and-hybridcache",
+  "author": "Milan Jovanović",
+  "issue": 19,
+  "topics": [
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "Add application security to the SWIYU generic management verifier APIs using OAuth",
+  "url": "https://damienbod.com/2026/02/16/add-application-security-to-the-swiyu-generic-management-verifier-apis-using-oauth/",
+  "author": "Damien Bowden",
+  "issue": 19,
+  "topics": [
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "5 Architecture Tests You Should Add to Your .NET Projects",
+  "url": "https://www.milanjovanovic.tech/blog/5-architecture-tests-you-should-add-to-your-dotnet-projects",
+  "author": "Milan Jovanović",
+  "issue": 19,
+  "topics": [
+   "testing",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 11 Preview 1 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-preview-1/",
+  "author": null,
+  "issue": 18,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Build AI Agents with GitHub Copilot SDK & Microsoft Agent Framework",
+  "url": "https://devblogs.microsoft.com/semantic-kernel/build-ai-agents-with-github-copilot-sdk-and-microsoft-agent-framework/",
+  "author": null,
+  "issue": 18,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Visual Studio January Update: Enhanced Editor Experience",
+  "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-january-update-enhanced-editor-experience/",
+  "author": null,
+  "issue": 18,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Giving Agents a Visual Voice: MCP Apps Support in VS Code",
+  "url": "https://code.visualstudio.com/blogs/2026/01/26/mcp-apps-support",
+  "author": null,
+  "issue": 18,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Bringing work context to your code in GitHub Copilot",
+  "url": "https://developer.microsoft.com/blog/bringing-work-context-to-your-code-in-github-copilot",
+  "author": null,
+  "issue": 18,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET AI Essentials: The Core Building Blocks Explained",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-ai-essentials-the-core-building-blocks-explained/",
+  "author": null,
+  "issue": 18,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET Framework 3.5 Moves to Standalone Deployment in new versions of Windows",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-framework-3-5-moves-to-standalone-deployment-in-new-versions-of-windows/",
+  "author": null,
+  "issue": 18,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Getting Started with Aspire 13: Building and Deploying an App",
+  "url": "https://antondevtips.com/blog/getting-started-with-dotnet-aspire-13-building-and-deploying-an-app",
+  "author": "Anton Martyniuk",
+  "issue": 18,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to Start a New .NET Project in 2026",
+  "url": "https://antondevtips.com/blog/how-to-start-a-new-dotnet-project-in-2026",
+  "author": "Anton Martyniuk",
+  "issue": 18,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Keyed Services in ASP.NET Core",
+  "url": "https://www.nikolatech.net/blogs/keyed-services-in-asp-dotnet-core",
+  "author": "Nikola Knežević",
+  "issue": 18,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Dapper Plus: Getting Started with High-Performance Bulk Operations in .NET",
+  "url": "https://www.nikolatech.net/blogs/dapper-plus-getting-started",
+  "author": "Nikola Knežević",
+  "issue": 18,
+  "topics": [
+   "data",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "GitHub Copilot Testing for .NET Now Available in Visual Studio",
+  "url": "https://devblogs.microsoft.com/dotnet/github-copilot-testing-for-dotnet-available-in-visual-studio/",
+  "author": null,
+  "issue": 18,
+  "topics": [
+   "ai",
+   "tooling",
+   "testing"
+  ],
+  "note": null
+ },
+ {
+  "title": "Generative AI with Large Language Models in .NET and C#",
+  "url": "https://devblogs.microsoft.com/dotnet/generative-ai-with-large-language-models-in-dotnet-and-csharp/",
+  "author": null,
+  "issue": 17,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "MongoDB EF Core Provider: Queryable Encryption & Vector Search",
+  "url": "https://devblogs.microsoft.com/dotnet/mongodb-efcore-provider-queryable-encryption-vector-search/",
+  "author": null,
+  "issue": 17,
+  "topics": [
+   "data",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "How .NET Synchronizes Its Virtual Monorepo at Scale",
+  "url": "https://devblogs.microsoft.com/dotnet/how-we-synchronize-dotnets-virtual-monorepo/",
+  "author": null,
+  "issue": 17,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to Build Android Widgets with .NET MAUI",
+  "url": "https://devblogs.microsoft.com/dotnet/how-to-build-android-widgets-with-dotnet-maui/",
+  "author": null,
+  "issue": 17,
+  "topics": [
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework January 2026 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-january-2026-servicing-updates/",
+  "author": null,
+  "issue": 17,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Copilot Studio Extension for Visual Studio Code Is Now Generally Available",
+  "url": "https://devblogs.microsoft.com/microsoft365dev/copilot-studio-extension-for-visual-studio-code-is-now-generally-available/",
+  "author": null,
+  "issue": 17,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "GitHub Copilot Memories in Visual Studio",
+  "url": "https://devblogs.microsoft.com/visualstudio/copilot-memories/",
+  "author": null,
+  "issue": 17,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Guard Clauses in .NET",
+  "url": "https://www.nikolatech.net/blogs/guard-clauses-in-dotnet",
+  "author": "Nikola Knežević",
+  "issue": 17,
+  "topics": [
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "End-to-End Validation in .NET and TypeScript",
+  "url": "https://developersvoice.com/blog/dotnet/end-to-end-validation-net-typescript-architecture/",
+  "author": null,
+  "issue": 17,
+  "topics": [
+   "architecture",
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "New in .NET 10 and C# 14: Enhancements in APIs Request/Response Pipeline",
+  "url": "https://blog.elmah.io/new-in-net-10-and-c-14-enhancements-in-apis-request-response-pipeline/",
+  "author": null,
+  "issue": 17,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Enterprise Patterns for ASP.NET Core Minimal API: Identity Map Pattern",
+  "url": "https://www.woodruff.dev/enterprise-patterns-for-asp-net-core-minimal-api-identity-map-pattern/",
+  "author": "Chris Woody Woodruff",
+  "issue": 17,
+  "topics": [
+   "aspnet-core",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to Build a Production-Ready Invoice Builder in .NET Using IronPDF",
+  "url": "https://antondevtips.com/blog/how-to-build-a-production-ready-invoice-builder-in-dotnet-using-ironpdf",
+  "author": "Anton Martyniuk",
+  "issue": 16,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Enterprise Patterns for ASP.NET Core Minimal API: Transaction Script Pattern",
+  "url": "https://woodruff.dev/enterprise-patterns-for-asp-net-core-minimal-api-transaction-script-pattern-the-shortcut-that-quietly-reshapes-your-system/",
+  "author": "Chris Woody Woodruff",
+  "issue": 16,
+  "topics": [
+   "aspnet-core",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 10 Networking Improvements",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-10-networking-improvements/",
+  "author": null,
+  "issue": 16,
+  "topics": [
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Implementing Cross-Platform In-App Billing in .NET MAUI Applications",
+  "url": "https://devblogs.microsoft.com/dotnet/cross-platform-billing-dotnet-maui/",
+  "author": null,
+  "issue": 16,
+  "topics": [
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "Microsoft Learn MCP Server Elevates Development",
+  "url": "https://devblogs.microsoft.com/dotnet/microsoft-learn-mcp-server-elevates-development/",
+  "author": null,
+  "issue": 16,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Azure Cosmos DB: Becoming a Search-Native Database",
+  "url": "https://devblogs.microsoft.com/cosmosdb/azure-cosmos-db-becoming-a-search-native-database/",
+  "author": null,
+  "issue": 16,
+  "topics": [
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "Aspire 13.1: Our holiday gift to you",
+  "url": "https://devblogs.microsoft.com/aspire/aspire-13-1-holiday-gift/",
+  "author": null,
+  "issue": 16,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework December 2025 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-december-2025-servicing-updates/",
+  "author": null,
+  "issue": 16,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Making Windows Terminal awesome with GitHub Copilot CLI",
+  "url": "https://developer.microsoft.com/blog/making-windows-terminal-awesome-with-github-copilot-cli",
+  "author": null,
+  "issue": 16,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to Build iOS Widgets with .NET MAUI",
+  "url": "https://devblogs.microsoft.com/dotnet/how-to-build-ios-widgets-with-dotnet-maui/",
+  "author": null,
+  "issue": 16,
+  "topics": [
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "Enterprise Patterns, Real Code: Implementing Fowler's Ideas in C#",
+  "url": "https://www.woodruff.dev/enterprise-patterns-real-code-implementing-fowlers-ideas-in-c/",
+  "author": "Chris Woody Woodruff",
+  "issue": 16,
+  "topics": [
+   "csharp",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "Getting Started with Concurrency Control in .NET",
+  "url": "https://www.nikolatech.net/blogs/concurrency-control-dotnet",
+  "author": "Nikola Knežević",
+  "issue": 16,
+  "topics": [
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "Implementing Large File Uploads and Downloads in Azure Blob Storage With .NET",
+  "url": "https://antondevtips.com/blog/implementing-large-file-uploads-and-downloads-in-azure-blob-storage-with-dotnet",
+  "author": "Anton Martyniuk",
+  "issue": 16,
+  "topics": [
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "Announcing .NET 10",
+  "url": "https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework November 2025 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-november-2025-servicing-updates/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Introducing C# 14",
+  "url": "https://devblogs.microsoft.com/dotnet/introducing-csharp-14/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "releases",
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Visual Studio 2026 is here: faster, smarter, and a hit with early adopters",
+  "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-2026-is-here-faster-smarter-and-a-hit-with-early-adopters/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "tooling",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Aspire 13: Aspireify anything",
+  "url": "https://devblogs.microsoft.com/aspire/aspire13/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "OpenAPI.NET: The Biggest Update Ever",
+  "url": "https://devblogs.microsoft.com/openapi/openapi-net-release-announcements/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "A first look at the all-new UX in Visual Studio 2026",
+  "url": "https://devblogs.microsoft.com/visualstudio/a-first-look-at-the-all%e2%80%91new-ux-in-visual-studio-2026/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Azure MCP Server Now Built-In with Visual Studio 2026",
+  "url": "https://devblogs.microsoft.com/visualstudio/azure-mcp-server-now-built-in-with-visual-studio-2026-a-new-era-for-agentic-workflows/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Tutorial Videos: Setting up GitHub Copilot for your Company",
+  "url": "https://devblogs.microsoft.com/all-things-azure/tutorial-videos-setting-up-github-copilot-for-your-company/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Running a Vite Frontend from .NET Aspire",
+  "url": "https://rasper87.blog/2025/10/28/running-a-vite-frontend-from-net-aspire/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "Cozy Aspire Dashboarding",
+  "url": "https://victorfrye.com/blog/posts/cozy-aspire-dashboarding",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "aspire",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Supercharge Your Test Coverage with GitHub Copilot Testing for .NET",
+  "url": "https://devblogs.microsoft.com/dotnet/github-copilot-testing-for-dotnet/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "ai",
+   "testing"
+  ],
+  "note": null
+ },
+ {
+  "title": "Reinventing how .NET Builds and Ships (Again)",
+  "url": "https://devblogs.microsoft.com/dotnet/reinventing-how-dotnet-builds-and-ships-again/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "How Copilot Studio uses .NET and WebAssembly for performance and innovation",
+  "url": "https://devblogs.microsoft.com/dotnet/copilot-studio-dotnet-wasm/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "ai",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Introducing F# 10",
+  "url": "https://devblogs.microsoft.com/dotnet/introducing-fsharp-10/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Post-Quantum Cryptography in .NET",
+  "url": "https://devblogs.microsoft.com/dotnet/post-quantum-cryptography-in-dotnet/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "A step-by-step guide to modernizing .NET applications with GitHub Copilot agent mode",
+  "url": "https://devblogs.microsoft.com/dotnet/modernizing-dotnet-with-github-copilot-agent-mode/",
+  "author": null,
+  "issue": 15,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Announcing .NET 10 Release Candidate 2",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-10-rc-2/",
+  "author": null,
+  "issue": 14,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework October 2025 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-october-2025-servicing-updates/",
+  "author": null,
+  "issue": 14,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Authentication with ASP.NET Core Identity",
+  "url": "https://www.nikolatech.net/blogs/authentification-asp-dotnet-core-identity",
+  "author": "Nikola Knežević",
+  "issue": 14,
+  "topics": [
+   "aspnet-core",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Introducing Microsoft Agent Framework: The Open-Source Engine for Agentic AI Apps",
+  "url": "https://devblogs.microsoft.com/foundry/introducing-microsoft-agent-framework-the-open-source-engine-for-agentic-ai-apps/",
+  "author": null,
+  "issue": 14,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Roadmap for AI in Visual Studio (October)",
+  "url": "https://devblogs.microsoft.com/visualstudio/roadmap-for-ai-in-visual-studio-october/",
+  "author": null,
+  "issue": 14,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Developer and AI Code Reviewer: Reviewing AI-Generated Code in .NET",
+  "url": "https://devblogs.microsoft.com/dotnet/developer-and-ai-code-reviewer-reviewing-ai-generated-code-in-dotnet",
+  "author": null,
+  "issue": 14,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Preparing for the .NET 10 GC (DATAS)",
+  "url": "https://devblogs.microsoft.com/dotnet/preparing-for-dotnet-10-gc/",
+  "author": null,
+  "issue": 14,
+  "topics": [
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Value Conversions in EF Core",
+  "url": "https://www.nikolatech.net/blogs/value-conversions-in-ef-core",
+  "author": "Nikola Knežević",
+  "issue": 14,
+  "topics": [
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "TickerQ: The Modern .NET Job Scheduler That Beats Quartz and Hangfire",
+  "url": "https://antondevtips.com/blog/tickerq-the-modern-dotnet-job-scheduler-that-beats-quartz-and-hangfire",
+  "author": "Anton Martyniuk",
+  "issue": 14,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "The 3 C# PDF Libraries Every Developer Must Know",
+  "url": "https://antondevtips.com/blog/the-3-csharp-pdf-libraries-every-developer-must-know",
+  "author": "Anton Martyniuk",
+  "issue": 14,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 10 Preview 7 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-10-preview-7/",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "GPT-5 for Microsoft Developers",
+  "url": "https://devblogs.microsoft.com/blog/gpt-5-for-microsoft-developers",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Announcing the NuGet MCP Server Preview",
+  "url": "https://devblogs.microsoft.com/dotnet/nuget-mcp-server-preview/",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "GPT-OSS: A C# Guide with Ollama",
+  "url": "https://devblogs.microsoft.com/dotnet/gpt-oss-csharp-ollama/",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Model Context Protocol (MCP) is Now Generally Available in Visual Studio",
+  "url": "https://devblogs.microsoft.com/visualstudio/mcp-is-now-generally-available-in-visual-studio/",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Designing Multi-Agent Intelligence",
+  "url": "https://devblogs.microsoft.com/blog/designing-multi-agent-intelligence",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Copilot Diagnostics toolset for .NET in Visual Studio",
+  "url": "https://devblogs.microsoft.com/dotnet/github-copilot-diagnostics-toolset-for-dotnet-in-visual-studio/",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "ai",
+   "tooling",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Bring Your Own Model to Chat in Visual Studio",
+  "url": "https://devblogs.microsoft.com/visualstudio/bring-your-own-model-visual-studio-chat/",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Enhance your CLI testing workflow with the new dotnet test",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-test-with-mtp/",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "tooling",
+   "testing"
+  ],
+  "note": null
+ },
+ {
+  "title": "Better Control over Your Copilot Code Suggestions",
+  "url": "https://devblogs.microsoft.com/visualstudio/better-control-over-your-copilot-code-suggestions/",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "YARP Reverse Proxy in ASP.NET Core",
+  "url": "https://www.nikolatech.net/blogs/yarp-reverse-proxy-asp-dotnet-core",
+  "author": "Nikola Knežević",
+  "issue": 13,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "EFCore.Visualizer: View Entity Framework Core query plan inside Visual Studio",
+  "url": "https://devblogs.microsoft.com/dotnet/ef-core-visualizer-view-entity-framework-core-query-plan-inside-visual-studio/",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "data",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Specification Pattern in EF Core: Flexible Data Access Without Repositories",
+  "url": "https://antondevtips.com/blog/specification-pattern-in-ef-core-flexible-data-access-without-repositories",
+  "author": "Anton Martyniuk",
+  "issue": 13,
+  "topics": [
+   "data",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "Getting Started with C# Eval Expression",
+  "url": "https://www.nikolatech.net/blogs/csharp-eval-expression",
+  "author": "Nikola Knežević",
+  "issue": 13,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Getting Started with the Aspire CLI",
+  "url": "https://devblogs.microsoft.com/dotnet/getting-started-with-the-aspire-cli/",
+  "author": null,
+  "issue": 13,
+  "topics": [
+   "aspire",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Catch Up on Microsoft Build 2025: Essential Sessions for .NET Developers",
+  "url": "https://devblogs.microsoft.com/dotnet/catching-up-on-microsoft-build-2025-essential-sessions-for-dotnet-developers/",
+  "author": null,
+  "issue": 12,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Emit logs on-demand with log buffering",
+  "url": "https://devblogs.microsoft.com/dotnet/emit-logs-on-demand-with-log-buffering/",
+  "author": null,
+  "issue": 12,
+  "topics": [
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 10 Preview 5 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-10-preview-5/",
+  "author": null,
+  "issue": 12,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework June 2025 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-june-2025-servicing-updates/",
+  "author": null,
+  "issue": 12,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Multimodal Voice Intelligence with .NET MAUI",
+  "url": "https://devblogs.microsoft.com/dotnet/multimodal-voice-intelligence-with-dotnet-maui/",
+  "author": null,
+  "issue": 12,
+  "topics": [
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "Improve Your Productivity with New GitHub Copilot Features for .NET",
+  "url": "https://devblogs.microsoft.com/dotnet/improve-productivity-with-github-copilot-dotnet/",
+  "author": null,
+  "issue": 12,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Use C# 14 extensions to simplify enum Parsing",
+  "url": "https://www.meziantou.net/use-csharp-14-extensions-to-simplify-enum-parsing.htm",
+  "author": "Gérald Barré",
+  "issue": 12,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Using the new AI template to create a chatbot about a website",
+  "url": "https://andrewlock.net/using-the-new-ai-template-to-create-a-chatbot-about-a-website/",
+  "author": "Andrew Lock",
+  "issue": 12,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Using Pattern Matching in C# for Performance Optimization",
+  "url": "https://www.meziantou.net/using-pattern-matching-in-csharp-for-performance-optimization.htm",
+  "author": "Gérald Barré",
+  "issue": 12,
+  "topics": [
+   "csharp",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Converting a docker-compose file to .NET Aspire",
+  "url": "https://andrewlock.net/converting-a-docker-compose-file-to-aspire/",
+  "author": "Andrew Lock",
+  "issue": 12,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "Swagger UI alternatives in ASP.NET Core",
+  "url": "https://www.nikolatech.net/blogs/swagger-alternatives-openapi-dotnet",
+  "author": "Nikola Knežević",
+  "issue": 12,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to Create and Convert PDF Documents in ASP.NET Core",
+  "url": "https://antondevtips.com/blog/how-to-create-and-convert-pdf-documents-in-aspnetcore",
+  "author": "Anton Martyniuk",
+  "issue": 12,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 10 Preview 4 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-10-preview-4/",
+  "author": null,
+  "issue": 11,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework May 2025 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-may-2025-servicing-updates/",
+  "author": null,
+  "issue": 11,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Accelerate AI Applications with Semantic Caching on Azure Managed Redis",
+  "url": "https://devblogs.microsoft.com/all-things-azure/accelerate-ai-applications-with-semantic-caching-on-azure-managed-redis/",
+  "author": null,
+  "issue": 11,
+  "topics": [
+   "data",
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Evaluating content safety in your .NET AI applications",
+  "url": "https://devblogs.microsoft.com/dotnet/evaluating-ai-content-safety/",
+  "author": null,
+  "issue": 11,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Agent mode has arrived in preview for Visual Studio",
+  "url": "https://devblogs.microsoft.com/visualstudio/agent-mode-has-arrived-in-preview-for-visual-studio/",
+  "author": null,
+  "issue": 11,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Visual Studio 2022 v17.14 is now generally available",
+  "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-2022-v17-14-is-now-generally-available/",
+  "author": null,
+  "issue": 11,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Using YARP as BFF within .NET Aspire: Integrating YARP into .NET Aspire",
+  "url": "https://timdeschryver.dev/blog/integrating-yarp-within-dotnet-aspire",
+  "author": "Tim Deschryver",
+  "issue": 11,
+  "topics": [
+   "aspnet-core",
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "Why You Should Try Aspire",
+  "url": "https://intrepid-developer.com/blog/why-you-should-try-aspire",
+  "author": null,
+  "issue": 11,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "ASP.NET 10: Validating incoming models in Minimal APIs",
+  "url": "https://timdeschryver.dev/blog/aspnet-10-validating-incoming-models-in-minimal-apis",
+  "author": "Tim Deschryver",
+  "issue": 11,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "WebSockets / SignalR: What ASP.NET Core Developers Need to Know",
+  "url": "https://topswagcode.com/blog/WebSockets-SignalR-What-ASP-NET-Core-Developers-Need-to-Know",
+  "author": null,
+  "issue": 11,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Introducing the Azure MCP Server",
+  "url": "https://devblogs.microsoft.com/azure-sdk/introducing-the-azure-mcp-server/",
+  "author": null,
+  "issue": 10,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Preview 2 of the .NET AI Template Now Available",
+  "url": "https://devblogs.microsoft.com/dotnet/announcing-dotnet-ai-template-preview2/",
+  "author": null,
+  "issue": 10,
+  "topics": [
+   "releases",
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Build MCP Remote Servers with Azure Functions",
+  "url": "https://devblogs.microsoft.com/dotnet/build-mcp-remote-servers-with-azure-functions/",
+  "author": null,
+  "issue": 10,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Building Real-Time iOS Apps with SignalR: Introducing the Official Swift Client",
+  "url": "https://devblogs.microsoft.com/dotnet/building-real%e2%80%91time-ios-apps-with-signalr-introducing-the-official-swift-client-public-preview/",
+  "author": null,
+  "issue": 10,
+  "topics": [
+   "aspnet-core",
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "Introducing the AI Dev Gallery: Your Gateway to Local AI Development with .NET",
+  "url": "https://devblogs.microsoft.com/dotnet/introducing-ai-dev-gallery-gateway-to-local-ai-development/",
+  "author": null,
+  "issue": 10,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Going beyond singleton, scoped, and transient lifetimes: tenant, pooled, and drifter",
+  "url": "https://andrewlock.net/going-beyond-singleton-scoped-and-transient-lifetimes/",
+  "author": "Andrew Lock",
+  "issue": 10,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Keyset (Cursor) Pagination in .NET using EF Core",
+  "url": "https://www.nikolatech.net/blogs/keyset-cursor-pagination-with-efcore-in-aspnetcore",
+  "author": "Nikola Knežević",
+  "issue": 10,
+  "topics": [
+   "aspnet-core",
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "Null-Conditional Assignment in C#",
+  "url": "https://www.arungudelli.com/csharp-tips/null-conditional-assignment-in-csharp/",
+  "author": null,
+  "issue": 10,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Understanding GraphQL in .NET: When and why to use it",
+  "url": "https://blog.elmah.io/understanding-graphql-in-net-when-and-why-to-use-it/",
+  "author": null,
+  "issue": 10,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Observability in ASP.NET Core with OpenTelemetry and Azure Monitor",
+  "url": "https://dotnetintellect.com/2025/04/15/observability-in-asp-net-core-with-opentelemetry-and-azure-monitor/",
+  "author": null,
+  "issue": 10,
+  "topics": [
+   "aspnet-core",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Build a Model Context Protocol (MCP) server in C#",
+  "url": "https://devblogs.microsoft.com/dotnet/build-a-model-context-protocol-mcp-server-in-csharp/",
+  "author": null,
+  "issue": 9,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework April 2025 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-april-2025-servicing-updates/",
+  "author": null,
+  "issue": 9,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Better Together: .NET Aspire, Azure Functions, and Visual Studio",
+  "url": "https://devblogs.microsoft.com/blog/net-aspire-and-azure-functions-integration-preview",
+  "author": null,
+  "issue": 9,
+  "topics": [
+   "aspire",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "How we ended up rewriting NuGet Restore in .NET 9",
+  "url": "https://devblogs.microsoft.com/dotnet/rewriting-nuget-restore-in-dotnet-9/",
+  "author": null,
+  "issue": 9,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 10 Preview 3 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-10-preview-3/",
+  "author": null,
+  "issue": 9,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET Aspire 9.2 is Now Available with New Ways to Deploy",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-aspire-92-is-now-available-with-new-ways-to-deploy/",
+  "author": null,
+  "issue": 9,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "Global Exception Handling in ASP.NET Core",
+  "url": "https://www.nikolatech.net/blogs/global-exception-handling-in-dotnet",
+  "author": "Nikola Knežević",
+  "issue": 9,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "A Correct Way to Use Batch Update and Batch Delete Methods in EF Core",
+  "url": "https://antondevtips.com/blog/correct-way-to-use-batch-update-and-batch-delete-methods-in-ef-core",
+  "author": "Anton Martyniuk",
+  "issue": 9,
+  "topics": [
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "Records and Collections",
+  "url": "https://codeblog.jonskeet.uk/2025/03/27/records-and-collections/",
+  "author": "Jon Skeet",
+  "issue": 9,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Aspire: A Platform for Reusable Infrastructure",
+  "url": "https://medium.com/@davidfowl/aspire-a-platform-for-reusable-infrastructure-3a15582f8a5a",
+  "author": "David Fowler",
+  "issue": 9,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "Introducing Model Context Protocol (MCP) in Azure AI Foundry: Create an MCP Server with Azure AI Agent Service",
+  "url": "https://devblogs.microsoft.com/foundry/integrating-azure-ai-agents-mcp/",
+  "author": null,
+  "issue": 8,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Semantic Kernel Agent Framework RC2",
+  "url": "https://devblogs.microsoft.com/semantic-kernel/semantic-kernel-agent-framework-rc2/",
+  "author": null,
+  "issue": 8,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Xbox + .NET Aspire: Transforming Local Development Practices",
+  "url": "https://devblogs.microsoft.com/dotnet/xboxs-usage-of-aspire-transforming-development-practices/",
+  "author": null,
+  "issue": 8,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "Introducing Visual Studio Hub",
+  "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-hub/",
+  "author": null,
+  "issue": 8,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Exploring new .NET releases with Dev Containers",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-in-dev-container/",
+  "author": null,
+  "issue": 8,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Use BrowserStack App Automate with Appium UI Tests for .NET MAUI Apps",
+  "url": "https://devblogs.microsoft.com/dotnet/browserstack-appium-dotnet-maui/",
+  "author": null,
+  "issue": 8,
+  "topics": [
+   "testing",
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "Debugging with the AI-powered IEnumerable visualizer",
+  "url": "https://devblogs.microsoft.com/visualstudio/debugging-with-the-ai-powered-ienumerable-visualizer/",
+  "author": null,
+  "issue": 8,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Building a Model Context Protocol Server with Semantic Kernel",
+  "url": "https://devblogs.microsoft.com/semantic-kernel/building-a-model-context-protocol-server-with-semantic-kernel/",
+  "author": null,
+  "issue": 8,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Level Up Your Razor Pages: Meet htmx, Your New Best Friend",
+  "url": "https://woodruff.dev/level-up-your-razor-pages-meet-htmx-your-new-best-friend/",
+  "author": "Chris Woody Woodruff",
+  "issue": 8,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Blazor Basics: Real-time Web Apps with WebAssembly & SignalR",
+  "url": "https://www.telerik.com/blogs/blazor-basics-real-time-web-applications-blazor-webassembly-signalr",
+  "author": null,
+  "issue": 8,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Configuring dotnet core apps for OpenApi with SwaggerUi or Scalar",
+  "url": "https://ravindradevrani.com/posts/configuring-dotnet-core-app-for-swagger-ui-or-scalar/",
+  "author": null,
+  "issue": 8,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Understanding Middlewares in ASP.NET Core",
+  "url": "https://codewithmukesh.com/blog/middlewares-in-aspnet-core/",
+  "author": "Mukesh Murugan",
+  "issue": 8,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "C# Tip: An In-Depth Look at CallerMemberName (and some Compile-Time trivia)",
+  "url": "https://www.code4it.dev/csharptips/callermembername-attribute/",
+  "author": "Davide Bellone",
+  "issue": 8,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 10 Preview 2 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-10-preview-2/",
+  "author": null,
+  "issue": 7,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Introducing support for SLNX, a new, simpler solution file format in the .NET CLI",
+  "url": "https://devblogs.microsoft.com/dotnet/introducing-slnx-support-dotnet-cli/",
+  "author": null,
+  "issue": 7,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Hello HybridCache! Streamlining Cache Management for ASP.NET Core Applications",
+  "url": "https://devblogs.microsoft.com/dotnet/hybrid-cache-is-now-ga/",
+  "author": null,
+  "issue": 7,
+  "topics": [
+   "aspnet-core",
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET AI Template Now Available in Preview",
+  "url": "https://devblogs.microsoft.com/dotnet/announcing-dotnet-ai-template-preview1/",
+  "author": null,
+  "issue": 7,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "New Debugging and Profiling Features in Visual Studio (v17.13)",
+  "url": "https://devblogs.microsoft.com/visualstudio/new-debugging-and-profiling-features-in-visual-studio-v17-13/",
+  "author": null,
+  "issue": 7,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Building Modern Web Applications Using Blazor ASP.NET Core",
+  "url": "https://www.codemag.com/Article/2503041/Building-Modern-Web-Applications-Using-Blazor-ASP.NET-Core",
+  "author": null,
+  "issue": 7,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Better Request Tracing with User Context in ASP.NET Core",
+  "url": "https://www.milanjovanovic.tech/blog/better-request-tracing-with-user-context-in-asp-net-core",
+  "author": "Milan Jovanović",
+  "issue": 7,
+  "topics": [
+   "aspnet-core",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Resolving Paths To Server Relative Paths in .NET Code",
+  "url": "https://weblog.west-wind.com/posts/2025/Mar/08/Resolving-Paths-To-Server-Relative-Paths-in-NET-Code",
+  "author": "Rick Strahl",
+  "issue": 7,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Building a Basic Modular Web API Using Minimal API in .NET",
+  "url": "https://blogs.sajankumarv.com/building-a-basic-modular-web-api-using-minimal-api-in-net-6841c9803753",
+  "author": null,
+  "issue": 7,
+  "topics": [
+   "aspnet-core",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET Aspire and Dev Container",
+  "url": "https://laurentkempe.com/2025/03/06/dotnet-aspire-and-dev-container/",
+  "author": "Laurent Kempé",
+  "issue": 7,
+  "topics": [
+   "aspire",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET Aspirations: Embracing OpenTelemetry",
+  "url": "https://techwatching.dev/posts/aspire-open-telemetry",
+  "author": null,
+  "issue": 7,
+  "topics": [
+   "aspire",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Mastering C# Design Patterns: Practical Examples of Singleton, Factory, and Observer",
+  "url": "https://dev.to/leandroveiga/mastering-c-design-patterns-practical-examples-of-singleton-factory-and-observer-36he",
+  "author": null,
+  "issue": 6,
+  "topics": [
+   "csharp",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "Injecting Action Method Values from Configuration in ASP.NET Core",
+  "url": "https://developmentwithadot.blogspot.com/2025/02/injecting-action-method-values-from.html",
+  "author": null,
+  "issue": 6,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Implement Phone verification, 2FA using ASP.NET Core Identity",
+  "url": "https://damienbod.com/2025/03/03/implement-phone-verification-2fa-using-asp-net-core-identity",
+  "author": "Damien Bowden",
+  "issue": 6,
+  "topics": [
+   "aspnet-core",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Writing a .NET profiler in C#, Part 5",
+  "url": "https://minidump.net/writing-a-net-profiler-in-c-part-5",
+  "author": "Kevin Gosse",
+  "issue": 6,
+  "topics": [
+   "csharp",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "C# Dictionary: How to Create One and Best Practices",
+  "url": "https://stackify.com/c-dictionary-how-to-create-one-and-best-practices/",
+  "author": null,
+  "issue": 6,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Blazor Basics: Lazy Load, Boost Blazor Wasm Performance",
+  "url": "https://www.telerik.com/blogs/blazor-basics-lazy-load-assemblies-boost-performance-blazor-webassembly",
+  "author": null,
+  "issue": 6,
+  "topics": [
+   "aspnet-core",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "What are Custom Integrations in .NET Aspire?",
+  "url": "https://www.kallemarjokorpi.fi/blog/why-do-you-need-custom-integrations-in-net-aspire-2/",
+  "author": null,
+  "issue": 6,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "Why is gRPC so much faster than a JSON-based REST API?",
+  "url": "https://itnext.io/why-is-grpc-so-much-faster-than-a-json-based-rest-api-df09cb69fae5",
+  "author": null,
+  "issue": 6,
+  "topics": [
+   "aspnet-core",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "MassTransit with Azure Service Bus: Error management",
+  "url": "https://irina.codes/masstransit-with-azure-service-bus-error-management/",
+  "author": null,
+  "issue": 6,
+  "topics": [
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 10 Preview 1 is now available!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-10-preview-1/",
+  "author": null,
+  "issue": 5,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET Aspire 9.1 is here with six great new dashboard features, and more!",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-aspire-9-1/",
+  "author": null,
+  "issue": 5,
+  "topics": [
+   "aspire",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Claude 3.7 Now Available in GitHub Copilot for Visual Studio",
+  "url": "https://devblogs.microsoft.com/visualstudio/claude-3-7-now-available-in-github-copilot-for-visual-studio/",
+  "author": null,
+  "issue": 5,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Unlock new possibilities for AI Evaluations for .NET",
+  "url": "https://devblogs.microsoft.com/dotnet/start-using-the-microsoft-ai-evaluations-library-today/",
+  "author": null,
+  "issue": 5,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Using 'in' C# Keyword as a Parameter Modifier",
+  "url": "https://blog.nimblepros.com/blogs/csharp-in-parameter-keyword/",
+  "author": null,
+  "issue": 5,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET MAUI Performance Features in .NET 9",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-9-performance-improvements-in-dotnet-maui/",
+  "author": null,
+  "issue": 5,
+  "topics": [
+   "performance",
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": "ASP.NET Core WebAPI Payload Logging with Serilog",
+  "url": "https://ranbook.cloud/posts/serilog-http-payload-logging/",
+  "author": null,
+  "issue": 5,
+  "topics": [
+   "aspnet-core",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "OpenTelemetry with ASP.NET Core",
+  "url": "https://developmentwithadot.blogspot.com/2025/02/opentelemetry-with-aspnet-core.html",
+  "author": null,
+  "issue": 5,
+  "topics": [
+   "aspnet-core",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Strongly-Typed Markdown for ASP.NET Core Content Apps",
+  "url": "https://khalidabuhakmeh.com/strongly-typed-markdown-for-aspnet-core-content-apps",
+  "author": "Khalid Abuhakmeh",
+  "issue": 5,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Setting application environment variables in IIS without restarts",
+  "url": "https://andrewlock.net/setting-environment-variables-in-iis-and-avoiding-app-pool-restarts/",
+  "author": "Andrew Lock",
+  "issue": 5,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Microsoft.Testing.Platform: Now Supported by All Major .NET Test Frameworks",
+  "url": "https://devblogs.microsoft.com/dotnet/mtp-adoption-frameworks/",
+  "author": null,
+  "issue": 4,
+  "topics": [
+   "testing"
+  ],
+  "note": null
+ },
+ {
+  "title": "C# Dev Kit Updates: .NET Aspire, Hot Reload, and More!",
+  "url": "https://devblogs.microsoft.com/dotnet/csharp-on-visual-studio-code-just-got-better-with-enhancements-to-csharp-dev-kit/",
+  "author": null,
+  "issue": 4,
+  "topics": [
+   "tooling",
+   "aspire"
+  ],
+  "note": null
+ },
+ {
+  "title": "Visual Studio 2022 v17.13 is Now Available!",
+  "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-2022-v17-13-is-now-available/",
+  "author": null,
+  "issue": 4,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Announcing Generative AI for Beginners .NET",
+  "url": "https://devblogs.microsoft.com/dotnet/announcing-generative-ai-for-beginners-dotnet/",
+  "author": null,
+  "issue": 4,
+  "topics": [
+   "ai"
+  ],
+  "note": null
+ },
+ {
+  "title": "Deploying ASP.NET Core Applications with Docker, Part 1",
+  "url": "https://www.telerik.com/blogs/deploying-aspnet-core-applications-docker-part-1",
+  "author": null,
+  "issue": 4,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Deploying ASP.NET Core Applications with Docker, Part 2",
+  "url": "https://www.telerik.com/blogs/deploying-aspnet-core-applications-docker-part-2",
+  "author": null,
+  "issue": 4,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Async Best Practices for .NET",
+  "url": "https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md",
+  "author": "David Fowler",
+  "issue": 4,
+  "topics": [
+   "csharp",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "ASP.NET Core Distributed Tracing",
+  "url": "https://developmentwithadot.blogspot.com/2025/01/aspnet-core-distributed-tracing.html",
+  "author": null,
+  "issue": 4,
+  "topics": [
+   "aspnet-core",
+   "observability"
+  ],
+  "note": null
+ },
+ {
+  "title": "Mastering C#: Pattern Matching",
+  "url": "https://jesseliberty.com/2025/01/16/mastering-c-pattern-matching/",
+  "author": "Jesse Liberty",
+  "issue": 4,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "C# Enum: Definition and Best Practices",
+  "url": "https://stackify.com/c-enum-definition-and-best-practices/",
+  "author": null,
+  "issue": 4,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Using Roslyn to analyze and rewrite code in a solution",
+  "url": "https://www.meziantou.net/using-roslyn-to-analyze-and-rewrite-code-in-a-solution.htm",
+  "author": "Gérald Barré",
+  "issue": 4,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Why Tracebit is written in C#",
+  "url": "https://tracebit.com/blog/why-tracebit-is-written-in-c-sharp",
+  "author": null,
+  "issue": 4,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "ASP.NET Core on .NET Framework servicing release advisory: ASP.NET Core 2.3",
+  "url": "https://devblogs.microsoft.com/dotnet/servicing-release-advisory-aspnetcore-23/",
+  "author": null,
+  "issue": 3,
+  "topics": [
+   "releases",
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "How X-Men and Wolverine Saved Our Tests: Mutation Testing in .NET",
+  "url": "https://medium.com/@AVTUNEY/how-x-men-and-wolverine-saved-our-tests-mutation-testing-in-net-c5bbffadf394",
+  "author": null,
+  "issue": 3,
+  "topics": [
+   "testing"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET 9 Networking Improvements",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-9-networking-improvements/",
+  "author": null,
+  "issue": 3,
+  "topics": [
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Supporting multiple .NET SDK versions in a source generator: Creating a source generator, Part 14",
+  "url": "https://andrewlock.net/creating-a-source-generator-part-14-supporting-multiple-sdk-versions-in-a-source-generator/",
+  "author": "Andrew Lock",
+  "issue": 3,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Writing a .NET Garbage Collector in C#, Part 2",
+  "url": "https://minidump.net/writing-a-net-gc-in-c-part-2/",
+  "author": "Kevin Gosse",
+  "issue": 3,
+  "topics": [
+   "csharp",
+   "performance"
+  ],
+  "note": null
+ },
+ {
+  "title": "Understanding LINQ's SelectMany() Method",
+  "url": "https://ravindradevrani.medium.com/understanding-linqs-selectmany-method-b5528b62d7c7",
+  "author": null,
+  "issue": 3,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "ASP.NET Core 9 Web API CRUD with Entity Framework Core: Full Course with DDD, Clean Code & Best Practices",
+  "url": "https://codewithmukesh.com/blog/aspnet-core-webapi-crud-with-entity-framework-core-full-course",
+  "author": "Mukesh Murugan",
+  "issue": 3,
+  "topics": [
+   "aspnet-core",
+   "data",
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "HTTP File updates for Request Variables and more",
+  "url": "https://devblogs.microsoft.com/visualstudio/http-file-updates-for-request-variables-and-more/",
+  "author": null,
+  "issue": 3,
+  "topics": [
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "Localization in ASP.NET Core: Make Your Minimal APIs Multilingual",
+  "url": "https://www.ottorinobruni.com/localization-in-asp-net-core-make-your-minimal-apis-multilingual/",
+  "author": "Ottorino Bruni",
+  "issue": 3,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Parallelism in Action: Sequential vs Parallel.For vs PLINQ",
+  "url": "https://medium.com/@shamuddin/parallelism-in-action-sequential-vs-parallel-for-vs-plinq-e5564d286900",
+  "author": null,
+  "issue": 2,
+  "topics": [
+   "csharp"
+  ],
+  "note": null
+ },
+ {
+  "title": "Exploring the Forwarded Headers Middleware in ASP.NET Core",
+  "url": "https://nestenius.se/hardware/exploring-the-forwarded-headers-middleware-in-asp-net-core/",
+  "author": null,
+  "issue": 2,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": null
+ },
+ {
+  "title": "Caching in .NET Applications",
+  "url": "https://medium.com/@pyrosv/caching-in-net-applications-df816d1f8aae",
+  "author": null,
+  "issue": 2,
+  "topics": [
+   "data"
+  ],
+  "note": null
+ },
+ {
+  "title": "How to use resource-based authorization in ASP.NET Core",
+  "url": "https://www.infoworld.com/article/3806921/how-to-use-resource-based-authorization-in-asp-net-core.html",
+  "author": null,
+  "issue": 2,
+  "topics": [
+   "aspnet-core",
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET Design Patterns: Creational Patterns",
+  "url": "https://medium.com/@robhutton8/net-design-patterns-creational-patterns-1bb9bfd68b15",
+  "author": null,
+  "issue": 2,
+  "topics": [
+   "architecture"
+  ],
+  "note": null
+ },
+ {
+  "title": "Pushed Authorization Requests in .NET 9: Why and How to Use Them",
+  "url": "https://dev.to/oktadev/pushed-authorization-requests-in-net-9-why-and-how-to-use-them-53ba",
+  "author": null,
+  "issue": 2,
+  "topics": [
+   "security"
+  ],
+  "note": null
+ },
+ {
+  "title": "Top .NET Videos & Live Streams of 2024",
+  "url": "https://devblogs.microsoft.com/dotnet/top-dotnet-videos-live-streams-of-2024/",
+  "author": null,
+  "issue": 1,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": "Announcing a free GitHub Copilot for Visual Studio",
+  "url": "https://devblogs.microsoft.com/visualstudio/announcing-a-free-github-copilot-for-visual-studio",
+  "author": null,
+  "issue": 1,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": null
+ },
+ {
+  "title": "WinForms: Analyze This (Me in Visual Basic)",
+  "url": "https://devblogs.microsoft.com/dotnet/introducing-winforms-analyzers/",
+  "author": null,
+  "issue": 1,
+  "topics": [
+   "clients"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET and .NET Framework January 2025 servicing releases updates",
+  "url": "https://devblogs.microsoft.com/dotnet/net-and-net-framework-january-2025-servicing-releases-updates/",
+  "author": null,
+  "issue": 1,
+  "topics": [
+   "releases"
+  ],
+  "note": null
+ },
+ {
+  "title": ".NET Aspire Quick Tip: Managing Container & Data Lifetime",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-aspire-container-lifetime/",
+  "author": null,
+  "issue": 1,
+  "topics": [
+   "aspire"
+  ],
+  "note": null
+ }
 ]

@@ -1,0 +1,17 @@
+[
+  {
+    "slug": "memory-dump-thread-pool-starvation",
+    "title": "Make your .NET app capture its own memory dump",
+    "image": "/posts/memory-dump.png",
+    "imageAlt": "dotnetdevs.io card: Make your .NET app capture its own memory dump. Steps: ThreadPoolWatcher probe task runs late; Windows MiniDumpWriteDump (dbghelp.dll); Linux createdump --full; open fulldump-<pid>.dmp in Visual Studio. Source: Aaron Powell, .NET Blog.",
+    "topics": ["observability", "performance"],
+    "source": {
+      "title": "Creating a memory dump in C#",
+      "url": "https://devblogs.microsoft.com/dotnet/creating-a-memory-dump-in-csharp/",
+      "author": "Aaron Powell",
+      "published": "2026-09-22"
+    },
+    "summary": "A background watcher queues a small probe task on the thread pool every few seconds. If the probe runs late, the pool is probably starved, so the app writes a full memory dump of itself: MiniDumpWriteDump from dbghelp.dll on Windows, the runtime's createdump tool on Linux. You can then open the dump in Visual Studio and look at call stacks and the Parallel Stacks view.",
+    "caveats": "Full dumps are large and can contain secrets such as tokens and connection strings, so the article recommends a restricted directory, a cooldown and a file limit. On Linux, container and ptrace permissions may need adjusting."
+  }
+]

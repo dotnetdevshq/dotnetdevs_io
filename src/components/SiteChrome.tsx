@@ -33,6 +33,8 @@ export function SiteChrome({ current, children }: { current: Section; children: 
     <footer className="footer">
       <span>© {new Date().getFullYear()} {site.brand}</span>
       {navigation.map(item => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+      <Link href="/guides/">Guides</Link>
+      <Link href="/posts/">Posts</Link>
       {validDestination(site.contact.url, true) && <a href={site.contact.url!}>{site.contact.label}<ArrowUpRight size={14} aria-hidden="true" /></a>}
       <span className="footer-symbol" aria-hidden="true">{'</>'}</span>
     </footer>

@@ -44,6 +44,8 @@ External destinations consistently open in the same tab. Cards are single links,
 | `/` | Hero, newsletter card, latest issue, four most recent picks, social links |
 | `/newsletter/` | `src/content/issues.json` (all published issues, linking to dotnet.news) |
 | `/links/` and `/links/<topic>/` | `src/content/links.json`; topics are defined in `src/lib/content.ts` |
+| `/guides/` and `/guides/<slug>/` | `src/content/guides.json`; each section lists URLs that must exist in `links.json` |
+| `/posts/` | `src/content/posts.json`; card images live in `public/posts/` |
 | `/sponsor/` | `src/content/media-kit.json`; contact from `site.json` |
 
 Topic pages are generated only for topics that have at least one link. Everything is static; no client-side data fetching.
@@ -53,6 +55,11 @@ Topic pages are generated only for topics that have at least one link. Everythin
 1. Add the new issue to the top of `src/content/issues.json`: `number`, `date` (send date, `YYYY-MM-DD`), `slug` (the part after `/p/` in the dotnet.news URL), Beehiiv `tags`, and an optional one-sentence `summary`.
 2. Add each featured article to `src/content/links.json`: `title`, original `url`, `author` (or `null` if unknown; never guess), `issue`, one or more `topics` keys, and an optional `note`. Notes are dotnetdevs.io commentary and are labelled as such on the page. Leave out sponsor and ad placements.
 3. Run `npm run build`. The export check fails if any issue or link is missing from the generated pages.
+
+## Guides and posts
+
+- A guide is an ordered reading path. Add one to `guides.json` with sections of library URLs; the build fails if a URL is not in `links.json`. Update `reviewed` / `reviewedLabel` whenever you revisit it.
+- A post is a social card. Add the exported image to `public/posts/`, then an entry to `posts.json` with the source article, author and publish date. Write the summary only after reading the source article, and keep it clearly yours.
 
 ## Sponsor page figures
 
