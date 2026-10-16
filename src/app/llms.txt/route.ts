@@ -1,6 +1,9 @@
 import { site, socialLinks, isIndexable } from '@/lib/site';
+import { issues, issueUrl, topics, activeTopics } from '@/lib/content';
 
 export const dynamic = 'force-static';
+
+const page = (path: string) => new URL(path, site.canonicalUrl).href;
 
 export function GET() {
   const content = isIndexable ? [
@@ -9,10 +12,15 @@ export function GET() {
     `> ${site.description}`,
     '',
     '## Website',
-    `- [${site.name}](${site.canonicalUrl}): Community homepage and official links.`,
+    `- [${site.name}](${site.canonicalUrl}): Community homepage, latest issue and recent picks.`,
+    `- [Newsletter archive](${page('/newsletter/')}): Every issue of ${site.newsletter.title}.`,
+    `- [Link library](${page('/links/')}): Curated articles and releases featured in ${site.newsletter.title}, with author credit.`,
+    ...activeTopics.map(topic => `- [${topics[topic].label} links](${page(`/links/${topic}/`)}): ${topics[topic].description}`),
+    `- [Sponsor](${page('/sponsor/')}): Audience figures and sponsorship options.`,
     '',
     '## Newsletter',
     `- [${site.newsletter.title}](${site.newsletter.url}): ${site.newsletter.description}`,
+    ...issues.slice(0, 5).map(issue => `- [Issue ${issue.number}](${issueUrl(issue)})`),
     '',
     '## Official community channels',
     ...socialLinks.map(link => `- [${link.label}](${link.url})`),

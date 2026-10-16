@@ -1,6 +1,6 @@
 # dotnetdevs.io
 
-A static community link page for C#, .NET, and the developer ecosystem, with The .NET Insider newsletter and ten owner-confirmed social destinations.
+A static content hub for C# and .NET developers: The .NET Insider archive, a curated link library organized by topic, a sponsor page, and ten owner-confirmed social destinations.
 
 ## Local preview
 
@@ -36,6 +36,27 @@ node scripts/preview.mjs
 - Rebuild after configuration edits. Content and links are present in the exported HTML and work without JavaScript.
 
 External destinations consistently open in the same tab. Cards are single links, with visible platform labels and decorative icons. No forms, accounts, or backend are needed. Google Analytics and Vercel Web Analytics run only on the canonical production hostname.
+
+## Pages
+
+| Route | Content source |
+| --- | --- |
+| `/` | Hero, newsletter card, latest issue, four most recent picks, social links |
+| `/newsletter/` | `src/content/issues.json` (all published issues, linking to dotnet.news) |
+| `/links/` and `/links/<topic>/` | `src/content/links.json`; topics are defined in `src/lib/content.ts` |
+| `/sponsor/` | `src/content/media-kit.json`; contact from `site.json` |
+
+Topic pages are generated only for topics that have at least one link. Everything is static; no client-side data fetching.
+
+## Weekly update (after each Monday issue)
+
+1. Add the new issue to the top of `src/content/issues.json`: `number`, `date` (send date, `YYYY-MM-DD`), `slug` (the part after `/p/` in the dotnet.news URL), Beehiiv `tags`, and an optional one-sentence `summary`.
+2. Add each featured article to `src/content/links.json`: `title`, original `url`, `author` (or `null` if unknown; never guess), `issue`, one or more `topics` keys, and an optional `note`. Notes are dotnetdevs.io commentary and are labelled as such on the page. Leave out sponsor and ad placements.
+3. Run `npm run build`. The export check fails if any issue or link is missing from the generated pages.
+
+## Sponsor page figures
+
+`src/content/media-kit.json` holds dated audience figures. Update `asOf`, `asOfLabel` and every figure together from a fresh snapshot; never mix dates. Channel totals overlap and must not be summed. No prices are published; rates are discussed by email.
 
 ## Design and assets
 

@@ -16,4 +16,16 @@ for (const file of ['404.html', 'robots.txt', 'sitemap.xml', 'favicon.svg', 'log
 for (const route of ['jobs', 'creators', 'blog', 'tools', 'roadmaps']) assert(!existsSync(`out/${route}`), `Prototype route exported: ${route}`);
 const png = readFileSync('out/social-card.png');
 assert.equal(png.readUInt32BE(16), 1200); assert.equal(png.readUInt32BE(20), 630);
+for (const route of ['newsletter', 'links', 'sponsor']) {
+  assert(existsSync(`out/${route}/index.html`), `Missing page: /${route}/`);
+  const page = readFileSync(`out/${route}/index.html`, 'utf8');
+  assert(page.includes(`rel="canonical" href="${new URL(`/${route}/`, config.canonicalUrl).href}"`), `/${route}/ canonical missing`);
+  assert.equal([...page.matchAll(/<h1\b/g)].length, 1, `/${route}/ needs one h1`);
+}
+const links = JSON.parse(readFileSync('src/content/links.json', 'utf8'));
+const library = readFileSync('out/links/index.html', 'utf8');
+for (const link of links) assert(library.includes(`href="${escape(link.url)}"`), `Link library missing ${link.url}`);
+const issues = JSON.parse(readFileSync('src/content/issues.json', 'utf8'));
+const archive = readFileSync('out/newsletter/index.html', 'utf8');
+for (const issue of issues) assert(archive.includes(`/p/${issue.slug}`), `Archive missing issue ${issue.number}`);
 console.log('Export verified: static links, metadata, 1200×630 sharing image, assets, and no prototype or preview content.');

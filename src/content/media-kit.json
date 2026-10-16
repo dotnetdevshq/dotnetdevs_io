@@ -1,0 +1,32 @@
+{
+  "asOf": "2026-10-08",
+  "asOfLabel": "October 2026",
+  "audience": [
+    { "label": "LinkedIn page followers", "value": "141,445", "detail": "The .NET Developers page" },
+    { "label": "LinkedIn newsletter subscribers", "value": "75,186", "detail": "The .NET Insider on LinkedIn" },
+    { "label": "Facebook group members", "value": "31,993", "detail": ".NET developer community group" },
+    { "label": "Instagram followers", "value": "13,956", "detail": "Developer-focused visual posts" },
+    { "label": "Email subscribers", "value": "1,409", "detail": "The .NET Insider on Beehiiv" }
+  ],
+  "engagement": [
+    { "label": "Email open rate", "value": "34.5%", "period": "Beehiiv, last 3 months" },
+    { "label": "Email click rate", "value": "8.3%", "period": "Beehiiv, last 3 months" },
+    { "label": "LinkedIn newsletter article views", "value": "236,300", "period": "Oct 2025 to Oct 2026" },
+    { "label": "New LinkedIn newsletter subscribers", "value": "14,939", "period": "Oct 2025 to Oct 2026" },
+    { "label": "New LinkedIn page followers", "value": "24,913", "period": "Oct 2025 to Oct 2026" }
+  ],
+  "demographics": [
+    { "label": "Top job titles", "value": "Software Engineer 32%, Dotnet Developer 6%, Full Stack Engineer 5%" },
+    { "label": "Top industries", "value": "Software Development 38%, IT Services and Consulting 31%" },
+    { "label": "Seniority", "value": "Entry 45%, Senior 31%" }
+  ],
+  "demographicsSource": "LinkedIn newsletter subscriber demographics, Oct 2025 to Oct 2026",
+  "offerings": [
+    { "title": "Newsletter sponsorship", "description": "A clearly labelled sponsor section in one issue of The .NET Insider, published to both the email and LinkedIn editions." },
+    { "title": "LinkedIn page posts", "description": "Sponsored posts on the .NET Developers LinkedIn page, written for a developer audience and reviewed with you before publishing." },
+    { "title": "Cross-channel distribution", "description": "Adapted versions of a sponsored post across our other channels, such as the Facebook group, Instagram and Threads." }
+  ],
+  "notes": [
+    "Channel audiences overlap, so these totals should not be added together."
+  ]
+}
