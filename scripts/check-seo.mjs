@@ -72,7 +72,9 @@ if (preview) {
   assert.match(robots, /^Allow: \/$/m);
   assert(!/^Disallow:\s*\S+/m.test(robots), 'Production crawlers and rendering assets must remain accessible');
   assert(robots.includes(`Sitemap: ${new URL('sitemap.xml', site.canonicalUrl).href}`));
-  assert.deepEqual(locations, [site.canonicalUrl]);
+  const expected = ['/', '/newsletter/', '/links/', '/sponsor/'].map(path => new URL(path, site.canonicalUrl).href);
+  for (const url of expected) assert(locations.includes(url), `sitemap missing ${url}`);
+  assert(locations.every(url => url.startsWith(site.canonicalUrl) && url.endsWith('/')), 'Sitemap URLs must be canonical with trailing slash');
   for (const url of [site.canonicalUrl, site.newsletter.url, ...socials.map(link => link.url)]) assert(llms.includes(url), `llms.txt missing ${url}`);
   assert(llms.includes(site.description));
 }

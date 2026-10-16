@@ -128,3 +128,87 @@ a.social-card:hover { background-color: var(--social-hover); border-color: var(-
 @media (max-width: 640px) { .masthead { flex-wrap: wrap; gap: 12px; padding-block: 18px; } .wordmark { min-width: 0; } .brand-logo { width: 64px; height: 64px; border-radius: 18px; } .wordmark span { overflow-wrap: anywhere; } .masthead-actions { margin-left: auto; } }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .social-card, .theme-toggle { background: var(--surface); } .newsletter-card { background: var(--violet-tint); } }
 @media (prefers-reduced-transparency: reduce) { .social-card, .theme-toggle { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; } .newsletter-card { background: var(--violet-tint); backdrop-filter: none; -webkit-backdrop-filter: none; } }
+
+/* Phase 1 content hub: navigation, archive, link library, sponsor page */
+.site-nav { display: flex; align-items: center; gap: 4px; }
+.site-nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 12px; font-size: 0.875rem; font-weight: 600; color: var(--muted); transition: color .18s, background .18s; }
+.site-nav a:hover { color: var(--ink); background: var(--glass); }
+.site-nav a[aria-current="page"] { color: var(--violet-dark); background: var(--violet-tint); }
+.page-intro { max-width: 680px; padding: 52px 0 28px; }
+.page-intro h1 { font-size: clamp(2.1rem, 4.4vw, 3rem); }
+.page-intro .intro-copy { margin-left: 0; max-width: 600px; }
+.page-cta { margin-top: 24px; }
+.page-cta:hover { background: var(--button-hover); }
+.content-section { max-width: 800px; margin: 40px auto 0; }
+.page-intro + .content-section, .topic-nav + .content-section { margin-top: 28px; }
+.section-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 0.8125rem; font-weight: 600; color: var(--violet-dark); }
+.section-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.glass-panel, .issue-card, .link-card, .stat-card, .offer-card, .fact-list { border: 1px solid var(--glass-edge); border-radius: var(--radius); background: linear-gradient(120deg, var(--glass-highlight), transparent 70%), var(--glass); box-shadow: inset 0 1px 0 var(--glass-highlight), 0 6px 24px var(--glass-shadow); -webkit-backdrop-filter: blur(18px) saturate(140%); backdrop-filter: blur(18px) saturate(140%); }
+
+.issue-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.issue-card { position: relative; display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 4px 16px; padding: 18px 52px 18px 22px; transition: border-color .18s, transform .18s, box-shadow .18s; }
+.issue-card:hover { border-color: var(--social-hover-border); transform: translateY(-2px); box-shadow: inset 0 1px 0 var(--glass-highlight), 0 10px 30px var(--glass-shadow); }
+.issue-number { font-weight: 680; letter-spacing: -.3px; }
+.issue-date { font-size: 0.8125rem; color: var(--muted); }
+.issue-summary { grid-column: 1 / -1; color: var(--newsletter-copy); font-size: 0.9375rem; line-height: 1.65; }
+.issue-tags { grid-column: 1 / -1; font-family: var(--mono); font-size: 0.6875rem; color: var(--domain-ink); letter-spacing: .3px; }
+.issue-arrow { position: absolute; right: 20px; top: 21px; color: var(--arrow-ink); }
+.issue-card-feature { padding: 24px 26px; }
+.issue-card-feature .issue-number { font-size: 1.25rem; }
+.issue-read { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 4px; margin-top: 8px; font-size: 0.8125rem; font-weight: 600; color: var(--violet-dark); }
+
+.link-list { display: grid; gap: 12px; }
+.link-card { padding: 20px 22px; }
+.link-title { margin: 0; font-size: 1.0625rem; font-weight: 650; line-height: 1.4; letter-spacing: -.2px; }
+.link-title a { display: inline; overflow-wrap: anywhere; }
+.link-title a:hover { color: var(--violet-dark); text-decoration: underline; text-underline-offset: 3px; }
+.link-title svg { display: inline-block; vertical-align: -2px; margin-left: 4px; color: var(--arrow-ink); }
+.link-meta { margin: 6px 0 0; font-size: 0.8125rem; color: var(--muted); }
+.link-note { margin: 10px 0 0; font-size: 0.9375rem; line-height: 1.65; color: var(--newsletter-copy); }
+.link-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-top: 14px; }
+.topic-chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+.topic-chips a { display: inline-flex; align-items: center; min-height: 28px; padding: 2px 10px; border-radius: 999px; background: var(--violet-tint); color: var(--violet-dark); font-size: 0.75rem; font-weight: 600; }
+.topic-chips a:hover { text-decoration: underline; text-underline-offset: 2px; }
+.link-issue { font-family: var(--mono); font-size: 0.6875rem; color: var(--domain-ink); min-height: 28px; display: inline-flex; align-items: center; }
+.link-issue:hover { color: var(--violet-dark); text-decoration: underline; }
+
+.topic-nav { max-width: 800px; margin: 0 auto; }
+.topic-nav ul { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.topic-nav a { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 14px; border: 1px solid var(--glass-edge); border-radius: 999px; background: var(--glass); font-size: 0.8125rem; font-weight: 600; transition: border-color .18s, background .18s; }
+.topic-nav a:hover { border-color: var(--social-hover-border); background: var(--social-hover); }
+.topic-nav a[aria-current="page"] { background: var(--button-bg); color: var(--button-ink); border-color: var(--button-bg); }
+.topic-nav span { font-family: var(--mono); font-size: 0.6875rem; opacity: .75; }
+
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; }
+.stat-card { display: flex; flex-direction: column; gap: 2px; padding: 20px 22px; }
+.stat-value { font-size: 1.75rem; font-weight: 700; letter-spacing: -.04em; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.stat-label { font-size: 0.875rem; font-weight: 600; }
+.stat-detail { font-size: 0.75rem; color: var(--muted); }
+.fact-list { margin: 0; padding: 6px 22px; }
+.fact-list div { display: grid; grid-template-columns: 160px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid var(--line); }
+.fact-list div:first-child { border-top: 0; }
+.fact-list dt { font-size: 0.8125rem; font-weight: 600; color: var(--muted); }
+.fact-list dd { margin: 0; font-size: 0.9375rem; }
+.offer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; }
+.offer-card { padding: 20px 22px; }
+.offer-card h3 { margin: 0 0 8px; font-size: 1rem; font-weight: 650; }
+.offer-card p { margin: 0; font-size: 0.875rem; line-height: 1.65; color: var(--newsletter-copy); }
+.page-note, .page-note-list { max-width: 800px; margin: 28px auto 0; font-size: 0.8125rem; color: var(--muted); }
+.page-note-list { padding-left: 18px; }
+.page-note + .page-note, .page-note-list + .page-note { margin-top: 8px; }
+.page-note a { color: var(--violet-dark); text-decoration: underline; text-underline-offset: 2px; }
+.footer { flex-wrap: wrap; gap: 4px 20px; }
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .issue-card, .link-card, .stat-card, .offer-card, .fact-list { background: var(--surface); } }
+@media (prefers-reduced-transparency: reduce) { .issue-card, .link-card, .stat-card, .offer-card, .fact-list { background: var(--surface); backdrop-filter: none; -webkit-backdrop-filter: none; } }
+@media (max-width: 640px) {
+  .masthead-actions { gap: 8px; }
+  .site-nav a { padding: 0 9px; font-size: 0.8125rem; }
+  .page-intro { padding: 34px 0 20px; }
+  .content-section { margin-top: 32px; }
+  .issue-card { grid-template-columns: minmax(0, 1fr); padding: 16px 44px 16px 18px; }
+  .issue-card-feature { padding: 20px; }
+  .link-card, .stat-card, .offer-card { padding: 18px; }
+  .fact-list { padding: 4px 18px; }
+  .fact-list div { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
