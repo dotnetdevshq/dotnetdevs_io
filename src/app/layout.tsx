@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
     other: process.env.BING_SITE_VERIFICATION ? { 'msvalidate.01': process.env.BING_SITE_VERIFICATION } : undefined,
   },
-  icons: { icon: [{ url: site.icon || site.logo || '/favicon.svg', type: (site.icon || site.logo) ? 'image/png' : 'image/svg+xml' }], apple: site.icon || site.logo || '/apple-touch-icon.png' },
+  icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }, { url: site.logo, type: 'image/png', sizes: '500x500' }], apple: '/apple-touch-icon.png' },
   openGraph: { type: 'website', locale: 'en_US', url: site.canonicalUrl, siteName: site.name, title: site.title, description: site.description, images: [{ url: image, width: 1200, height: 630, alt: `${site.name} — ${site.newsletter.title}` }] },
   twitter: { card: 'summary_large_image', title: site.title, description: site.description, images: [{ url: image, alt: `${site.name} — ${site.newsletter.title}` }] },
 };
