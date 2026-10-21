@@ -67,7 +67,7 @@ Topic pages are generated only for topics that have at least one link. Everythin
 
 ## Design and assets
 
-`src/app/globals.css` holds the proposed warm neutral/violet design and CSS variables. `src/components/CommunityPage.tsx` contains layout, and `BrandMark.tsx` contains the original code mark.
+`src/app/globals.css` holds design direction A (October 2026): warm neutral ground, violet accent, white cards, with every color as a token redefined for dark mode. `SiteChrome.tsx` is the shared header (Newsletter, Library, Guides, Posts, Subscribe; a no-JavaScript `<details>` menu on phones) and footer (which carries Sponsor). `CommunityPage.tsx` is the homepage, `LinkLibrary.tsx` the library, and `LibrarySearch.tsx` the in-browser search; without JavaScript the full list still renders and older issues sit in a `<details>` block. `LogoMark.tsx` is the `<·>` mark.
 
 Light and dark palettes follow the visitor's system preference by default. The moon/sun button in the header saves an explicit choice in local storage. `ThemeToggle.tsx` handles that control; `src/lib/theme.ts` applies saved choices before paint. Without JavaScript, the page still follows the system theme and all destination links work. Clear the `dotnetdevs-theme` local-storage entry to resume automatic system preference after an override.
 

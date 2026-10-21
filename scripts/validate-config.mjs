@@ -6,6 +6,8 @@ for (const field of ['brand', 'name', 'description', 'title', 'eyebrow', 'social
 assert(https(config.canonicalUrl) && config.canonicalUrl.endsWith('/'), 'canonicalUrl must be an absolute HTTPS URL ending in /');
 assert(!config.googleAnalyticsId || /^G-[A-Z0-9]+$/.test(config.googleAnalyticsId), 'googleAnalyticsId must be a GA4 measurement ID or empty');
 assert(https(config.newsletter.url), 'newsletter.url must be an absolute HTTPS URL');
+assert(https(config.newsletter.subscribeUrl), 'newsletter.subscribeUrl must be an absolute HTTPS URL');
+assert(typeof config.tagline === 'string' && config.tagline.trim(), 'tagline must be nonempty text');
 for (const field of ['title', 'description', 'label', 'eyebrow']) assert(config.newsletter[field]?.trim(), `newsletter.${field} is required`);
 const seen = new Set();
 for (const link of config.socials) {

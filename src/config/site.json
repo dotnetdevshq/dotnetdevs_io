@@ -2,23 +2,23 @@
   "brand": "dotnetdevs.io",
   "name": ".NET devs",
   "googleAnalyticsId": "G-FJLBMHRY60",
-  "mastheadNote": "A shared love of .NET.",
-  "description": ".NET devs connects C# and .NET developers with The .NET Insider newsletter, practical articles, developer tools, and official community channels.",
+  "description": "The .NET Insider newsletter, a library of hand-picked articles, and reading guides for C# and .NET developers. Every link credits the original author.",
   "eyebrow": "The .NET developer community",
   "canonicalUrl": "https://dotnetdevs.io/",
   "title": ".NET devs — C# & .NET Developer Community",
   "logo": "/logo.png",
-  "icon": "/logo.png",
+  "icon": "/favicon.svg",
   "sharingImage": "/social-card.png",
   "newsletter": {
     "title": "The .NET Insider",
     "description": "Explore .NET updates, practical articles, and developer tools in our curated newsletter.",
     "label": "Read The .NET Insider",
     "url": "https://dotnet.news",
-    "eyebrow": "Our newsletter"
+    "eyebrow": "Our newsletter",
+    "subscribeUrl": "https://dotnet.news/subscribe"
   },
-  "socialHeading": "Find your community",
-  "socialDescription": "Follow along on your favorite platforms.",
+  "socialHeading": "Follow along",
+  "socialDescription": "News and explainers on the platforms you already use.",
   "socials": [
     {
       "id": "linkedin",
@@ -94,5 +94,6 @@
   "contact": {
     "label": "Contact",
     "url": "mailto:info@dotnetdevs.io"
-  }
+  },
+  "tagline": "The best of .NET, hand-picked for you."
 }

@@ -10,11 +10,12 @@ export const metadata: Metadata = pageMetadata('/posts/', 'Social posts archive'
   'Visual explainers shared on the .NET Developers social channels, each with a summary and a link to the original article.');
 
 export default function PostsPage() {
-  return <SiteChrome current="/links/">
+  return <SiteChrome current="/posts/">
+    <div className="container page">
     <section className="page-intro" aria-labelledby="page-title">
       <p className="eyebrow">From our social channels</p>
       <h1 id="page-title">Posts</h1>
-      <p className="intro-copy">Cards we have shared on LinkedIn, Instagram and our other channels, with a short summary and a link to the article each one is based on. The ideas and code belong to the original authors.</p>
+      <p className="lead">Cards we have shared on LinkedIn, Instagram and our other channels, with a short summary and a link to the article each one is based on. The ideas and code belong to the original authors.</p>
     </section>
     <section className="content-section" aria-label="All posts">
       <ul className="post-grid">
@@ -36,5 +37,6 @@ export default function PostsPage() {
       </ul>
     </section>
     <p className="page-note">Summaries are dotnetdevs.io commentary written from the linked articles.</p>
+    </div>
   </SiteChrome>;
 }

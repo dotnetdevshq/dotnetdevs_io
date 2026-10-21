@@ -13,11 +13,12 @@ export const metadata: Metadata = pageMetadata('/newsletter/', title, descriptio
 export default function NewsletterPage() {
   const years = [...new Set(issues.map(issue => issue.date.slice(0, 4)))];
   return <SiteChrome current="/newsletter/">
+    <div className="container page">
     <section className="page-intro" aria-labelledby="page-title">
       <p className="eyebrow">Newsletter archive</p>
       <h1 id="page-title">{site.newsletter.title}</h1>
-      <p className="intro-copy">{description} {issues.length} issues so far.</p>
-      <a className="newsletter-action page-cta" href={site.newsletter.url}>Subscribe on {new URL(site.newsletter.url).hostname}<ArrowRight size={18} aria-hidden="true" /></a>
+      <p className="lead">{description} {issues.length} issues so far.</p>
+      <a className="button" href={site.newsletter.subscribeUrl}>Subscribe free<ArrowRight size={18} aria-hidden="true" /></a>
     </section>
     {years.map(year => <section key={year} className="content-section" aria-labelledby={`year-${year}`}>
       <div className="section-heading"><h2 id={`year-${year}`}>{year}</h2></div>
@@ -33,5 +34,6 @@ export default function NewsletterPage() {
         </li>)}
       </ul>
     </section>)}
+    </div>
   </SiteChrome>;
 }

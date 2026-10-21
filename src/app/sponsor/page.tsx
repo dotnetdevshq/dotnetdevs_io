@@ -11,11 +11,12 @@ export const metadata: Metadata = pageMetadata('/sponsor/', 'Sponsor dotnetdevs.
 export default function SponsorPage() {
   const contact = validDestination(site.contact.url, true) ? site.contact.url! : null;
   return <SiteChrome current="/sponsor/">
+    <div className="container page">
     <section className="page-intro" aria-labelledby="page-title">
       <p className="eyebrow">Sponsorships</p>
       <h1 id="page-title">Reach .NET developers</h1>
-      <p className="intro-copy">dotnetdevs.io runs {site.newsletter.title} and the .NET Developers channels on LinkedIn, Facebook, Instagram and more. Sponsorships put developer tools and services in front of people who build with C# and .NET every day.</p>
-      {contact && <a className="newsletter-action page-cta" href={`${contact}?subject=Sponsorship%20enquiry`}>Ask about sponsoring<ArrowRight size={18} aria-hidden="true" /></a>}
+      <p className="lead">dotnetdevs.io runs {site.newsletter.title} and the .NET Developers channels on LinkedIn, Facebook, Instagram and more. Sponsorships put developer tools and services in front of people who build with C# and .NET every day.</p>
+      {contact && <a className="button" href={`${contact}?subject=Sponsorship%20enquiry`}>Ask about sponsoring<ArrowRight size={18} aria-hidden="true" /></a>}
     </section>
 
     <section className="content-section" aria-labelledby="audience-title">
@@ -56,5 +57,6 @@ export default function SponsorPage() {
 
     <ul className="page-note-list">{mediaKit.notes.map(note => <li key={note}>{note}</li>)}</ul>
     {contact && <p className="page-note">For rates and availability, write to <a href={contact}>{contact.replace(/^mailto:/, '')}</a>.</p>}
+    </div>
   </SiteChrome>;
 }
