@@ -1,5 +1,98 @@
 [
  {
+  "title": "Announcing .NET 11 Release Candidate 2",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-rc-2/",
+  "author": ".NET Team",
+  "issue": 31,
+  "topics": [
+   "releases"
+  ],
+  "note": "RC2 is available with a go-live support license for production use. Highlights include incremental CBOR reading, configurable initial HTTP/2 concurrency, faster MSBuild wildcard matching and a CLI option for NuGet's minimum package publication age. Blazor's QuickGrid virtualization APIs are no longer experimental."
+ },
+ {
+  "title": "Introducing dotnetup: A toolchain manager for .NET",
+  "url": "https://devblogs.microsoft.com/dotnet/introducing-dotnetup/",
+  "author": "Chet Husk",
+  "issue": 31,
+  "topics": [
+   "tooling"
+  ],
+  "note": "A public-preview tool that installs and manages user-local SDKs and runtimes on macOS and Linux without administrator access. Stable, preview and daily builds can sit side by side, and dotnetup update refreshes tracked channels while leaving exact-version requirements pinned."
+ },
+ {
+  "title": ".NET and .NET Framework October 2026 servicing updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-october-2026-servicing-updates/",
+  "author": "Rahul Bhandari and Tara Overfield",
+  "issue": 31,
+  "topics": [
+   "releases",
+   "security"
+  ],
+  "note": "Security and non-security fixes in .NET 10.0.13, 9.0.21 and 8.0.32. If you ship self-contained apps, update the bundled runtime and redeploy; check the versions your applications actually deploy, including container images."
+ },
+ {
+  "title": "Bring Your Own Model to the GitHub Copilot SDK with C#",
+  "url": "https://devblogs.microsoft.com/dotnet/bring-your-own-model-to-the-github-copilot-sdk-with-csharp/",
+  "author": "Bruno Capuano",
+  "issue": 31,
+  "topics": [
+   "ai"
+  ],
+  "note": "Keep the Copilot agent runtime while routing model requests to your own provider through ProviderConfig. The .NET 10 sample uses a Foundry or Azure OpenAI deployment with Microsoft Entra ID or an API key; pick a deployment that supports the Responses API."
+ },
+ {
+  "title": "Get Your .NET MAUI App Ready for Xcode 27",
+  "url": "https://devblogs.microsoft.com/dotnet/migrate-dotnet-maui-apps-uikit-scene-lifecycle/",
+  "author": "Gerald Versluis",
+  "issue": 31,
+  "topics": [
+   "clients"
+  ],
+  "note": "Apps built with Xcode 27 need UIKit's scene lifecycle, and updating workloads alone won't change their platform files. For .NET 10 apps, use MAUI 10.0.110 or later and test authentication, deep links and App Actions too."
+ },
+ {
+  "title": "Durable Task in the Real World: What Problems Does It Actually Solve?",
+  "url": "https://devblogs.microsoft.com/dotnet/durable-task-in-the-real-world/",
+  "author": "Tamir Dresher",
+  "issue": 31,
+  "topics": [
+   "architecture"
+  ],
+  "note": "Five examples cover approvals, Azure provisioning, subscription payments, out-of-order webhooks and an incident-response agent. Durable Task coordinates waits and recovery, but your application still owns authoritative state, idempotency and reconciliation."
+ },
+ {
+  "title": "Testing Payment Retries Without Charging Customers Twice",
+  "url": "https://www.c-sharpcorner.com/article/testing-payment-retries-without-charging-customers-twice",
+  "author": "Vivek Kumar",
+  "issue": 31,
+  "topics": [
+   "testing",
+   "architecture"
+  ],
+  "note": "Stable idempotency keys, explicit payment states and failure-focused testing in C#. The important case is a completed charge followed by a lost response: keep the outcome unknown until it can be reconciled, and verify the provider's own deduplication in its sandbox."
+ },
+ {
+  "title": "Why AI Agents Overstep and How to Build Agents That Stay Within Their Boundaries",
+  "url": "https://www.c-sharpcorner.com/article/why-ai-agents-overstep-and-how-to-build-agents-that-stay-within-their-boundaries",
+  "author": "Mahesh Chand",
+  "issue": 31,
+  "topics": [
+   "ai",
+   "security"
+  ],
+  "note": "Tool permissions and application-side authorization, not instructions, decide what an agent can do. Check the user's identity, tenant, resource and requested operation before a tool runs, because an agent-generated approval flag isn't permission."
+ },
+ {
+  "title": "Stop waiting on a failed build",
+  "url": "https://devblogs.microsoft.com/visualstudio/stop-waiting-on-a-failed-build/",
+  "author": "Mads Kristensen",
+  "issue": 31,
+  "topics": [
+   "tooling"
+  ],
+  "note": "Visual Studio 2026 version 18.11 adds an opt-in setting to stop the solution build after its first project failure. Enable it when you usually fix the first error immediately; leave it off when you want diagnostics from the remaining projects."
+ },
+ {
   "title": "A faster, lighter C# Dev Kit",
   "url": "https://devblogs.microsoft.com/dotnet/faster-lighter-csharp-dev-kit/",
   "author": "Drew Noakes",
