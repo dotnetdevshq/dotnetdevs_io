@@ -7,6 +7,7 @@
   --tint: #f0ebf8; --tint-border: #ded3ec; --hero-glow: #e9dffa; --on-feature-muted: #e6dcfa;
   --line: #e6e2e9; --card-border: #ebe6f2; --input-border: #d6cfe0; --inset: #faf9f6; --inset-border: #efebf3;
   --shadow: rgba(84, 59, 123, 0.08); --feature-a: #7a55cf; --feature-b: #4c268e; --icon-filter: none;
+  --glass: rgba(250, 249, 246, 0.62); --glass-solid: rgba(250, 249, 246, 0.94); --glass-edge: rgba(255, 255, 255, 0.75); --glass-line: rgba(99, 65, 181, 0.12); --glass-shadow: rgba(84, 59, 123, 0.10);
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, monospace;
 }
@@ -17,6 +18,7 @@
   --tint: #2c233a; --tint-border: #4b3a62; --hero-glow: #2a1f3f; --on-feature-muted: #e6dcfa;
   --line: #39333f; --card-border: #322c3c; --input-border: #4a4256; --inset: #18161f; --inset-border: #2d2836;
   --shadow: rgba(5, 2, 15, 0.35); --feature-a: #5b3aa8; --feature-b: #33185f; --icon-filter: invert(1);
+  --glass: rgba(21, 19, 27, 0.58); --glass-solid: rgba(21, 19, 27, 0.94); --glass-edge: rgba(255, 255, 255, 0.08); --glass-line: rgba(183, 155, 233, 0.14); --glass-shadow: rgba(5, 2, 15, 0.45);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -26,6 +28,7 @@
     --tint: #2c233a; --tint-border: #4b3a62; --hero-glow: #2a1f3f; --on-feature-muted: #e6dcfa;
     --line: #39333f; --card-border: #322c3c; --input-border: #4a4256; --inset: #18161f; --inset-border: #2d2836;
     --shadow: rgba(5, 2, 15, 0.35); --feature-a: #5b3aa8; --feature-b: #33185f; --icon-filter: invert(1);
+    --glass: rgba(21, 19, 27, 0.58); --glass-solid: rgba(21, 19, 27, 0.94); --glass-edge: rgba(255, 255, 255, 0.08); --glass-line: rgba(183, 155, 233, 0.14); --glass-shadow: rgba(5, 2, 15, 0.45);
   }
 }
 
@@ -63,7 +66,31 @@ h1, h2, h3 { color: var(--ink); }
 .page-intro .button { margin-top: 24px; }
 
 /* Header */
-.site-header { border-bottom: 1px solid var(--line); background: var(--bg); }
+/* Fixed on scroll with a liquid-glass surface: content blurs and tints through it.
+   Browsers without backdrop-filter get a near-opaque bar instead. */
+html { scroll-padding-top: 92px; }
+.site-header {
+  position: sticky; top: 0; z-index: 15;
+  background: var(--glass-solid);
+  border-bottom: 1px solid var(--glass-line);
+  box-shadow: inset 0 1px 0 var(--glass-edge);
+  transition: box-shadow .2s ease, background-color .2s ease;
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .site-header {
+    background: linear-gradient(180deg, var(--glass-edge) -60%, transparent 70%), var(--glass);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+}
+/* Lift the bar with a soft shadow once the page scrolls (where scroll timelines exist). */
+@supports (animation-timeline: scroll()) {
+  @keyframes header-lift { to { box-shadow: inset 0 1px 0 var(--glass-edge), 0 10px 30px -12px var(--glass-shadow); } }
+  .site-header { animation: header-lift linear both; animation-timeline: scroll(root); animation-range: 0 80px; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .site-header { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
 .header-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 76px; }
 .wordmark { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--ink); text-decoration: none; font-weight: 700; font-size: 1.125rem; letter-spacing: -0.4px; }
 .wordmark:hover { color: var(--ink); }
@@ -268,6 +295,7 @@ h1, h2, h3 { color: var(--ink); }
 @media (max-width: 640px) {
   .container { width: min(100% - 32px, 1120px); }
   .header-row { min-height: 64px; gap: 8px; }
+  html { scroll-padding-top: 80px; }
   .wordmark { font-size: 1.0625rem; }
   .wordmark .logo-mark { width: 36px; height: 36px; }
   .header-actions > .theme-toggle { display: none; }

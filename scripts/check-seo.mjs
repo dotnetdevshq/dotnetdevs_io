@@ -20,7 +20,7 @@ assert.equal(meta.get('og:url'), site.canonicalUrl);
 assert.equal(meta.get('og:site_name'), site.name);
 assert.equal(meta.get('twitter:card'), 'summary_large_image');
 assert.equal(meta.get('og:image'), new URL(site.sharingImage, site.canonicalUrl).href);
-assert.equal(meta.get('twitter:image:alt'), `${site.name} — ${site.newsletter.title}`);
+assert.equal(meta.get('twitter:image:alt'), `${site.name}: ${site.newsletter.title}`);
 assert.match(html, /<html[^>]*lang="en"/);
 assert.equal([...html.matchAll(/<h1\b/g)].length, 1, 'One clear primary heading');
 assert(html.includes(site.description), 'Entity description must be visible in server-rendered content');

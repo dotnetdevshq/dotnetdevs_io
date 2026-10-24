@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Search } from 'lucide-react';
+import { externalProps } from '@/lib/site';
 
 export type SearchItem = { title: string; url: string; meta: string; issue: number; issueUrl: string };
 
@@ -27,8 +28,8 @@ export function LibrarySearch({ items, children, placeholder }: { items: SearchI
           <p className="results-count">{results.length === 0 ? `No links match “${query.trim()}”.` : `${results.length} ${results.length === 1 ? 'link matches' : 'links match'} “${query.trim()}”`}</p>
           <ul className="row-list">
             {results.map(item => <li key={item.url} className="row-card">
-              <a className="row-title" href={item.url}>{item.title}</a>
-              <div className="row-meta-line"><span className="row-meta">{item.meta}</span><a className="row-issue" href={item.issueUrl}>Issue {item.issue}</a></div>
+              <a className="row-title" href={item.url} {...externalProps(item.url)}>{item.title}</a>
+              <div className="row-meta-line"><span className="row-meta">{item.meta}</span><a className="row-issue" href={item.issueUrl} {...externalProps(item.issueUrl)}>Issue {item.issue}</a></div>
             </li>)}
           </ul>
         </section>

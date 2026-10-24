@@ -4,6 +4,7 @@ import { SiteChrome } from './SiteChrome';
 import { LinkCard } from './LinkCard';
 import { LibrarySearch, type SearchItem } from './LibrarySearch';
 import { type CuratedLink, topics, activeTopics, linksForTopic, links as allLinks, issueByNumber, issueUrl, formatDate, guides, sourceName } from '@/lib/content';
+import { externalProps } from '@/lib/site';
 
 const VISIBLE_ISSUES = 2;
 
@@ -12,7 +13,7 @@ function IssueGroup({ n, links }: { n: number; links: CuratedLink[] }) {
   return <section className="issue-group" aria-labelledby={`issue-${n}`}>
     <div className="group-heading">
       <h2 id={`issue-${n}`}>Issue {n}</h2>
-      {issue && <a href={issueUrl(issue)}>{formatDate(issue.date)} · Read the issue<ArrowUpRight size={14} aria-hidden="true" /></a>}
+      {issue && <a href={issueUrl(issue)} {...externalProps(issueUrl(issue))}>{formatDate(issue.date)} · Read the issue<ArrowUpRight size={14} aria-hidden="true" /></a>}
     </div>
     <div className="row-list">{links.filter(link => link.issue === n).map(link => <LinkCard key={link.url} link={link} showIssue={false} />)}</div>
   </section>;
