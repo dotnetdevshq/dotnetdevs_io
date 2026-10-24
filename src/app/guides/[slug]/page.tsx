@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { SiteChrome } from '@/components/SiteChrome';
 import { LinkCard } from '@/components/LinkCard';
 import { pageMetadata } from '@/lib/page-meta';
-import { site } from '@/lib/site';
+import { site, externalProps } from '@/lib/site';
 import { guides, guideBySlug, linkByUrl, type CuratedLink } from '@/lib/content';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -40,7 +40,7 @@ export default async function GuidePage({ params }: Props) {
               {guide.sections.map((section, i) => <li key={section.title}><a href={`#step-${i + 1}`}><span className="toc-number">{i + 1}</span><span>{section.title}</span></a></li>)}
             </ol>
           </nav>
-          <a className="side-callout" href={site.newsletter.subscribeUrl}>
+          <a className="side-callout" href={site.newsletter.subscribeUrl} {...externalProps(site.newsletter.subscribeUrl)}>
             <strong>Get the next issue</strong>
             <span className="muted small">New articles on these topics land in {site.newsletter.title} first.</span>
           </a>

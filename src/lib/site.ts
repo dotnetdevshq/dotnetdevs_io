@@ -14,3 +14,13 @@ export const isStaging = process.env.SITE_NOINDEX === '1'
   || process.env.VERCEL_ENV === 'preview'
   || (process.env.CF_PAGES === '1' && !!process.env.CF_PAGES_BRANCH && process.env.CF_PAGES_BRANCH !== (process.env.SITE_PRODUCTION_BRANCH || 'main'));
 export const isIndexable = !isStaging && !isDesignPreview;
+const siteHost = new URL(site.canonicalUrl).hostname;
+// Links that leave dotnetdevs.io open in a new tab. rel="noopener" (not noreferrer)
+// keeps the referrer, so authors and Beehiiv still see traffic from dotnetdevs.io.
+export function externalProps(href: string): { target?: '_blank'; rel?: string } {
+  try {
+    const url = new URL(href, site.canonicalUrl);
+    if ((url.protocol === 'https:' || url.protocol === 'http:') && url.hostname !== siteHost) return { target: '_blank', rel: 'noopener' };
+  } catch { /* relative or malformed: treat as internal */ }
+  return {};
+}

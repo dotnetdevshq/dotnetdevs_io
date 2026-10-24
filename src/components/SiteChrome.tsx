@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import { LogoMark } from './LogoMark';
 import { ThemeToggle } from './ThemeToggle';
-import { site, isDesignPreview, validDestination } from '@/lib/site';
+import { site, isDesignPreview, validDestination, externalProps } from '@/lib/site';
 
 export const navigation = [
   { href: '/newsletter/', label: 'Newsletter' },
@@ -30,7 +30,7 @@ export function SiteChrome({ current, children }: { current: Section; children: 
         <nav className="site-nav" aria-label="Main"><NavLinks current={current} /></nav>
         <div className="header-actions">
           <ThemeToggle />
-          <a className="button button-small" href={site.newsletter.subscribeUrl}>Subscribe</a>
+          <a className="button button-small" href={site.newsletter.subscribeUrl} {...externalProps(site.newsletter.subscribeUrl)}>Subscribe</a>
           {/* A details element keeps the phone menu working without JavaScript. */}
           <details className="mobile-menu">
             <summary aria-label="Menu"><Menu size={20} aria-hidden="true" /></summary>

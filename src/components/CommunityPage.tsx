@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { SiteChrome } from './SiteChrome';
-import { site, socialLinks, isDesignPreview, validDestination } from '@/lib/site';
+import { site, socialLinks, isDesignPreview, validDestination, externalProps } from '@/lib/site';
 import { issues, latestIssue, links, issueUrl, formatDate, guides, posts, topics, activeTopics, linksForTopic, sourceName, mediaKit } from '@/lib/content';
 
 // "141,445" -> "141K+". Rounded down so the figure never overstates the dated snapshot.
@@ -28,10 +28,10 @@ export function CommunityPage() {
           <h1 id="page-title">{site.tagline.replace(/-/g, '\u2011')}</h1>
           <p className="lead">{site.description}</p>
           <div className="button-row">
-            <a className="button" href={site.newsletter.subscribeUrl}>Subscribe free<ArrowRight size={18} aria-hidden="true" /></a>
+            <a className="button" href={site.newsletter.subscribeUrl} {...externalProps(site.newsletter.subscribeUrl)}>Subscribe free<ArrowRight size={18} aria-hidden="true" /></a>
             <Link className="button button-secondary" href="/links/">Browse the library</Link>
           </div>
-          <p className="fine-print">Free. Unsubscribe any time. Past issues are on <a href={site.newsletter.url}>{new URL(site.newsletter.url).hostname}</a>.</p>
+          <p className="fine-print">Free. Unsubscribe any time. Past issues are on <a href={site.newsletter.url} {...externalProps(site.newsletter.url)}>{new URL(site.newsletter.url).hostname}</a>.</p>
         </div>
         <ul className="hero-stats" aria-label="At a glance">
           <li><span className="stat-number">{issues.length}</span><span>newsletter issues</span></li>
@@ -48,14 +48,14 @@ export function CommunityPage() {
           <Link className="section-link" href="/newsletter/">All {issues.length} issues<ArrowRight size={15} aria-hidden="true" /></Link>
         </div>
         <div className="latest-row">
-          <a className="feature-card" href={issueUrl(latestIssue)}>
+          <a className="feature-card" href={issueUrl(latestIssue)} {...externalProps(issueUrl(latestIssue))}>
             <span className="feature-kicker">Issue {latestIssue.number} · {formatDate(latestIssue.date)}</span>
             {latestIssue.summary && <span className="feature-summary">{latestIssue.summary}</span>}
             <span className="feature-action">Read Issue {latestIssue.number} on {new URL(site.newsletter.url).hostname}<ArrowUpRight size={16} aria-hidden="true" /></span>
           </a>
           <ol className="row-list">
             {latestLinks.map(link => <li key={link.url} className="row-card">
-              <a className="row-title" href={link.url}>{link.title}</a>
+              <a className="row-title" href={link.url} {...externalProps(link.url)}>{link.title}</a>
               <span className="row-meta">{link.author ? `${link.author} · ` : ''}{sourceName(link.url)}</span>
             </li>)}
           </ol>
@@ -98,7 +98,7 @@ export function CommunityPage() {
         <ul className="channel-list">
           {socials.map(link => {
             const content = <><Image className="channel-icon" src={`/icons/${link.id}.svg`} width={16} height={16} alt="" unoptimized /><span>{link.label}</span></>;
-            return <li key={link.id}>{validDestination(link.url) ? <a className={`channel platform-${link.id}`} href={link.url!}>{content}</a> : <span className="channel social-sample">{content}</span>}</li>;
+            return <li key={link.id}>{validDestination(link.url) ? <a className={`channel platform-${link.id}`} href={link.url!} {...externalProps(link.url!)}>{content}</a> : <span className="channel social-sample">{content}</span>}</li>;
           })}
         </ul>
       </section>}

@@ -5,7 +5,7 @@ import { site } from '@/lib/site';
 // so every subpage rebuilds them here with the shared sharing image.
 export function pageMetadata(path: string, title: string, description: string): Metadata {
   const url = new URL(path, site.canonicalUrl).href;
-  const image = { url: new URL(site.sharingImage, site.canonicalUrl).href, width: 1200, height: 630, alt: `${site.name} — ${site.newsletter.title}` };
+  const image = { url: new URL(site.sharingImage, site.canonicalUrl).href, width: 1200, height: 630, alt: `${site.name}: ${site.newsletter.title}` };
   const fullTitle = `${title} | ${site.name}`;
   return {
     title: fullTitle, description,

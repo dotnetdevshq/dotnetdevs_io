@@ -1,6 +1,6 @@
-# Verification — September 15, 2026
+# Verification: September 15, 2026
 
-## SEO and Analytics follow-up — September 16, 2026
+## SEO and Analytics follow-up: September 16, 2026
 
 - Production and Vercel Preview builds passed compilation, lint/type checks, export checks, and the new SEO assertions. The preview build also exercised optional Google/Bing verification tokens; these test tokens were not present in the final production export.
 - Verified metadata, JSON-LD graph relationships, official profile links, canonical-only sitemap contents, production crawler access, preview exclusion, llms.txt, and 404 noindex/canonical behavior in the exported files.

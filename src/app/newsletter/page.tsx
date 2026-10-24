@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { SiteChrome } from '@/components/SiteChrome';
-import { site } from '@/lib/site';
+import { site, externalProps } from '@/lib/site';
 import { pageMetadata } from '@/lib/page-meta';
 import { issues, issueUrl, formatDate } from '@/lib/content';
 
@@ -18,13 +18,13 @@ export default function NewsletterPage() {
       <p className="eyebrow">Newsletter archive</p>
       <h1 id="page-title">{site.newsletter.title}</h1>
       <p className="lead">{description} {issues.length} issues so far.</p>
-      <a className="button" href={site.newsletter.subscribeUrl}>Subscribe free<ArrowRight size={18} aria-hidden="true" /></a>
+      <a className="button" href={site.newsletter.subscribeUrl} {...externalProps(site.newsletter.subscribeUrl)}>Subscribe free<ArrowRight size={18} aria-hidden="true" /></a>
     </section>
     {years.map(year => <section key={year} className="content-section" aria-labelledby={`year-${year}`}>
       <div className="section-heading"><h2 id={`year-${year}`}>{year}</h2></div>
       <ul className="issue-list">
         {issues.filter(issue => issue.date.startsWith(year)).map(issue => <li key={issue.number}>
-          <a className="issue-card" href={issueUrl(issue)}>
+          <a className="issue-card" href={issueUrl(issue)} {...externalProps(issueUrl(issue))}>
             <span className="issue-number">Issue {issue.number}</span>
             <span className="issue-date">{formatDate(issue.date)}</span>
             {issue.summary && <span className="issue-summary">{issue.summary}</span>}

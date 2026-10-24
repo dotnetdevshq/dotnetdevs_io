@@ -5,6 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { SiteChrome } from '@/components/SiteChrome';
 import { pageMetadata } from '@/lib/page-meta';
 import { posts, topics, sourceName, formatDate } from '@/lib/content';
+import { externalProps } from '@/lib/site';
 
 export const metadata: Metadata = pageMetadata('/posts/', 'Social posts archive',
   'Visual explainers shared on the .NET Developers social channels, each with a summary and a link to the original article.');
@@ -24,7 +25,7 @@ export default function PostsPage() {
             <Image src={post.image} alt={post.imageAlt} width={1080} height={1350} unoptimized />
             <div className="post-body">
               <h2>{post.title}</h2>
-              <p className="link-meta">Based on <a className="post-source" href={post.source.url}>{post.source.title}<ArrowUpRight size={14} aria-hidden="true" /></a></p>
+              <p className="link-meta">Based on <a className="post-source" href={post.source.url} {...externalProps(post.source.url)}>{post.source.title}<ArrowUpRight size={14} aria-hidden="true" /></a></p>
               <p className="link-meta">{post.source.author} · {sourceName(post.source.url)} · {formatDate(post.source.published)}</p>
               <p>{post.summary}</p>
               {post.caveats && <p><strong>Worth knowing:</strong> {post.caveats}</p>}

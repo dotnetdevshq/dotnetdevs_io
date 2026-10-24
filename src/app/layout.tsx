@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     other: process.env.BING_SITE_VERIFICATION ? { 'msvalidate.01': process.env.BING_SITE_VERIFICATION } : undefined,
   },
   icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }, { url: site.logo, type: 'image/png', sizes: '500x500' }], apple: '/apple-touch-icon.png' },
-  openGraph: { type: 'website', locale: 'en_US', url: site.canonicalUrl, siteName: site.name, title: site.title, description: site.description, images: [{ url: image, width: 1200, height: 630, alt: `${site.name} — ${site.newsletter.title}` }] },
-  twitter: { card: 'summary_large_image', title: site.title, description: site.description, images: [{ url: image, alt: `${site.name} — ${site.newsletter.title}` }] },
+  openGraph: { type: 'website', locale: 'en_US', url: site.canonicalUrl, siteName: site.name, title: site.title, description: site.description, images: [{ url: image, width: 1200, height: 630, alt: `${site.name}: ${site.newsletter.title}` }] },
+  twitter: { card: 'summary_large_image', title: site.title, description: site.description, images: [{ url: image, alt: `${site.name}: ${site.newsletter.title}` }] },
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="en" suppressHydrationWarning>
