@@ -5,7 +5,8 @@ import { SiteChrome } from '@/components/SiteChrome';
 import { LinkCard } from '@/components/LinkCard';
 import { pageMetadata } from '@/lib/page-meta';
 import { site, externalProps } from '@/lib/site';
-import { guides, guideBySlug, linkByUrl, type CuratedLink } from '@/lib/content';
+import { guideStructuredData, serializeJsonLd } from '@/lib/seo';
+import { guides, guideBySlug, guideImagePath, linkByUrl, type CuratedLink } from '@/lib/content';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -16,7 +17,11 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const guide = guideBySlug((await params).slug);
-  return guide ? pageMetadata(`/guides/${guide.slug}/`, guide.title, guide.description) : {};
+  if (!guide) return {};
+  return pageMetadata(`/guides/${guide.slug}/`, guide.seoTitle ?? guide.title, guide.description, {
+    image: { path: guideImagePath(guide), alt: `${guide.title}: a reading guide from ${site.name}` },
+    modified: guide.reviewed,
+  });
 }
 
 export default async function GuidePage({ params }: Props) {
@@ -24,10 +29,11 @@ export default async function GuidePage({ params }: Props) {
   if (!guide) notFound();
   const articleCount = guide.sections.reduce((n, s) => n + s.links.length, 0);
   return <SiteChrome current="/guides/">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(guideStructuredData(guide)) }} />
     <div className="container page">
       <nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/guides/">Guides</Link><span aria-hidden="true">/</span><span>{guide.title}</span></nav>
       <section className="guide-hero" aria-labelledby="page-title">
-        <p className="kicker">Guide · {guide.sections.length} steps · {articleCount} articles · Reviewed {guide.reviewedLabel}</p>
+        <p className="kicker">Guide · {guide.sections.length} steps · {articleCount} articles · Reviewed <time dateTime={guide.reviewed}>{guide.reviewedLabel}</time></p>
         <h1 id="page-title">{guide.title}</h1>
         <p className="lead">{guide.intro}</p>
       </section>

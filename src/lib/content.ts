@@ -55,10 +55,15 @@ export const formatDate = (iso: string) =>
 export const pageUrl = (path: string) => new URL(path, site.canonicalUrl).href;
 
 export type GuideSection = { title: string; intro: string; links: string[] };
-export type Guide = { slug: string; title: string; description: string; reviewed: string; reviewedLabel: string; intro: string; sections: GuideSection[] };
+export type Guide = {
+  slug: string; title: string; seoTitle?: string; description: string; about?: string[];
+  reviewed: string; reviewedLabel: string; intro: string; sections: GuideSection[];
+};
 export const guides: Guide[] = guidesData;
 export const guideBySlug = (slug: string) => guides.find(guide => guide.slug === slug);
 export const linkByUrl = (url: string) => links.find(link => link.url === url);
+// Rendered by scripts/render-brand-assets.mjs; one 1200 × 630 card per guide.
+export const guideImagePath = (guide: Guide) => `/og/guides/${guide.slug}.png`;
 
 export type Post = {
   slug: string; title: string; image: string; imageAlt: string; topics: string[];

@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 
 const site = JSON.parse(readFileSync('src/config/site.json', 'utf8'));
@@ -78,6 +78,33 @@ if (preview) {
   for (const url of [site.canonicalUrl, site.newsletter.url, ...socials.map(link => link.url)]) assert(llms.includes(url), `llms.txt missing ${url}`);
   assert(llms.includes(site.description));
 }
+// Guides: own sharing image, article metadata, and a CollectionPage graph that links back to the homepage entities.
+for (const guide of JSON.parse(readFileSync('src/content/guides.json', 'utf8'))) {
+  const url = new URL(`/guides/${guide.slug}/`, site.canonicalUrl).href;
+  const imagePath = `og/guides/${guide.slug}.png`;
+  assert(existsSync(`out/${imagePath}`), `Guide sharing image missing: run ASSETS_ONLY=og/ npm run assets`);
+  const guideHtml = readFileSync(`out/guides/${guide.slug}/index.html`, 'utf8');
+  const guideMeta = new Map([...guideHtml.matchAll(/<meta\s+[^>]*>/g)].map(([tag]) => [tag.match(/(?:name|property)="([^"]+)"/)?.[1], decode(tag.match(/content="([^"]*)"/)?.[1] ?? '')]));
+  assert.equal(guideMeta.get('og:image'), new URL(imagePath, site.canonicalUrl).href);
+  assert.equal(guideMeta.get('twitter:image'), new URL(imagePath, site.canonicalUrl).href);
+  assert.equal(guideMeta.get('og:type'), 'article');
+  assert.equal(guideMeta.get('article:modified_time'), guide.reviewed);
+  assert.equal(guideMeta.get('description'), guide.description);
+  assert(guideMeta.get('description').length <= 160, `Guide description over 160 characters: ${guide.slug}`);
+  assert(guideHtml.includes(`<link rel="canonical" href="${url}"/>`), `Guide canonical missing: ${guide.slug}`);
+  const [guideSchema, ...extra] = [...guideHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+  assert(guideSchema && !extra.length, 'Exactly one JSON-LD graph on each guide');
+  const node = type => guideSchema['@graph'].find(n => n['@type'] === type);
+  const items = node('ItemList').itemListElement;
+  assert.equal(node('CollectionPage').url, url);
+  assert.equal(node('CollectionPage').isPartOf['@id'], website['@id']);
+  assert.equal(node('CollectionPage').publisher['@id'], org['@id']);
+  assert.equal(items.length, guide.sections.reduce((n, s) => n + s.links.length, 0), 'Every guide link must resolve to a library entry');
+  assert(items.every(item => guideHtml.includes(`href="${item.item.url.replace(/&/g, '&amp;')}"`)), 'Structured data must only list links shown on the page');
+  assert.equal(node('BreadcrumbList').itemListElement.at(-1).item, url);
+  if (!preview) assert(llms.includes(`## Guide: ${guide.title}`), `llms.txt missing guide outline: ${guide.slug}`);
+}
+
 const notFound = readFileSync('out/404.html', 'utf8');
 assert.match(notFound, /name="robots" content="noindex"/);
 assert(!notFound.includes('application/ld+json'), '404 must not describe itself as the community homepage');

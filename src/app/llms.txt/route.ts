@@ -1,5 +1,5 @@
 import { site, socialLinks, isIndexable } from '@/lib/site';
-import { issues, issueUrl, topics, activeTopics, guides } from '@/lib/content';
+import { issues, issueUrl, topics, activeTopics, guides, linkByUrl, type CuratedLink } from '@/lib/content';
 
 export const dynamic = 'force-static';
 
@@ -20,6 +20,20 @@ export function GET() {
     `- [Posts](${page('/posts/')}): Visual explainers from our social channels, with links to the original articles.`,
     `- [Sponsor](${page('/sponsor/')}): Audience figures and sponsorship options.`,
     '',
+    // Each guide's reading order, so answer engines can cite the right step and the original article.
+    ...guides.flatMap(guide => [
+      `## Guide: ${guide.title}`,
+      '',
+      `${guide.intro} Reviewed ${guide.reviewedLabel}. Full guide: ${page(`/guides/${guide.slug}/`)}`,
+      '',
+      ...guide.sections.flatMap((section, i) => [
+        `### Step ${i + 1}: ${section.title}`,
+        section.intro,
+        ...section.links.map(linkByUrl).filter((link): link is CuratedLink => !!link)
+          .map(link => `- [${link.title}](${link.url})${link.author ? ` by ${link.author}` : ''}`),
+        '',
+      ]),
+    ]),
     '## Newsletter',
     `- [${site.newsletter.title}](${site.newsletter.url}): ${site.newsletter.description}`,
     ...issues.slice(0, 5).map(issue => `- [Issue ${issue.number}](${issueUrl(issue)})`),

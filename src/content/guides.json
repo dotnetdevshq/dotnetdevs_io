@@ -2,7 +2,17 @@
   {
     "slug": "ai-agents-mcp",
     "title": "AI agents and MCP in .NET",
-    "description": "A reading path through the articles featured in The .NET Insider on building AI features, MCP servers and agents with .NET.",
+    "seoTitle": "AI agents and MCP in .NET: a reading guide",
+    "description": "Build AI agents and MCP servers in C#: a step-by-step reading path through Microsoft.Extensions.AI, the MCP C# SDK, Agent Framework, AG-UI and AI evaluation.",
+    "about": [
+      "Model Context Protocol",
+      "Microsoft Agent Framework",
+      "Microsoft.Extensions.AI",
+      "AG-UI",
+      "AI agents",
+      "C#",
+      ".NET"
+    ],
     "reviewed": "2026-10-16",
     "reviewedLabel": "October 2026",
     "intro": "The .NET AI stack has moved quickly. This page puts the most useful articles we have featured into an order that makes sense to read them in: the building blocks first, then MCP servers, then agents, then putting agents in front of users and shipping them responsibly. Every link goes to the original article.",

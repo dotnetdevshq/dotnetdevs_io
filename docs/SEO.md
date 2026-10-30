@@ -10,6 +10,18 @@ The site exports its homepage, metadata, and structured data as HTML. Crawlers d
 
 The homepage has Organization, WebSite, and WebPage JSON-LD with stable canonical IDs, the original logo, and the owner's official social URLs in `sameAs`. Its newsletter reference matches visible page content. It does not invent reviews, members, addresses, authors, update dates, or FAQ answers. The homepage canonical is page-specific, so the 404 does not inherit it or the community JSON-LD.
 
+## Guides
+
+Each guide in `src/content/guides.json` gets page-specific search and AI discovery data, built from the same content as the visible page:
+
+- `seoTitle` (optional) is used for `<title>` and Open Graph; `title` stays the visible heading. `description` is the meta description and must stay at or under 160 characters. `about` lists the main technologies, used for JSON-LD `about`/`keywords` and the sharing image's topic chips.
+- Metadata is shared as `og:type=article` with `article:modified_time` set to the real `reviewed` date. The visible review date is a `<time>` element.
+- JSON-LD is a CollectionPage (linked by `@id` to the homepage WebSite and Organization), an ordered ItemList of the linked articles with authors where the library records one, and a BreadcrumbList. It lists only links shown on the page.
+- `llms.txt` includes each guide's intro and its steps with every article link, so answer engines can cite the right step and the original author.
+- The sharing image is `public/og/guides/<slug>.png`, rendered by `ASSETS_ONLY=og/ npm run assets` (see `docs/ASSETS.md`). Re-render it after changing a guide's title, steps or `about`.
+
+`scripts/check-seo.mjs` checks all of this for every guide on each build.
+
 ## Indexing controls
 
 Production metadata allows indexing, following, unlimited text snippets, and large image previews. `VERCEL_ENV=preview`, `SITE_NOINDEX=1`, or a non-production Cloudflare branch switches the export to noindex metadata, a disallow-all robots file, an empty sitemap, and a preview-only llms.txt notice. Analytics is also omitted from these builds. Rebuild when changing these settings; the output is static.
