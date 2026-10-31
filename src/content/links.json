@@ -1,5 +1,152 @@
 [
  {
+  "title": ".NET October 2026 Out-of-Band Security Updates",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-october-2026-oob-security-updates/",
+  "author": "Rahul Bhandari",
+  "issue": 32,
+  "topics": [
+   "releases",
+   "security"
+  ],
+  "note": ".NET 8.0.33, 9.0.22, 10.0.14 and .NET 11 RC3 fix Brotli decompression and Linux tarball ownership issues, and complete fixes from the earlier October release. Update framework-dependent runtimes and restart apps; rebuild and republish self-contained apps and containers. RC2 users should move to RC3."
+ },
+ {
+  "title": "Microsoft.UI.Reactor: a C#-first way to build WinUI apps",
+  "url": "https://devblogs.microsoft.com/ifdef-windows/microsoft-ui-reactor-a-c-first-way-to-build-winui-apps/",
+  "author": "Alexandre Zollinger Chohfi",
+  "issue": 32,
+  "topics": [
+   "clients"
+  ],
+  "note": "An experimental framework that brings Model-View-Update to WinUI: interfaces are described in C# and native controls update as state changes. The walkthrough builds a counter as a .NET 10 file-based app. There is no support policy or API guarantee yet."
+ },
+ {
+  "title": "Memory-efficient JSON in .NET 10 web APIs with PipeReader",
+  "url": "https://blog.elmah.io/memory-efficient-json-in-net-10-web-apis-with-pipereader/",
+  "author": "Ali Hamza Ansari",
+  "issue": 32,
+  "topics": [
+   "performance",
+   "aspnet-core"
+  ],
+  "note": "Compares stream-based JSON deserialization with the PipeReader support in System.Text.Json on a payload of one million readings, measuring time, allocations and garbage collections. Validate the results against your own workload."
+ },
+ {
+  "title": "Are Async Database Inserts Really Faster in .NET?",
+  "url": "https://dotnettips.com/2026/10/25/are-async-database-inserts-really-faster-in-net/",
+  "author": "David McCarter",
+  "issue": 32,
+  "topics": [
+   "data",
+   "performance"
+  ],
+  "note": "Benchmarks synchronous against asynchronous database inserts and challenges the assumption that async always finishes faster. A prompt to measure your own database workload. The full article needs a paid subscription."
+ },
+ {
+  "title": "Stop Blocking on the Database Inside IsValid: .NET 11 Validates Async",
+  "url": "https://dev.to/iamprincejkc/stop-blocking-on-the-database-inside-isvalid-net-11-validates-async-455d",
+  "author": "JKC",
+  "issue": 32,
+  "topics": [
+   "aspnet-core",
+   "csharp"
+  ],
+  "note": "AsyncValidationAttribute, IAsyncValidatableObject and the async Validator APIs move database-backed checks out of blocking IsValid calls. Also covers cancellation, validation stages, the validateAllProperties flag and why synchronous validation paths need deliberate handling."
+ },
+ {
+  "title": ".NET tasks AI is better at than developers",
+  "url": "https://www.roundthecode.com/dotnet-tutorials/dotnet-tasks-ai-better-than-developers",
+  "author": "David Grace",
+  "issue": 32,
+  "topics": [
+   "ai"
+  ],
+  "note": "Uses Claude Code for project creation, unit tests, comments and exception debugging in an ASP.NET Core Web API. Reusable Markdown specifications define the architecture, packages, conventions and verification steps, giving the agent a clearer target."
+ },
+ {
+  "title": "Compare today’s code with an earlier commit",
+  "url": "https://devblogs.microsoft.com/visualstudio/compare-todays-code-with-an-earlier-commit/",
+  "author": "Leah Tran",
+  "issue": 32,
+  "topics": [
+   "tooling"
+  ],
+  "note": "Visual Studio 2026 version 18.11 adds Compare with Working Tree: pick a historical commit and see how your current files differ, uncommitted changes included, without switching branches. Every differing file is listed, not only those the commit touched."
+ },
+ {
+  "title": "Organize and revisit tabs with the keyboard",
+  "url": "https://devblogs.microsoft.com/visualstudio/organize-and-revisit-tabs-with-the-keyboard/",
+  "author": "Mads Kristensen",
+  "issue": 32,
+  "topics": [
+   "tooling"
+  ],
+  "note": "Visual Studio 2026 version 18.11 adds Ctrl+Shift+PgUp/PgDn to move the active tab and Ctrl+NumPad1 to NumPad9 to jump to a visible tab in the active group. Pinned sections and project groups still apply; preview tabs cannot be moved."
+ },
+ {
+  "title": "Keep your investigation between sessions",
+  "url": "https://devblogs.microsoft.com/visualstudio/keep-your-investigation-between-sessions/",
+  "author": "Jason Chlus and Mads Kristensen",
+  "issue": 32,
+  "topics": [
+   "tooling"
+  ],
+  "note": "Create a standalone Markdown note through New File, and the opt-in Hot Exit preview in Visual Studio 2026 version 18.11 restores unfinished notes and unsaved edits after reopening the IDE. Save the note when you want to share it or keep it in the repository."
+ },
+ {
+  "title": "JetBrains .NET Day Online 2026: Watch the Recordings",
+  "url": "https://blog.jetbrains.com/dotnet/2026/10/19/jetbrains-dotnet-day-online-2026-watch-the-recordings/",
+  "author": "Mehul Harry",
+  "issue": 32,
+  "topics": [
+   "tooling"
+  ],
+  "note": "Recordings from the October 7 event: agent workflows in Rider, Outbox/Inbox/Saga messaging patterns, C# interceptors and Native AOT, and NuGet supply-chain attacks. The recap describes each session so you can pick a topic."
+ },
+ {
+  "title": "JetBrains GameDev Day 2026: Watch the Recordings",
+  "url": "https://blog.jetbrains.com/dotnet/2026/10/23/jetbrains-gamedev-day-2026-watch-the-recordings/",
+  "author": "Anna Ruban",
+  "issue": 32,
+  "topics": [
+   "tooling"
+  ],
+  "note": "Sessions on Unreal Engine profiling, Unity UI automation, procedural generation in Godot, debugging across C# and C++, version control for game assets and evolving a live engine, grouped by engine and role."
+ },
+ {
+  "title": "C# Concepts Every .NET Backend Developer Should Know in 2026",
+  "url": "https://dev.to/qodors/c-concepts-every-net-backend-developer-should-know-in-2026-2981",
+  "author": "qodors",
+  "issue": 32,
+  "topics": [
+   "csharp",
+   "data"
+  ],
+  "note": "A backend refresher on interfaces, asynchronous I/O and EF Core query optimization, with examples of the cost of blocking HTTP calls and loading more data than an endpoint needs."
+ },
+ {
+  "title": "This week in Cursor + .NET — 7 rules",
+  "url": "https://dev.to/agentic_architect/this-week-in-cursor-net-7-rules-week-ending-october-25-2026-22g8",
+  "author": "Agentic Architect",
+  "issue": 32,
+  "topics": [
+   "ai",
+   "csharp"
+  ],
+  "note": "Seven opinionated rules for reviewing agent-generated C#: value objects versus entities, sealed classes, strongly typed IDs, typed configuration, exception rethrowing, query tracking and DI lifetimes. Watch especially for singletons capturing scoped dependencies."
+ },
+ {
+  "title": "Azure DevOps Comes to Microsoft Copilot with Plugin for Work Items, Pull Requests",
+  "url": "https://visualstudiomagazine.com/articles/2026/10/23/azure-devops-comes-to-microsoft-copilot-with-plugin-for-work-items-pull-requests.aspx",
+  "author": "David Ramel",
+  "issue": 32,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": "The Azure DevOps plugin for Microsoft Copilot reaches work items, pull requests, pipelines and test plans, and Cowork can turn requirements into structured backlogs. Check your organization has the required Copilot experience; Azure DevOps Server is not supported."
+ },
+ {
   "title": "Announcing .NET 11 Release Candidate 2",
   "url": "https://devblogs.microsoft.com/dotnet/dotnet-11-rc-2/",
   "author": ".NET Team",
