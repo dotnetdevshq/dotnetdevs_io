@@ -197,6 +197,12 @@ html { scroll-padding-top: 92px; }
 .side-list a[aria-current="page"] .count { color: var(--on-violet); }
 .toc-list a { justify-content: flex-start; }
 .toc-number { font-family: var(--mono); font-size: 0.8125rem; font-weight: 700; color: var(--violet-ink); }
+/* Guide table of contents stays in view beside the steps on wide screens. */
+@media (min-width: 861px) {
+  .sidebar-sticky { position: sticky; top: 92px; max-height: calc(100vh - 108px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+}
+.more-guides { margin-top: 40px; }
+.more-guides .guide-list { margin-top: 12px; }
 .side-callout { display: grid; gap: 4px; padding: 18px; border-radius: 18px; background: var(--tint); border: 1px solid var(--tint-border); color: var(--ink); text-decoration: none; }
 .side-callout:hover { color: var(--ink); border-color: var(--violet); }
 .side-callout .small { display: inline-flex; align-items: center; gap: 4px; }

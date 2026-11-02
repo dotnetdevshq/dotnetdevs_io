@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { SiteChrome } from '@/components/SiteChrome';
 import { LinkCard } from '@/components/LinkCard';
@@ -39,7 +40,7 @@ export default async function GuidePage({ params }: Props) {
       </section>
 
       <div className="with-sidebar">
-        <aside className="sidebar">
+        <aside className="sidebar sidebar-sticky">
           <nav aria-labelledby="toc-heading">
             <h2 id="toc-heading" className="sidebar-heading">In this guide</h2>
             <ol className="side-list toc-list">
@@ -63,6 +64,19 @@ export default async function GuidePage({ params }: Props) {
             </div>
             <div className="row-list">{section.links.map(linkByUrl).filter((l): l is CuratedLink => !!l).map(link => <LinkCard key={link.url} link={link} />)}</div>
           </section>)}
+          {guides.length > 1 && <nav className="more-guides" aria-labelledby="more-guides-heading">
+            <h2 id="more-guides-heading" className="sidebar-heading">More reading guides</h2>
+            <ul className="guide-list">
+              {guides.filter(other => other.slug !== guide.slug).map(other => <li key={other.slug}>
+                <Link className="guide-card" href={`/guides/${other.slug}/`}>
+                  <span className="kicker">Guide · {other.sections.length} steps · Reviewed {other.reviewedLabel}</span>
+                  <span className="guide-card-title">{other.title}</span>
+                  <span className="muted">{other.description}</span>
+                  <span className="card-action">Read the guide<ArrowRight size={16} aria-hidden="true" /></span>
+                </Link>
+              </li>)}
+            </ul>
+          </nav>}
           <p className="page-note">Step introductions are dotnetdevs.io commentary. Every article belongs to its author; see <Link href="/links/">the full library</Link> for everything we have featured.</p>
         </div>
       </div>
