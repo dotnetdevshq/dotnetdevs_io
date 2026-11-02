@@ -79,5 +79,79 @@
         ]
       }
     ]
+  },
+  {
+    "slug": "aspire",
+    "title": "Building with Aspire",
+    "seoTitle": "Aspire for .NET developers: a reading guide",
+    "description": "Learn Aspire step by step: the AppHost, integrations, the dashboard and OpenTelemetry, deployment, and using Aspire with AI coding agents.",
+    "about": [
+      "Aspire",
+      "AppHost",
+      "OpenTelemetry",
+      "Distributed applications",
+      "C#",
+      ".NET"
+    ],
+    "reviewed": "2026-11-02",
+    "reviewedLabel": "November 2026",
+    "intro": "Aspire describes your whole application in code, from APIs and frontends to databases and caches, then runs it locally with one command and helps you ship it. This page puts the Aspire articles we have featured into a reading order: why it exists, a first app, integrations, the dashboard, deployment, and working with AI agents. Aspire releases often, so some earlier articles show older APIs; we note this where it matters. Every link goes to the original article.",
+    "sections": [
+      {
+        "title": "Understand what Aspire is for",
+        "intro": "The problem Aspire solves, why teams adopt it, and what it looks like to move an existing Docker Compose setup into an AppHost. Some of these predate Aspire 13, so read them for the ideas rather than exact APIs.",
+        "links": [
+          "https://medium.com/@davidfowl/aspire-a-platform-for-reusable-infrastructure-3a15582f8a5a",
+          "https://intrepid-developer.com/blog/why-you-should-try-aspire",
+          "https://devblogs.microsoft.com/dotnet/xboxs-usage-of-aspire-transforming-development-practices/",
+          "https://andrewlock.net/converting-a-docker-compose-file-to-aspire/"
+        ]
+      },
+      {
+        "title": "Build your first app with the AppHost",
+        "intro": "A complete walkthrough on Aspire 13, from the AppHost and service defaults to deployment, then a short tip on keeping containers and their data between runs.",
+        "links": [
+          "https://antondevtips.com/blog/getting-started-with-dotnet-aspire-13-building-and-deploying-an-app",
+          "https://devblogs.microsoft.com/dotnet/dotnet-aspire-container-lifetime/"
+        ]
+      },
+      {
+        "title": "Connect databases, frontends and other languages",
+        "intro": "Aspire 13 added first-class support for Python and JavaScript apps alongside .NET. Start with that release, then see how to write your own hosting integration and how to run a JavaScript frontend next to your .NET services.",
+        "links": [
+          "https://devblogs.microsoft.com/aspire/aspire13/",
+          "https://www.kallemarjokorpi.fi/blog/why-do-you-need-custom-integrations-in-net-aspire-2/",
+          "https://rasper87.blog/2025/10/28/running-a-vite-frontend-from-net-aspire/",
+          "https://devblogs.microsoft.com/aspire/aspire-bun-support-and-container-enhancements/"
+        ]
+      },
+      {
+        "title": "Observe your app with the dashboard",
+        "intro": "The dashboard shows structured logs, traces and metrics once your services emit OpenTelemetry. These articles cover instrumenting your app, customizing the dashboard, and the export and history features added in recent releases.",
+        "links": [
+          "https://techwatching.dev/posts/aspire-open-telemetry",
+          "https://victorfrye.com/blog/posts/cozy-aspire-dashboarding",
+          "https://devblogs.microsoft.com/aspire/aspire-dashboard-improvements-export-and-telemetry/",
+          "https://devblogs.microsoft.com/aspire/whats-new-aspire-13-6/"
+        ]
+      },
+      {
+        "title": "Secure and deploy",
+        "intro": "A full backend-for-frontend security setup modeled in the AppHost, and the release that added Kubernetes and AKS deployment through Helm. The walkthrough in step 2 also covers deploying with Docker Compose.",
+        "links": [
+          "https://damienbod.com/2026/08/17/use-aspire-to-implement-and-deploy-the-bff-security-architecture/",
+          "https://devblogs.microsoft.com/aspire/whats-new-aspire-13-3/"
+        ]
+      },
+      {
+        "title": "Use Aspire with AI agents",
+        "intro": "How the Aspire CLI gives coding agents current docs, a way to run the whole app, and telemetry to check their work, plus a complete agent application that Aspire orchestrates. For the agent side, see our AI agents and MCP guide.",
+        "links": [
+          "https://devblogs.microsoft.com/aspire/aspire-docs-in-your-terminal/",
+          "https://devblogs.microsoft.com/aspire/agentic-dev-aspirations/",
+          "https://developer.microsoft.com/blog/build-a-real-world-example-with-microsoft-agent-framework-microsoft-foundry-mcp-and-aspire"
+        ]
+      }
+    ]
   }
 ]
