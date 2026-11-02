@@ -84,12 +84,13 @@
     "slug": "aspire",
     "title": "Building with Aspire",
     "seoTitle": "Aspire for .NET developers: a reading guide",
-    "description": "Learn Aspire step by step: the AppHost, integrations, the dashboard and OpenTelemetry, deployment, and using Aspire with AI coding agents.",
+    "description": "Learn Aspire (formerly .NET Aspire) step by step: the AppHost, integrations, the dashboard and OpenTelemetry, deployment, and AI coding agents.",
     "about": [
       "Aspire",
       "AppHost",
       "OpenTelemetry",
       "Distributed applications",
+      ".NET Aspire",
       "C#",
       ".NET"
     ],
