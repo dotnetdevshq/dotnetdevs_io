@@ -1,4 +1,5 @@
 import { site, socialLinks } from '@/lib/site';
+import legal from '@/content/legal.json';
 import { guideImagePath, linkByUrl, type CuratedLink, type Guide } from '@/lib/content';
 
 const id = (fragment: string) => new URL(`#${fragment}`, site.canonicalUrl).href;
@@ -13,6 +14,7 @@ export const communityStructuredData = {
       url: site.canonicalUrl, description: site.description,
       ...(site.logo ? { logo: new URL(site.logo, site.canonicalUrl).href } : {}),
       sameAs: socialLinks.map(link => link.url),
+      founder: { '@id': id('founder') },
     },
     {
       '@type': 'WebSite', '@id': id('website'),
@@ -34,6 +36,25 @@ export const communityStructuredData = {
         url: site.newsletter.url, description: site.newsletter.description,
       },
     },
+  ],
+};
+
+const founder = {
+  '@type': 'Person', '@id': id('founder'), name: legal.owner,
+  jobTitle: 'Software engineer', knowsAbout: ['C#', '.NET', 'ASP.NET Core', 'Entity Framework Core', 'Aspire'],
+  homeLocation: { '@type': 'Place', name: `${legal.city}, ${legal.country}` },
+};
+
+// The About page names the person behind the brand and links back to the homepage entities.
+export const aboutStructuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'AboutPage', '@id': `${new URL('/about/', site.canonicalUrl).href}#webpage`,
+      name: `About ${site.brand}`, url: new URL('/about/', site.canonicalUrl).href, inLanguage: 'en',
+      isPartOf: { '@id': id('website') }, about: { '@id': id('organization') }, mainEntity: { '@id': id('founder') },
+    },
+    { ...founder, worksFor: { '@id': id('organization') } },
   ],
 };
 

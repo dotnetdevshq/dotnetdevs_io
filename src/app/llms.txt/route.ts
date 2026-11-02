@@ -19,6 +19,9 @@ export function GET() {
     ...guides.map(guide => `- [${guide.title}](${page(`/guides/${guide.slug}/`)}): ${guide.description}`),
     `- [Posts](${page('/posts/')}): Visual explainers from our social channels, with links to the original articles.`,
     `- [Sponsor](${page('/sponsor/')}): Audience figures and sponsorship options.`,
+    `- [About](${page('/about/')}): Who runs the site, how articles are chosen and credited, and how sponsored content is labeled.`,
+    `- [Privacy and cookies](${page('/privacy/')}): What personal data the site uses and why.`,
+    `- [Terms of use](${page('/terms/')}): Terms for using the site and its curated links.`,
     '',
     // Each guide's reading order, so answer engines can cite the right step and the original article.
     ...guides.flatMap(guide => [

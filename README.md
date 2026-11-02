@@ -35,7 +35,11 @@ node scripts/preview.mjs
 - Contact is optional. Set `contact.url` to a real HTTPS or mailto destination; never invent an address.
 - Rebuild after configuration edits. Content and links are present in the exported HTML and work without JavaScript.
 
-External destinations consistently open in the same tab. Cards are single links, with visible platform labels and decorative icons. No forms, accounts, or backend are needed. Google Analytics and Vercel Web Analytics run only on the canonical production hostname.
+External destinations consistently open in the same tab. Cards are single links, with visible platform labels and decorative icons. No forms, accounts, or backend are needed. Google Analytics and Vercel Web Analytics run only on the canonical production hostname. Google Analytics also waits for consent: it loads only after a visitor chooses Accept analytics in the cookie banner (`src/components/CookieConsent.tsx`), with advertising features off. Vercel Web Analytics is cookieless and runs without the banner. If you add any other service that sets cookies or tracks visitors, gate it the same way and list it on `/privacy/`.
+
+## About and legal pages
+
+`/about/`, `/privacy/` and `/terms/` are linked in the footer next to Cookie settings. Owner details and the last-updated dates live in `src/content/legal.json`; update the date whenever the policy text changes.
 
 ## Pages
 
