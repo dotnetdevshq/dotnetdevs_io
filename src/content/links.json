@@ -1,5 +1,163 @@
 [
  {
+  "title": "Free Blazor components from Syncfusion",
+  "url": "https://www.syncfusion.com/blogs/post/open-source-syncfusion-toolkit-for-blazor",
+  "author": "Saravanan G",
+  "issue": 33,
+  "topics": [
+   "clients"
+  ],
+  "note": "An MIT-licensed toolkit with charts, dialogs, date inputs and other common components for Server, WebAssembly and Auto render modes, with no license key needed for commercial use. It is separate from the commercial suite, so check that it covers the components you need."
+ },
+ {
+  "title": "What changed in ASP.NET Core authentication for .NET 11?",
+  "url": "https://nestenius.se/net/whats-new-in-asp-net-core-authentication-in-net-11/",
+  "author": "Tore Nestenius",
+  "issue": 33,
+  "topics": [
+   "aspnet-core",
+   "security"
+  ],
+  "note": "Compares source code across .NET 10 servicing releases and .NET 11 RC2 to separate fixes already shipped in .NET 10 from next-version changes, covering cookie sessions, Windows Authentication, authorization logs and Data Protection. Findings are based on RC2, not the final release."
+ },
+ {
+  "title": "Visual Studio: resolve merge conflicts in bulk",
+  "url": "https://devblogs.microsoft.com/visualstudio/visual-studio-october-update-compare-commits-to-your-code-resolve-conflicts-in-bulk-keep-coding/",
+  "author": "Mark Downie",
+  "issue": 33,
+  "topics": [
+   "tooling"
+  ],
+  "note": "Keep All Current or Take All Incoming can now be applied to a selection or folder of conflicted files. The October roundup also covers the refreshed Copilot chat experience, commit comparisons and Hot Exit."
+ },
+ {
+  "title": "Give Claude Code clearer permissions in your .NET project",
+  "url": "https://www.roundthecode.com/dotnet-tutorials/how-to-stop-claude-code-permission-prompts-dotnet",
+  "author": "David Grace",
+  "issue": 33,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": "Project-level permission rules for situations such as starting the app, editing migration files or updating a database, so you get fewer interruptions while keeping deliberate checks on specific operations."
+ },
+ {
+  "title": "Godot, C# and Rider in one workflow",
+  "url": "https://blog.jetbrains.com/dotnet/2026/10/29/from-gdscript-to-gdextensions-one-ide-for-your-godot-code/",
+  "author": "Anna Ruban",
+  "issue": 33,
+  "topics": [
+   "tooling",
+   "csharp"
+  ],
+  "note": "Rider's Godot support covers GDScript, C# and C++ extensions, with mixed-language debugging and C# tests. The live scene tree and node inspector for C# debugging are previewed in the 2026.3 EAP and need a preview build."
+ },
+ {
+  "title": "Preview an Azure deployment before running it",
+  "url": "https://devblogs.microsoft.com/azure-sdk/azure-developer-cli-azd-october-2026/",
+  "author": "Kristen Womack",
+  "issue": 33,
+  "topics": [
+   "tooling"
+  ],
+  "note": "azd deploy --preview shows resolved service targets and deployment operations without deploying. October's release also adds Container Apps express support and a beta command for removing stored environment values."
+ },
+ {
+  "title": "Publish extensions without a long-lived token",
+  "url": "https://developer.microsoft.com/blog/trusted-publishing-visual-studio-marketplace/",
+  "author": "Lynn Dai",
+  "issue": 33,
+  "topics": [
+   "tooling",
+   "security"
+  ],
+  "note": "Visual Studio Marketplace now accepts federated publishing identities from GitHub Actions and Azure Pipelines, with separate setup steps for each. Confirm a successful release before removing the existing publishing secret."
+ },
+ {
+  "title": "Microsoft's Copilot harness is available through Foundry",
+  "url": "https://blogs.microsoft.com/blog/2026/10/28/introducing-the-microsoft-copilot-harness-unlocking-the-potential-of-truly-multi-model-agentic-work/",
+  "author": "Tina Schuchman and Vladimir Fedorov",
+  "issue": 33,
+  "topics": [
+   "ai"
+  ],
+  "note": "The harness handles an agent's execution loop, context and tools, with MCP and skills support. It is available as a downloadable SDK and as a managed Foundry option."
+ },
+ {
+  "title": "What's new in VS Code 1.144",
+  "url": "https://code.visualstudio.com/updates/v1_144",
+  "author": "Visual Studio Code Team",
+  "issue": 33,
+  "topics": [
+   "tooling",
+   "ai"
+  ],
+  "note": "Copilot Fusion coordinates models, side-by-side comparisons run the same task with different choices, and agent sessions get new controls. Image generation is in preview and desktop computer use is experimental."
+ },
+ {
+  "title": "Taking over a .NET visitor system",
+  "url": "https://dev.to/umerfarooqofficial/i-took-over-a-net-visitor-system-with-face-recognition-5bnc",
+  "author": "Umer Farooq",
+  "issue": 33,
+  "topics": [
+   "architecture"
+  ],
+  "note": "Lessons from maintaining a WPF app, an ASP.NET MVC portal, a shared database and a face-recognition SDK, including compatibility, employee-data synchronization and update testing."
+ },
+ {
+  "title": "Why Azure SQL Hyperscale separates the database into four parts",
+  "url": "https://devblogs.microsoft.com/azure-sql/the-paper-that-split-the-database-in-four-inside-azure-sql-database-hyperscale-aka-socrates/",
+  "author": "Anna Hoffman",
+  "issue": 33,
+  "topics": [
+   "data",
+   "architecture"
+  ],
+  "note": "How Hyperscale splits compute, logging, page servers and durable storage, and what that means for backups, read replicas and scaling."
+ },
+ {
+  "title": "A roadmap for your next .NET interview",
+  "url": "https://antondevtips.com/blog/how-to-pass-any-dotnet-interview-in-2026",
+  "author": "Anton Martyniuk",
+  "issue": 33,
+  "topics": [
+   "csharp"
+  ],
+  "note": "Covers runtime fundamentals, async, ASP.NET Core, EF Core and system design, with different expectations by seniority. Originally published July 7."
+ },
+ {
+  "title": "Do \"eval\" folder names change agent behavior?",
+  "url": "https://developer.microsoft.com/blog/does-eval-in-the-workspace-path-change-what-your-agent-does/",
+  "author": "Waldek Mastykarz",
+  "issue": 33,
+  "topics": [
+   "ai",
+   "testing"
+  ],
+  "note": "Roughly 900 runs found agents more suspicious of being tested, without a statistically significant behavioral difference in the scenarios studied. Evaluate actual actions and results."
+ },
+ {
+  "title": "Control a local coding agent from your phone",
+  "url": "https://github.blog/changelog/2026-10-28-github-copilot-in-vs-code-universe-releases/",
+  "author": null,
+  "issue": 33,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": "Agent Host connects GitHub Mobile to agent work running on your development machine, which must stay on. Cloud sessions are a separate option."
+ },
+ {
+  "title": "The infrastructure behind GitHub's agent plans",
+  "url": "https://github.blog/news-insights/company-news/github-universe-2026-evolving-every-layer-of-the-stack/",
+  "author": "Jay Parikh",
+  "issue": 33,
+  "topics": [
+   "ai"
+  ],
+  "note": "GitHub's Universe recap includes four million additional CPU cores and 160 PB of high-speed storage added during 2026, alongside the product announcements."
+ },
+ {
   "title": ".NET October 2026 Out-of-Band Security Updates",
   "url": "https://devblogs.microsoft.com/dotnet/dotnet-october-2026-oob-security-updates/",
   "author": "Rahul Bhandari",
