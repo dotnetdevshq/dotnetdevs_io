@@ -16,7 +16,7 @@ for (const file of ['404.html', 'robots.txt', 'sitemap.xml', 'favicon.svg', 'log
 for (const route of ['jobs', 'creators', 'blog', 'tools', 'roadmaps']) assert(!existsSync(`out/${route}`), `Prototype route exported: ${route}`);
 const png = readFileSync('out/social-card.png');
 assert.equal(png.readUInt32BE(16), 1200); assert.equal(png.readUInt32BE(20), 630);
-for (const route of ['newsletter', 'links', 'sponsor', 'guides', 'posts']) {
+for (const route of ['newsletter', 'links', 'sponsor', 'guides', 'posts', 'about', 'privacy', 'terms']) {
   assert(existsSync(`out/${route}/index.html`), `Missing page: /${route}/`);
   const page = readFileSync(`out/${route}/index.html`, 'utf8');
   assert(page.includes(`rel="canonical" href="${new URL(`/${route}/`, config.canonicalUrl).href}"`), `/${route}/ canonical missing`);
