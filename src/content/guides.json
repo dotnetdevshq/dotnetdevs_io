@@ -20,9 +20,10 @@
     "sections": [
       {
         "title": "Start with the release",
-        "intro": "The official announcement covers every area of the release and links to the documentation for each. Read the support section first: .NET 8 and .NET 9 reached end of support on the same day, so if you are on either, your next step is .NET 10 (LTS) or .NET 11.",
+        "intro": "The official announcement covers every area of the release, and the documentation overview lists the changes in more detail with a page for each area. Read the support section of the announcement first: .NET 8 and .NET 9 reached end of support on the same day, so if you are on either, your next step is .NET 10 (LTS) or .NET 11.",
         "links": [
-          "https://devblogs.microsoft.com/dotnet/announcing-dotnet-11/"
+          "https://devblogs.microsoft.com/dotnet/announcing-dotnet-11/",
+          "https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview"
         ]
       },
       {
@@ -42,7 +43,7 @@
       },
       {
         "title": "SDK and libraries",
-        "intro": "New process APIs, a preview toolchain manager for installing SDKs, and file-based apps that span more than one file. The file-based apps article was written against RC1 and shows a #:ref directive behind an experimental flag. The release announcement describes this feature with #:include, so check the current SDK documentation for the final syntax.",
+        "intro": "New process APIs, a preview toolchain manager for installing SDKs, and file-based apps that span more than one file. The file-based apps article was written against RC1, where the #:ref directive sat behind an experimental flag. The SDK documentation also describes #:include for splitting an app across files, so check it for the current state of both directives.",
         "links": [
           "https://devblogs.microsoft.com/dotnet/process-api-improvements-in-dotnet-11/",
           "https://devblogs.microsoft.com/dotnet/introducing-dotnetup/",

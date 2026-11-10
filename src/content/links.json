@@ -10,6 +10,16 @@
   "note": ".NET 11 is a Standard Term Support release with two years of support, and .NET 8 and .NET 9 reach end of support on the same day, November 10, 2026. Headline changes include C# 15 union types and closed hierarchies, a Native AOT CLI host and warm MSBuild server in the SDK, async validation and OpenAPI 3.2 in ASP.NET Core, and CoreCLR as the default runtime for .NET MAUI. Runtime Async and the Blazor AI components remain preview or experimental."
  },
  {
+  "title": "What's new in .NET 11",
+  "url": "https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview",
+  "author": null,
+  "issue": 35,
+  "topics": [
+   "releases"
+  ],
+  "note": "The official documentation overview. It lists the changes by area (runtime, libraries, SDK, C# 15) in more detail than the announcement and links to a dedicated page for each, plus ASP.NET Core, EF Core, Windows Forms and WPF. Useful as a reference to search once you know what you are looking for. Check the last-updated line at the top: on release day it still described RC 2."
+ },
+ {
   "title": "Free Blazor components from Syncfusion",
   "url": "https://www.syncfusion.com/blogs/post/open-source-syncfusion-toolkit-for-blazor",
   "author": "Saravanan G",
