@@ -1,5 +1,103 @@
 [
   {
+    "slug": "dotnet-11",
+    "title": "What's new in .NET 11",
+    "seoTitle": ".NET 11: a reading guide to what's new",
+    "description": "A reading path through .NET 11: C# 15 union types, performance, the SDK, ASP.NET Core and Blazor, EF Core 11, AI, .NET MAUI on CoreCLR, and your upgrade.",
+    "about": [
+      ".NET 11",
+      "C# 15",
+      "ASP.NET Core",
+      "EF Core 11",
+      "Union types",
+      ".NET MAUI",
+      "Native AOT",
+      "C#",
+      ".NET"
+    ],
+    "reviewed": "2026-11-10",
+    "reviewedLabel": "November 2026",
+    "intro": ".NET 11 was released on November 10, 2026. It is a Standard Term Support release with two years of support, and .NET 10 remains the supported LTS option. This page collects the articles we have featured about the release and puts them in a sensible reading order: the announcement first, then the language, runtime, SDK, web, AI and client changes, and finally the upgrade. Many of these articles were written during the previews, so we note where details may have changed. We will add more as the community publishes on the final release.",
+    "sections": [
+      {
+        "title": "Start with the release",
+        "intro": "The official announcement covers every area of the release, and the documentation overview lists the changes in more detail with a page for each area. Read the support section of the announcement first: .NET 8 and .NET 9 reached end of support on the same day, so if you are on either, your next step is .NET 10 (LTS) or .NET 11.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/announcing-dotnet-11/",
+          "https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview"
+        ]
+      },
+      {
+        "title": "Learn C# 15",
+        "intro": "C# 15 is the default language version for projects that target .NET 11. Union types and closed hierarchies let the compiler check that you have handled every possible case. Start with the overview, then read the union types deep dive. Both posts were written during the previews, and the announcement confirms these features no longer need the preview language version. The updated memory safety model is still preview.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/explore-csharp-15/",
+          "https://devblogs.microsoft.com/dotnet/csharp-15-union-types/"
+        ]
+      },
+      {
+        "title": "Runtime and performance",
+        "intro": "Hundreds of runtime and library optimizations arrive without code changes on your side, though the announcement's own advice is to measure your application. Runtime Async, which moves async suspension into the runtime and gives clearer live call stacks, remains a preview feature that you opt into per project.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/"
+        ]
+      },
+      {
+        "title": "SDK and libraries",
+        "intro": "New process APIs, a preview toolchain manager for installing SDKs, and file-based apps that span more than one file. The file-based apps article was written against RC1, where the #:ref directive sat behind an experimental flag. The SDK documentation also describes #:include for splitting an app across files, so check it for the current state of both directives.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/process-api-improvements-in-dotnet-11/",
+          "https://devblogs.microsoft.com/dotnet/introducing-dotnetup/",
+          "https://medium.com/@denmaklucky/file-based-apps-can-reference-other-c-files-65ffa06f7894"
+        ]
+      },
+      {
+        "title": "ASP.NET Core and Blazor",
+        "intro": "How C# unions flow through JSON APIs, validation that can await a database or remote call, and what changed in authentication. The authentication comparison is based on RC2, and Device Bound Session Credentials support is experimental, so verify both against the final release before relying on them.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/unions-and-closed-hierarchies-in-aspnetcore/",
+          "https://dev.to/iamprincejkc/stop-blocking-on-the-database-inside-isvalid-net-11-validates-async-455d",
+          "https://nestenius.se/net/whats-new-in-asp-net-core-authentication-in-net-11/",
+          "https://andrewlock.net/exploring-the-dotnet-11-preview-8-experimental-support-for-device-bound-session-credentials-in-aspnetcore/"
+        ]
+      },
+      {
+        "title": "Data and EF Core 11",
+        "intro": "EF Core 11 requires .NET 11, so the two upgrades go together. The first page shows what improved, mostly in how queries become SQL, and the second lists what can break. If you use SQL Server 2019 or older, Entra ID authentication, or the Azure Cosmos DB provider, read the breaking changes before you update packages. Both are official documentation pages that Microsoft keeps updating, so check them again when you upgrade.",
+        "links": [
+          "https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew",
+          "https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/breaking-changes"
+        ]
+      },
+      {
+        "title": "AI and agents",
+        "intro": "The .NET 11 SDK includes an MCP server template (dotnet new mcpserver) built on the official MCP C# SDK, and Blazor gains components for agent user interfaces. The Blazor AI components package is experimental and stays prerelease throughout .NET 11. For a fuller path through this area, see our AI agents and MCP guide.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/dotnet-ai-essentials-the-core-building-blocks-explained/",
+          "https://devblogs.microsoft.com/dotnet/announcing-v20-of-the-official-mcp-csharp-sdk/",
+          "https://devblogs.microsoft.com/dotnet/build-agentic-ui-blazor/",
+          "https://devblogs.microsoft.com/dotnet/ag-ui-dotnet-sdk/"
+        ]
+      },
+      {
+        "title": ".NET MAUI on CoreCLR",
+        "intro": "CoreCLR is now the default runtime for .NET MAUI, which puts mobile apps on the same runtime as the rest of .NET. These posts were written during the previews. Test navigation, custom handlers and trimmed publishing as part of your upgrade, and note that the Microsoft.Maui.Controls.Compatibility package no longer ships.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/dotnet-maui-moves-to-coreclr-in-dotnet-11/",
+          "https://devblogs.microsoft.com/dotnet/coreclr-progress-and-mono-timeline-dotnet-maui/"
+        ]
+      },
+      {
+        "title": "Plan your upgrade",
+        "intro": "Update the SDK pinned in global.json, retarget your projects, then review the .NET 11 breaking changes, including the updated minimum CPU requirements. Check your database provider's compatibility as well, using the EF Core step above. These two posts cover Microsoft's AI-assisted tooling for the work: the modernization workflow in GitHub Copilot, and .NET Skills for coding agents.",
+        "links": [
+          "https://devblogs.microsoft.com/dotnet/modernize-dotnet-in-github-copilot-app/",
+          "https://devblogs.microsoft.com/dotnet/extend-your-coding-agent-with-dotnet-skills/"
+        ]
+      }
+    ]
+  },
+  {
     "slug": "ai-agents-mcp",
     "title": "AI agents and MCP in .NET",
     "seoTitle": "AI agents and MCP in .NET: a reading guide",
