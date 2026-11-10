@@ -3,7 +3,7 @@
     "slug": "dotnet-11",
     "title": "What's new in .NET 11",
     "seoTitle": ".NET 11: a reading guide to what's new",
-    "description": "A reading path through .NET 11: C# 15 union types, runtime performance, SDK and library changes, ASP.NET Core and Blazor, AI and agents, .NET MAUI on CoreCLR, and planning your upgrade.",
+    "description": "A reading path through .NET 11: C# 15 union types, performance, the SDK, ASP.NET Core and Blazor, AI, .NET MAUI on CoreCLR, and planning your upgrade.",
     "about": [
       ".NET 11",
       "C# 15",
