@@ -20,6 +20,28 @@
   "note": "The official documentation overview. It lists the changes by area (runtime, libraries, SDK, C# 15) in more detail than the announcement and links to a dedicated page for each, plus ASP.NET Core, EF Core, Windows Forms and WPF. Useful as a reference to search once you know what you are looking for. Check the last-updated line at the top: on release day it still described RC 2."
  },
  {
+  "title": "What's New in EF Core 11",
+  "url": "https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew",
+  "author": null,
+  "issue": 35,
+  "topics": [
+   "data",
+   "releases"
+  ],
+  "note": "The official feature list, with code and generated SQL for each change. Highlights: unnecessary joins and ORDER BY columns removed from to-one includes, translation of the new LINQ FullJoin, MaxBy and MinBy, complex types and JSON columns on TPT and TPC inheritance, and migration tooling such as dotnet ef database update --add. SQL Server vector search is marked experimental. The benchmark figures quoted are Microsoft's own scenarios, so measure your queries."
+ },
+ {
+  "title": "Breaking changes in EF Core 11 (EF11)",
+  "url": "https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/breaking-changes",
+  "author": null,
+  "issue": 35,
+  "topics": [
+   "data",
+   "releases"
+  ],
+  "note": "Read this before upgrading. For SQL Server: the default compatibility level moves to 160 (SQL Server 2022), so older servers need UseCompatibilityLevel set explicitly, and Microsoft.Data.SqlClient 7.0 moves Entra ID authentication into a separate package. Migrate() now throws when no migrations are found, and split queries throw on concurrent modifications instead of returning empty collections. The Azure Cosmos DB provider has the most changes, including one rated high impact."
+ },
+ {
   "title": "Free Blazor components from Syncfusion",
   "url": "https://www.syncfusion.com/blogs/post/open-source-syncfusion-toolkit-for-blazor",
   "author": "Saravanan G",

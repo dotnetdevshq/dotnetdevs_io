@@ -3,11 +3,12 @@
     "slug": "dotnet-11",
     "title": "What's new in .NET 11",
     "seoTitle": ".NET 11: a reading guide to what's new",
-    "description": "A reading path through .NET 11: C# 15 union types, performance, the SDK, ASP.NET Core and Blazor, AI, .NET MAUI on CoreCLR, and planning your upgrade.",
+    "description": "A reading path through .NET 11: C# 15 union types, performance, the SDK, ASP.NET Core and Blazor, EF Core 11, AI, .NET MAUI on CoreCLR, and your upgrade.",
     "about": [
       ".NET 11",
       "C# 15",
       "ASP.NET Core",
+      "EF Core 11",
       "Union types",
       ".NET MAUI",
       "Native AOT",
@@ -16,7 +17,7 @@
     ],
     "reviewed": "2026-11-10",
     "reviewedLabel": "November 2026",
-    "intro": ".NET 11 was released on November 10, 2026. It is a Standard Term Support release with two years of support, and .NET 10 remains the supported LTS option. This page collects the articles we have featured about the release and puts them in a sensible reading order: the announcement first, then the language, runtime, SDK, web, AI and client changes, and finally the upgrade. Many of these articles were written during the previews, so we note where details may have changed. We will add more as the community publishes on the final release, including EF Core 11.",
+    "intro": ".NET 11 was released on November 10, 2026. It is a Standard Term Support release with two years of support, and .NET 10 remains the supported LTS option. This page collects the articles we have featured about the release and puts them in a sensible reading order: the announcement first, then the language, runtime, SDK, web, AI and client changes, and finally the upgrade. Many of these articles were written during the previews, so we note where details may have changed. We will add more as the community publishes on the final release.",
     "sections": [
       {
         "title": "Start with the release",
@@ -61,6 +62,14 @@
         ]
       },
       {
+        "title": "Data and EF Core 11",
+        "intro": "EF Core 11 requires .NET 11, so the two upgrades go together. The first page shows what improved, mostly in how queries become SQL, and the second lists what can break. If you use SQL Server 2019 or older, Entra ID authentication, or the Azure Cosmos DB provider, read the breaking changes before you update packages. Both are official documentation pages that Microsoft keeps updating, so check them again when you upgrade.",
+        "links": [
+          "https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/whatsnew",
+          "https://learn.microsoft.com/ef/core/what-is-new/ef-core-11.0/breaking-changes"
+        ]
+      },
+      {
         "title": "AI and agents",
         "intro": "The .NET 11 SDK includes an MCP server template (dotnet new mcpserver) built on the official MCP C# SDK, and Blazor gains components for agent user interfaces. The Blazor AI components package is experimental and stays prerelease throughout .NET 11. For a fuller path through this area, see our AI agents and MCP guide.",
         "links": [
@@ -80,7 +89,7 @@
       },
       {
         "title": "Plan your upgrade",
-        "intro": "Update the SDK pinned in global.json, retarget your projects, then review the .NET 11 breaking changes, including the updated minimum CPU requirements. EF Core 11 requires .NET 11, so check your database provider's compatibility too. These two posts cover Microsoft's AI-assisted tooling for the work: the modernization workflow in GitHub Copilot, and .NET Skills for coding agents.",
+        "intro": "Update the SDK pinned in global.json, retarget your projects, then review the .NET 11 breaking changes, including the updated minimum CPU requirements. Check your database provider's compatibility as well, using the EF Core step above. These two posts cover Microsoft's AI-assisted tooling for the work: the modernization workflow in GitHub Copilot, and .NET Skills for coding agents.",
         "links": [
           "https://devblogs.microsoft.com/dotnet/modernize-dotnet-in-github-copilot-app/",
           "https://devblogs.microsoft.com/dotnet/extend-your-coding-agent-with-dotnet-skills/"
