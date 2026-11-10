@@ -1,5 +1,15 @@
 [
  {
+  "title": "Announcing .NET 11",
+  "url": "https://devblogs.microsoft.com/dotnet/announcing-dotnet-11/",
+  "author": ".NET Team",
+  "issue": 35,
+  "topics": [
+   "releases"
+  ],
+  "note": ".NET 11 is a Standard Term Support release with two years of support, and .NET 8 and .NET 9 reach end of support on the same day, November 10, 2026. Headline changes include C# 15 union types and closed hierarchies, a Native AOT CLI host and warm MSBuild server in the SDK, async validation and OpenAPI 3.2 in ASP.NET Core, and CoreCLR as the default runtime for .NET MAUI. Runtime Async and the Blazor AI components remain preview or experimental."
+ },
+ {
   "title": "Free Blazor components from Syncfusion",
   "url": "https://www.syncfusion.com/blogs/post/open-source-syncfusion-toolkit-for-blazor",
   "author": "Saravanan G",
@@ -537,24 +547,24 @@
  {
   "title": "Performance Improvements in .NET 11",
   "url": "https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/",
-  "author": null,
+  "author": "Stephen Toub",
   "issue": 29,
   "topics": [
    "performance",
    "releases"
   ],
-  "note": null
+  "note": "The annual deep dive, with benchmarks and code for each change. Sections cover the JIT (including Runtime Async, bounds checks and vectorization), startup, threading, numerics, strings and spans, collections and LINQ, I/O, networking, JSON, diagnostics and cryptography. It is very long, so use the table of contents to jump to the areas your code depends on."
  },
  {
   "title": "Use C# unions and closed hierarchies in ASP.NET Core",
   "url": "https://devblogs.microsoft.com/dotnet/unions-and-closed-hierarchies-in-aspnetcore/",
-  "author": null,
+  "author": "Dmitrii Korolev",
   "issue": 29,
   "topics": [
    "csharp",
    "aspnet-core"
   ],
-  "note": null
+  "note": "How unions and closed hierarchies behave in Minimal APIs, MVC, SignalR, Blazor and OpenAPI, all through System.Text.Json. Unions serialize as the active case with no discriminator, so cases with the same JSON shape need a classifier. Not supported for route, query, header or form binding. For new contracts you control, the post recommends a closed hierarchy with a discriminator."
  },
  {
   "title": ".NET and .NET Framework September 2026 servicing releases updates",
@@ -642,13 +652,13 @@
  {
   "title": "Explore new features available in C# 15 preview",
   "url": "https://devblogs.microsoft.com/dotnet/explore-csharp-15/",
-  "author": null,
+  "author": "Bill Wagner",
   "issue": 28,
   "topics": [
    "csharp",
    "releases"
   ],
-  "note": null
+  "note": "A tour of C# 15: union types, closed hierarchies, collection expression arguments, extension indexers and labeled break and continue, each with before and after code. Written against Preview 7. The updated unsafe model it describes is still a preview feature that needs an explicit opt-in."
  },
  {
   "title": ".NET and .NET Framework August 2026 servicing releases updates",
@@ -1188,12 +1198,12 @@
  {
   "title": ".NET MAUI Moves to CoreCLR in .NET 11",
   "url": "https://devblogs.microsoft.com/dotnet/dotnet-maui-moves-to-coreclr-in-dotnet-11/",
-  "author": null,
+  "author": "David Ortinau",
   "issue": 24,
   "topics": [
    "clients"
   ],
-  "note": null
+  "note": "CoreCLR replaces Mono as the default runtime for .NET MAUI on Android, iOS and Mac Catalyst, bringing the same runtime and diagnostics tools as server apps. The post is candid that some larger Android apps saw startup or size regressions during the previews, so measure your own app. You can opt back with UseMonoRuntime, and Blazor WebAssembly is not affected."
  },
  {
   "title": "What's New in Aspire 13.3",
@@ -1208,12 +1218,12 @@
  {
   "title": "Process API Improvements in .NET 11",
   "url": "https://devblogs.microsoft.com/dotnet/process-api-improvements-in-dotnet-11/",
-  "author": null,
+  "author": "Adam Sitnik",
   "issue": 24,
   "topics": [
    "releases"
   ],
-  "note": null
+  "note": "Described by the author as the biggest update to System.Diagnostics.Process in years. New one-call APIs such as Process.RunAndCaptureText and Process.Run start a process and wait for it, with output capture that avoids deadlocks. Also covers handle inheritance control, KillOnParentExit and a lighter SafeProcessHandle-based API."
  },
  {
   "title": "NuGet Package Pruning: Cleaner Dependencies and Actionable Vulnerability Reports",
@@ -1543,12 +1553,12 @@
  {
   "title": "Explore union types in C# 15",
   "url": "https://devblogs.microsoft.com/dotnet/csharp-15-union-types/",
-  "author": null,
+  "author": "Bill Wagner",
   "issue": 22,
   "topics": [
    "csharp"
   ],
-  "note": null
+  "note": "Explains the union keyword in depth: implicit conversions from each case type, exhaustive switch expressions, null handling, unions with their own members, and how existing libraries can opt in with the Union attribute. Written for Preview 2, so the setup steps at the end (declaring runtime types yourself, the preview language version) reflect that early build."
  },
  {
   "title": "Ten Months with Copilot Coding Agent in dotnet/runtime",
