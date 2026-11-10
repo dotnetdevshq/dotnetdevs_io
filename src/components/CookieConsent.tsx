@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { consentKey, consentMaxAgeDays } from '@/lib/analytics';
+import { consentKey, consentMaxAgeDays, consentRequired } from '@/lib/analytics';
 
 type Choice = 'granted' | 'denied';
 const openEvent = 'dotnetdevs:cookie-settings';
@@ -30,35 +30,42 @@ function clearAnalyticsCookies() {
   }
 }
 
-// Asks once, before any analytics cookie is set. Both choices are equally easy, and
-// "Cookie settings" in the footer reopens it so the choice can be changed later.
+// In the EU/EEA, the UK and Switzerland it asks once, before any analytics cookie is
+// set, and both choices are equally easy. Elsewhere analytics is on by default and the
+// banner stays closed. "Cookie settings" in the footer opens it anywhere, so the choice
+// can be made or changed at any time.
 export function CookieConsent() {
   const [open, setOpen] = useState(false);
+  const [optIn, setOptIn] = useState(true);
 
   useEffect(() => {
-    setOpen(readChoice() === null);
+    const required = consentRequired();
+    setOptIn(required);
+    setOpen(required && readChoice() === null);
     const reopen = () => setOpen(true);
     window.addEventListener(openEvent, reopen);
     return () => window.removeEventListener(openEvent, reopen);
   }, []);
 
   function choose(choice: Choice) {
-    const previous = readChoice();
     try { window.localStorage.setItem(consentKey, JSON.stringify({ analytics: choice, at: new Date().toISOString(), v: 1 })); } catch { /* Storage blocked: ask again next visit. */ }
     setOpen(false);
     const w = window as AnalyticsWindow;
     if (choice === 'granted') { w.dotnetdevsLoadAnalytics?.(); return; }
     clearAnalyticsCookies();
     // Analytics was already running on this page: stop it by reloading without it.
-    if (previous === 'granted' && w.gtag) window.location.reload();
+    if (w.gtag) window.location.reload();
   }
 
   if (!open) return null;
   return <section className="cookie-banner" aria-label="Cookie choices">
     <div className="cookie-banner-inner">
       <p>
-        <strong>Cookies on dotnetdevs.io.</strong> We would like to use Google Analytics cookies to see which pages and
-        articles are useful. They are only set if you accept. No advertising cookies are used.{' '}
+        <strong>Cookies on dotnetdevs.io.</strong>{' '}
+        {optIn
+          ? 'We would like to use Google Analytics cookies to see which pages and articles are useful. They are only set if you accept.'
+          : 'We use Google Analytics cookies to see which pages and articles are useful. Choose Reject to turn them off and remove them.'}
+        {' '}No advertising cookies are used.{' '}
         <Link href="/privacy/#cookies">Privacy and cookies</Link>
       </p>
       <div className="cookie-actions">

@@ -31,19 +31,24 @@ export default function PrivacyPage() {
           <tbody>
             <tr><td>Technical request data (IP address, browser, page requested, time) in the hosting provider&apos;s logs</td><td>Delivering the site, keeping it secure, fixing errors</td><td>Legitimate interest in running a working, secure website</td></tr>
             <tr><td>Aggregated visit counts from Vercel Web Analytics, without cookies</td><td>Seeing which pages are read, without identifying anyone</td><td>Legitimate interest</td></tr>
-            <tr><td>Google Analytics data (pages viewed, approximate location, device and browser type, a cookie identifier)</td><td>Understanding which pages and articles are useful</td><td>Your consent, given in the cookie banner</td></tr>
+            <tr><td>Google Analytics data (pages viewed, approximate location, device and browser type, a cookie identifier)</td><td>Understanding which pages and articles are useful</td><td>In the EU/EEA, the UK and Switzerland: your consent, given in the cookie banner. Elsewhere: legitimate interest in understanding how the site is used, which you can switch off in Cookie settings</td></tr>
             <tr><td>Your email address and message, if you write to us</td><td>Replying to you, including about sponsorships</td><td>Legitimate interest in answering, or steps toward an agreement you asked about</td></tr>
           </tbody>
         </table></div>
         <p>We do not sell personal data, use it for advertising, or combine it with other sources to build profiles.</p>
 
         <h2 id="cookies">Cookies and local storage</h2>
-        <p>Google Analytics is the only service on this site that sets cookies, and it loads only after you choose <strong>Accept analytics</strong>. If you reject, or ignore the banner, no analytics cookies are set. Advertising features and Google signals are switched off.</p>
+        <p>Google Analytics is the only service on this site that sets cookies. Advertising features and Google signals are switched off.</p>
+        <ul>
+          <li><strong>In the EU/EEA, the United Kingdom and Switzerland</strong>, it loads only after you choose <strong>Accept analytics</strong> in the cookie banner. If you reject, or ignore the banner, no analytics cookies are set.</li>
+          <li><strong>Everywhere else</strong>, it is on by default and no banner is shown. You can turn it off at any time with <strong>Cookie settings</strong> at the bottom of every page.</li>
+        </ul>
+        <p>We work out which of the two applies from your browser&apos;s time zone setting, which is read on your device and not sent to us. If the time zone is European, unknown or UTC, or your browser sends a Global Privacy Control signal, we ask first.</p>
         <div className="table-wrap"><table>
           <thead><tr><th scope="col">Name</th><th scope="col">Set by</th><th scope="col">Purpose</th><th scope="col">Duration</th></tr></thead>
           <tbody>
-            <tr><td><code>_ga</code></td><td>Google Analytics, only with consent</td><td>Distinguishes visitors</td><td>2 years</td></tr>
-            <tr><td><code>_ga_&lt;id&gt;</code></td><td>Google Analytics, only with consent</td><td>Keeps session state</td><td>2 years</td></tr>
+            <tr><td><code>_ga</code></td><td>Google Analytics, when it is on</td><td>Distinguishes visitors</td><td>2 years</td></tr>
+            <tr><td><code>_ga_&lt;id&gt;</code></td><td>Google Analytics, when it is on</td><td>Keeps session state</td><td>2 years</td></tr>
             <tr><td><code>dotnetdevs-consent</code> (local storage)</td><td>{site.brand}</td><td>Remembers your cookie choice</td><td>Asked again after 12 months</td></tr>
             <tr><td><code>dotnetdevs-theme</code> (local storage)</td><td>{site.brand}</td><td>Remembers light or dark mode, if you pick one</td><td>Until you clear it</td></tr>
           </tbody>
@@ -53,7 +58,7 @@ export default function PrivacyPage() {
         <h2 id="processors">Services that process data for us</h2>
         <ul>
           <li><strong>Vercel</strong> hosts the site and provides cookieless Web Analytics. See the <ExternalLink href="https://vercel.com/legal/privacy-policy">Vercel privacy policy</ExternalLink>.</li>
-          <li><strong>Google</strong> provides Google Analytics, only with your consent. See the <ExternalLink href="https://policies.google.com/privacy">Google privacy policy</ExternalLink>.</li>
+          <li><strong>Google</strong> provides Google Analytics, as described under cookies above. See the <ExternalLink href="https://policies.google.com/privacy">Google privacy policy</ExternalLink>.</li>
           <li><strong>Email provider</strong>: messages sent to {contact} are stored in our mailbox.</li>
         </ul>
         <p>These providers may process data outside Georgia and the European Economic Area, including in the United States. They use standard safeguards, such as the European Commission&apos;s standard contractual clauses, for those transfers.</p>
@@ -70,7 +75,7 @@ export default function PrivacyPage() {
         </ul>
 
         <h2 id="rights">Your rights</h2>
-        <p>Under the Law of Georgia on Personal Data Protection and, where it applies to you, the EU General Data Protection Regulation (GDPR), you can ask to access, correct or delete your personal data, restrict or object to its use, and receive a copy of it. You can withdraw consent at any time through Cookie settings; this does not affect anything done before.</p>
+        <p>Under the Law of Georgia on Personal Data Protection and, where it applies to you, the EU General Data Protection Regulation (GDPR), you can ask to access, correct or delete your personal data, restrict or object to its use, and receive a copy of it. You can withdraw consent, or object to analytics, at any time through Cookie settings; this does not affect anything done before.</p>
         <p>To use these rights, write to {contact}. We will answer within one month. If you think your data has been mishandled, you can complain to the Personal Data Protection Service of Georgia or to the data protection authority in your own country.</p>
 
         <h2 id="children">Children</h2>
