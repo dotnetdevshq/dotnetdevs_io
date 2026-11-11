@@ -356,3 +356,13 @@ html { scroll-padding-top: 92px; }
 .prose th { font-size: 0.8125rem; color: var(--muted); font-weight: 600; }
 .prose code { font-family: var(--mono); font-size: 0.875em; }
 .table-wrap { overflow-x: auto; }
+
+/* Playbook: rule files rendered from the repository snapshot. */
+.prose .code-block { margin: 12px 0; padding: 14px 16px; overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); line-height: 1.6; }
+.prose .code-block code { font-size: 0.8125rem; white-space: pre; }
+.prose li > p { margin: 0 0 8px; }
+.prose h3 { scroll-margin-top: 100px; }
+/* Lets the horizontally scrolling chip list on phones scroll inside the sidebar instead of widening it. */
+.sidebar > nav { min-width: 0; }
+/* Long identifiers such as test names must wrap on a phone instead of widening the page. */
+.prose :not(pre) > code { overflow-wrap: anywhere; }

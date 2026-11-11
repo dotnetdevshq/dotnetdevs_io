@@ -1,10 +1,11 @@
 import type { MetadataRoute } from 'next';
 import { site, isIndexable } from '@/lib/site';
 import { activeTopics, guides } from '@/lib/content';
+import { playbookPages } from '@/lib/playbook';
 export const dynamic = 'force-static';
 
 // Every real, canonical, indexable page. Paths end in "/" to match trailingSlash: true.
-const sitePaths = ['/', '/newsletter/', '/links/', ...activeTopics.map(topic => `/links/${topic}/`), '/guides/', ...guides.map(guide => `/guides/${guide.slug}/`), '/posts/', '/sponsor/', '/about/', '/privacy/', '/terms/'];
+const sitePaths = ['/', '/newsletter/', '/links/', ...activeTopics.map(topic => `/links/${topic}/`), '/guides/', ...guides.map(guide => `/guides/${guide.slug}/`), '/playbook/', ...playbookPages.map(page => `/playbook/${page.slug}/`), '/posts/', '/sponsor/', '/about/', '/privacy/', '/terms/'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // Avoid fabricated lastmod dates.
