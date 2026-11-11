@@ -49,6 +49,7 @@ External destinations consistently open in the same tab. Cards are single links,
 | `/newsletter/` | `src/content/issues.json` (all published issues, linking to dotnet.news) |
 | `/links/` and `/links/<topic>/` | `src/content/links.json`; topics are defined in `src/lib/content.ts` |
 | `/guides/` and `/guides/<slug>/` | `src/content/guides.json`; each section lists URLs that must exist in `links.json` |
+| `/playbook/` and `/playbook/<slug>/` | `src/content/playbook.json` for our copy; `src/content/playbook-rules.json` is a snapshot of the rule files in the playbook repository |
 | `/posts/` | `src/content/posts.json`; card images live in `public/posts/` |
 | `/sponsor/` | `src/content/media-kit.json`; contact from `site.json` |
 
@@ -64,6 +65,16 @@ Topic pages are generated only for topics that have at least one link. Everythin
 
 - A guide is an ordered reading path. Add one to `guides.json` with sections of library URLs; the build fails if a URL is not in `links.json`. Update `reviewed` / `reviewedLabel` whenever you revisit it.
 - A post is a social card. Add the exported image to `public/posts/`, then an entry to `posts.json` with the source article, author and publish date. Write the summary only after reading the source article, and keep it clearly yours.
+
+## Playbook
+
+The playbook section presents the rules from [dotnetdevshq/dotnet-ai-coding-playbook](https://github.com/dotnetdevshq/dotnet-ai-coding-playbook). That repository is the single source of truth for the rules. The site keeps a snapshot at one commit and adds the question, the short answer, and the list of checks for each layer.
+
+- After the rules change in the playbook repository, run `node scripts/sync-playbook.mjs` (optionally with a commit SHA) and commit the updated `src/content/playbook-rules.json`. The script needs network access; the build does not.
+- Never edit `playbook-rules.json` by hand. Change the rule in the playbook repository and sync.
+- `src/content/playbook.json` holds our own copy. Update `reviewed` / `reviewedLabel` whenever you revisit a page. Keep each `description` at 160 characters or fewer.
+- A check listed with `"test": true` must be named in one of the synced rule files, and every rule section must appear on its page. The build fails otherwise.
+- The rule files may use level 2 headings, paragraphs, bullet lists, tables, fenced code, inline code, links and bold. `src/lib/playbook.ts` rejects other headings.
 
 ## Sponsor page figures
 

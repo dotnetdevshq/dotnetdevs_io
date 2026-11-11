@@ -9,6 +9,7 @@ export const navigation = [
   { href: '/newsletter/', label: 'Newsletter' },
   { href: '/links/', label: 'Library' },
   { href: '/guides/', label: 'Guides' },
+  { href: '/playbook/', label: 'Playbook' },
   { href: '/posts/', label: 'Posts' },
 ] as const;
 

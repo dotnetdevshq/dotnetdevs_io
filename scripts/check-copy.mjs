@@ -15,7 +15,7 @@ const walk = (dir, ext) => readdirSync(dir).flatMap(name => {
   return statSync(path).isDirectory() ? walk(path, ext) : ext.some(e => path.endsWith(e)) ? [path] : [];
 });
 
-for (const file of [...walk('src/app', ['.ts', '.tsx']), ...walk('src/components', ['.tsx']), ...walk('src/lib', ['.ts']), 'src/config/site.json', 'src/content/guides.json', 'src/content/posts.json']) {
+for (const file of [...walk('src/app', ['.ts', '.tsx']), ...walk('src/components', ['.tsx']), ...walk('src/lib', ['.ts']), 'src/config/site.json', 'src/content/guides.json', 'src/content/posts.json', 'src/content/playbook.json', 'src/content/playbook-rules.json']) {
   const lines = readFileSync(file, 'utf8').split('\n');
   lines.forEach((line, i) => assert(!line.includes(EM), `Em-dash in ${file}:${i + 1}. Use a comma, colon, or period instead.`));
 }

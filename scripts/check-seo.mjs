@@ -105,6 +105,39 @@ for (const guide of JSON.parse(readFileSync('src/content/guides.json', 'utf8')))
   if (!preview) assert(llms.includes(`## Guide: ${guide.title}`), `llms.txt missing guide outline: ${guide.slug}`);
 }
 
+// Playbook: the hub and every layer page carry article metadata, a visible author and review date,
+// and one JSON-LD graph that credits the author and links back to the homepage entities.
+const playbook = JSON.parse(readFileSync('src/content/playbook.json', 'utf8'));
+const owner = JSON.parse(readFileSync('src/content/legal.json', 'utf8')).owner;
+const playbookUrl = new URL('/playbook/', site.canonicalUrl).href;
+for (const entry of [{ path: '/playbook/', type: 'CollectionPage', ...playbook }, ...playbook.pages.map(layer => ({ path: `/playbook/${layer.slug}/`, type: 'TechArticle', ...layer }))]) {
+  const url = new URL(entry.path, site.canonicalUrl).href;
+  const pageHtml = readFileSync(`out${entry.path}index.html`, 'utf8');
+  const pageMeta = new Map([...pageHtml.matchAll(/<meta\s+[^>]*>/g)].map(([tag]) => [tag.match(/(?:name|property)="([^"]+)"/)?.[1], decode(tag.match(/content="([^"]*)"/)?.[1] ?? '')]));
+  assert.equal(pageMeta.get('description'), entry.description);
+  assert(entry.description.length <= 160, `Playbook description over 160 characters: ${entry.path}`);
+  assert.equal(pageMeta.get('og:type'), 'article');
+  assert.equal(pageMeta.get('article:modified_time'), entry.reviewed);
+  assert(pageHtml.includes(`<link rel="canonical" href="${url}"/>`), `Playbook canonical missing: ${entry.path}`);
+  assert(pageHtml.includes(`<time dateTime="${entry.reviewed}">${entry.reviewedLabel}</time>`) || pageHtml.includes(`<time datetime="${entry.reviewed}">${entry.reviewedLabel}</time>`), `Playbook review date not visible: ${entry.path}`);
+  assert(pageHtml.includes(owner) && pageHtml.includes(playbook.dotnet), `Playbook author or .NET version not visible: ${entry.path}`);
+  const [pageSchema, ...extra] = [...pageHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+  assert(pageSchema && !extra.length, `Exactly one JSON-LD graph on ${entry.path}`);
+  const main = pageSchema['@graph'].find(n => n['@type'] === entry.type);
+  assert.equal(main.url, url);
+  assert.equal(main.dateModified, entry.reviewed);
+  assert.equal(main.author.name, owner);
+  assert.equal(main.publisher['@id'], org['@id']);
+  assert.equal(main.isPartOf['@id'], entry.type === 'TechArticle' ? `${playbookUrl}#webpage` : website['@id']);
+  assert.equal(pageSchema['@graph'].find(n => n['@type'] === 'BreadcrumbList').itemListElement.at(-1).item, url);
+  if (entry.type === 'CollectionPage') assert.equal(main.hasPart.length, playbook.pages.length);
+  if (!preview) {
+    assert(locations.includes(url), `sitemap missing ${url}`);
+    assert(llms.includes(url), `llms.txt missing ${url}`);
+    if (entry.question) assert(llms.includes(`### ${entry.question}`), `llms.txt missing the playbook question for ${entry.path}`);
+  }
+}
+
 const notFound = readFileSync('out/404.html', 'utf8');
 assert.match(notFound, /name="robots" content="noindex"/);
 assert(!notFound.includes('application/ld+json'), '404 must not describe itself as the community homepage');

@@ -1,0 +1,112 @@
+{
+  "repository": "dotnetdevshq/dotnet-ai-coding-playbook",
+  "title": "The .NET AI Coding Playbook",
+  "seoTitle": ".NET AI Coding Playbook: rules and guardrails for AI-written code",
+  "description": "Rules that AI coding agents read and guardrails that the build enforces, for Clean Architecture .NET projects. With a template repository you can copy.",
+  "about": ["AI coding agents", "AGENTS.md", ".NET", "C#", "Clean Architecture", "Architecture tests"],
+  "reviewed": "2026-11-12",
+  "reviewedLabel": "November 12, 2026",
+  "dotnet": ".NET 10 and .NET 11",
+  "lead": "AI coding agents write .NET code quickly. Without clear rules and automatic checks, they also break layer boundaries, write slow queries, and skip tests. The playbook treats that as an engineering problem, not a prompting problem.",
+  "pages": [
+    {
+      "slug": "data-access",
+      "title": "Data access rules for AI agents: EF Core",
+      "shortTitle": "Data access (EF Core)",
+      "seoTitle": "EF Core rules for AI coding agents",
+      "description": "Rules that keep AI-written EF Core code correct: no-tracking reads, no N+1 queries, safe SQL, and migrations that match the model, with tests that enforce them.",
+      "about": ["Entity Framework Core", "EF Core migrations", "N+1 queries", "AsNoTracking", "SQLite", "AI coding agents"],
+      "reviewed": "2026-11-12",
+      "reviewedLabel": "November 12, 2026",
+      "question": "How do you keep AI-written EF Core code from causing slow queries and broken migrations?",
+      "answer": "Keep all data access in one project that nothing else can reach into, tell the agent the query and migration rules in a file it reads before it writes code, and back the rules that can be checked with tests against a real database.",
+      "takeaways": [
+        "The DbContext, the entity configurations, and the repositories are internal to the Infrastructure project. Other layers cannot query the database, even by accident.",
+        "Read-only queries use AsNoTracking, filter and page in the database, and never run inside a loop over another query's results.",
+        "Every change to an entity comes with a migration in the same pull request. Merged migrations are never edited.",
+        "Tests run against a real SQLite database built from the migrations, not the EF Core in-memory provider."
+      ],
+      "enforcedBy": [
+        { "name": "ApiDoesNotUseEntityFramework", "test": true, "what": "An architecture test that fails when the API project uses EF Core." },
+        { "name": "MigrationsMatchTheModel", "test": true, "what": "An integration test that fails when the model changed and no migration was added." },
+        { "name": "Integration tests on a real database", "test": false, "what": "The repository and the endpoints are tested against a temporary SQLite database, on both target frameworks." },
+        { "name": "NuGet audit with warnings as errors", "test": false, "what": "A package with a known vulnerability fails the build." }
+      ],
+      "sources": [{ "label": "Infrastructure rules", "path": "src/Infrastructure/AGENTS.md" }]
+    },
+    {
+      "slug": "api",
+      "title": "API layer rules for AI agents: thin endpoints",
+      "shortTitle": "API layer",
+      "seoTitle": "ASP.NET Core API rules for AI coding agents",
+      "description": "Rules that keep AI-written ASP.NET Core endpoints thin: validate, call the application layer, map the result. With tests that keep EF Core and entities out.",
+      "about": ["ASP.NET Core", "Minimal APIs", "Problem details", "TypedResults", "Input validation", "AI coding agents"],
+      "reviewed": "2026-11-12",
+      "reviewedLabel": "November 12, 2026",
+      "question": "How do you stop an AI agent from putting business logic and database queries in API endpoints?",
+      "answer": "Give the endpoint exactly three jobs (validate the input, call the application layer, map the result), write that down where the agent reads it, and add architecture tests that fail when the API project touches EF Core or a domain entity.",
+      "takeaways": [
+        "An endpoint validates the input, calls an application service, and maps the result to an HTTP response. Nothing else.",
+        "Handlers return TypedResults and declare every possible response in the return type, so the compiler rejects an undeclared one.",
+        "Errors are problem details. A response never contains a stack trace, an exception message, or SQL.",
+        "Who may call a new endpoint is a decision stated in the pull request, not a default."
+      ],
+      "enforcedBy": [
+        { "name": "ApiDoesNotUseEntityFramework", "test": true, "what": "An architecture test that fails when the API project uses EF Core." },
+        { "name": "ApiDoesNotUseDomain", "test": true, "what": "An architecture test that fails when the API project handles a domain entity." },
+        { "name": "Endpoint tests over HTTP", "test": false, "what": "Integration tests call every endpoint and check the success response and each declared error response." }
+      ],
+      "sources": [{ "label": "API rules", "path": "src/Api/AGENTS.md" }]
+    },
+    {
+      "slug": "application-and-domain",
+      "title": "Application and domain rules for AI agents",
+      "shortTitle": "Application and domain",
+      "seoTitle": "Domain and application layer rules for AI coding agents",
+      "description": "Rules that keep business logic in the domain and use cases in the application layer when an AI agent writes the code, with tests that enforce the boundaries.",
+      "about": ["Clean Architecture", "Domain model", "Use cases", "Dependency rule", "TimeProvider", "AI coding agents"],
+      "reviewed": "2026-11-12",
+      "reviewedLabel": "November 12, 2026",
+      "question": "How do you keep business rules in the domain when an AI agent writes the code?",
+      "answer": "Make the domain a project with no dependencies, let entities guard their own rules so they cannot be in an invalid state, keep use cases in an application layer that depends only on the domain, and let architecture tests fail the build when a dependency points the wrong way.",
+      "takeaways": [
+        "The Domain project references no other project and no package. The Application project references Domain only.",
+        "Entities have no public setters. State changes go through methods named after what happens in the business.",
+        "The domain never reads the system clock. The time is passed in, so rules that depend on it can be tested.",
+        "Use cases return DTOs, never entities, and define the interfaces that Infrastructure implements."
+      ],
+      "enforcedBy": [
+        { "name": "DomainUsesNoOtherLayerAndNoFramework", "test": true, "what": "An architecture test that fails when the domain depends on another layer, EF Core, ASP.NET Core, or Microsoft.Extensions." },
+        { "name": "ApplicationDoesNotUseInfrastructureApiOrFrameworks", "test": true, "what": "An architecture test that fails when the application layer depends on Infrastructure, the API, EF Core, or ASP.NET Core." },
+        { "name": "DomainTypesHaveNoPublicSetters", "test": true, "what": "An architecture test that fails when a domain type has a public setter. Init-only properties are allowed." }
+      ],
+      "sources": [
+        { "label": "Domain rules", "path": "src/Domain/AGENTS.md" },
+        { "label": "Application rules", "path": "src/Application/AGENTS.md" }
+      ]
+    },
+    {
+      "slug": "testing",
+      "title": "Testing rules for AI agents",
+      "shortTitle": "Testing",
+      "seoTitle": "Testing rules for AI coding agents in .NET",
+      "description": "Rules that stop AI agents from skipping, deleting, or weakening tests in .NET projects, plus what to test at which level and how to keep tests deterministic.",
+      "about": ["Unit testing", "Integration testing", "Architecture tests", "xUnit", "Test determinism", "AI coding agents"],
+      "reviewed": "2026-11-12",
+      "reviewedLabel": "November 12, 2026",
+      "question": "How do you stop an AI agent from skipping or weakening tests to get a green build?",
+      "answer": "Say plainly that a failing test means the code or the test is wrong and must be fixed, never skipped, and add a check that fails the build when any test is skipped. Then give the agent clear rules for what belongs in a unit, integration, or architecture test.",
+      "takeaways": [
+        "A test is never skipped, deleted, commented out, or loosened to get a green build.",
+        "Every change in behavior comes with a test that fails without the change.",
+        "Tests are deterministic: no real clock, no sleeps, no shared mutable state, no network.",
+        "A new automatic check must be shown to fail before it is trusted."
+      ],
+      "enforcedBy": [
+        { "name": "NoTestIsSkipped", "test": true, "what": "A convention test compiled into every test project. It fails when a test or a data row has Skip set." },
+        { "name": "CI on every pull request", "test": false, "what": "The build, the tests, and the format check run on both target frameworks, with warnings treated as errors." }
+      ],
+      "sources": [{ "label": "Testing rules", "path": "tests/AGENTS.md" }]
+    }
+  ]
+}
