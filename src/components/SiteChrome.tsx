@@ -3,6 +3,7 @@ import { Menu } from 'lucide-react';
 import { LogoMark } from './LogoMark';
 import { ThemeToggle } from './ThemeToggle';
 import { CookieSettingsButton } from './CookieConsent';
+import { SitePet, PetToggleButton } from './SitePet';
 import { site, isDesignPreview, validDestination, externalProps } from '@/lib/site';
 
 export const navigation = [
@@ -61,8 +62,10 @@ export function SiteChrome({ current, children }: { current: Section; children: 
         <nav aria-label="About and legal">
           {legal.map(item => <Link key={item.href} href={item.href} aria-current={current === item.href ? 'page' : undefined}>{item.label}</Link>)}
           <CookieSettingsButton />
+          <PetToggleButton />
         </nav>
       </div>
     </footer>
+    <SitePet />
   </div>;
 }

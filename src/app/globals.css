@@ -356,3 +356,108 @@ html { scroll-padding-top: 92px; }
 .prose th { font-size: 0.8125rem; color: var(--muted); font-weight: 600; }
 .prose code { font-family: var(--mono); font-size: 0.875em; }
 .table-wrap { overflow-x: auto; }
+
+/* Site pet: Bucksy walks along the bottom edge of the window. */
+.site-pet { position: fixed; z-index: 12; left: 0; right: 0; bottom: 0; height: 0; pointer-events: none; }
+.site-pet-inner { position: absolute; left: 50%; bottom: 4px; width: 84px; margin-left: -42px; pointer-events: auto; will-change: transform; }
+.site-pet-button { display: block; width: 100%; padding: 0; border: 0; background: none; border-radius: 16px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.site-pet-button svg { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 1px 1.5px rgba(39, 35, 49, 0.4)); }
+.site-pet-hide { position: absolute; top: 2px; right: -14px; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--muted); cursor: pointer; opacity: 0; transition: opacity .15s; }
+.site-pet-hide::before { content: ""; position: absolute; inset: -8px; }
+.site-pet-inner:hover .site-pet-hide, .site-pet-inner:focus-within .site-pet-hide { opacity: 1; }
+.site-pet-hide:hover { color: var(--ink); border-color: var(--input-border); }
+@media (max-width: 640px) { .site-pet-inner { width: 64px; margin-left: -32px; } .site-pet-hide { opacity: 1; } }
+@media print { .site-pet { display: none; } }
+/* Walk, side view */
+.site-pet-button .bk-side{display:none}
+.site-pet-button[data-state="walk"] .bk-rig{display:none}
+.site-pet-button[data-state="walk"] .bk-side{display:block}
+.site-pet-button[data-dir="-1"] .bk-side{transform:scaleX(-1)}
+.bk-w-leg{animation:bk-stepA .26s ease-in-out infinite alternate}
+.bk-w-legB{animation-name:bk-stepB}
+.bk-w-all{transform-origin:100px 224px;animation:bk-trot .26s ease-in-out infinite alternate}
+.bk-w-shadow{transform-origin:100px 224px;animation:bk-trotShadow .26s ease-in-out infinite alternate}
+.bk-w-tail{transform-origin:58px 172px;animation:bk-wagSide .2s ease-in-out infinite alternate}
+.bk-w-headbob{transform-origin:100px 150px;animation:bk-nod .26s ease-in-out infinite alternate}
+.bk-w-earL{transform-origin:48px 80px;animation:bk-earL .52s ease-in-out infinite}
+.bk-w-earR{transform-origin:152px 80px;animation:bk-earR .52s ease-in-out infinite}
+@keyframes bk-stepA{from{transform:rotate(-24deg)}to{transform:rotate(24deg)}}
+@keyframes bk-stepB{from{transform:rotate(24deg)}to{transform:rotate(-24deg)}}
+@keyframes bk-trot{from{transform:translateY(0)}to{transform:translateY(-4px)}}
+@keyframes bk-trotShadow{from{transform:scale(1)}to{transform:scale(.92)}}
+@keyframes bk-wagSide{from{transform:rotate(-12deg)}to{transform:rotate(10deg)}}
+@keyframes bk-nod{from{transform:rotate(-2deg)}to{transform:rotate(2deg)}}
+/* Front view */
+.bk-rig{--lx:0;--ly:0}
+.bk-shadow{transform-origin:100px 224px;animation:bk-shadow 1.6s ease-in-out infinite}
+.bk-all{transform-origin:100px 224px;animation:bk-bounce 1.6s ease-in-out infinite}
+.bk-tail{transform-origin:132px 186px;animation:bk-wag .38s ease-in-out infinite alternate}
+.bk-tilt{transform-origin:100px 150px;animation:bk-tilt 4.8s ease-in-out infinite}
+.bk-earL{transform-origin:48px 80px;animation:bk-earL 1.6s ease-in-out infinite}
+.bk-earR{transform-origin:152px 80px;animation:bk-earR 1.6s ease-in-out infinite}
+.bk-blink{transform-box:fill-box;transform-origin:center;animation:bk-blink 3.8s infinite}
+.bk-look-head{transform-origin:100px 150px;transform:translate(calc(var(--lx)*4px),calc(var(--ly)*3px)) rotate(calc(var(--lx)*5deg));transition:transform .25s ease-out}
+.bk-look-eyes{transform:translate(calc(var(--lx)*3px),calc(var(--ly)*2.5px));transition:transform .2s ease-out}
+.bk-eyes-happy,.bk-eyes-sleep,.bk-mouth-open,.bk-spark,.bk-zz{display:none}
+.bk-body-g{transform-origin:100px 216px;transition:transform .5s ease-in-out}
+.bk-legs-g{transform-origin:100px 222px;transition:transform .5s ease-in-out}
+.bk-footL,.bk-footR{transform-box:fill-box;transform-origin:center;transition:transform .5s ease-in-out}
+.bk-pose-head{transform-origin:100px 150px;transition:transform .5s ease-in-out}
+@keyframes bk-bounce{0%,100%{transform:translateY(0) scale(1,1)}45%{transform:translateY(-7px) scale(.99,1.01)}90%{transform:translateY(0) scale(1.02,.98)}}
+@keyframes bk-shadow{0%,100%{transform:scale(1)}45%{transform:scale(.86)}}
+@keyframes bk-wag{from{transform:rotate(-10deg)}to{transform:rotate(14deg)}}
+@keyframes bk-tilt{0%,55%,100%{transform:rotate(0deg)}65%,85%{transform:rotate(-6deg)}}
+@keyframes bk-earL{0%,100%{transform:rotate(0deg)}55%{transform:rotate(7deg)}}
+@keyframes bk-earR{0%,100%{transform:rotate(0deg)}55%{transform:rotate(-7deg)}}
+@keyframes bk-blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+/* Sit */
+.bk-rig[data-state="sit"] .bk-body-g{transform:scale(1.08,.88)}
+.bk-rig[data-state="sit"] .bk-legs-g{transform:scale(1,.8)}
+.bk-rig[data-state="sit"] .bk-footL{transform:translate(-8px,0) scale(1.3)}
+.bk-rig[data-state="sit"] .bk-footR{transform:translate(8px,0) scale(1.3)}
+.bk-rig[data-state="sit"] .bk-pose-head{transform:translate(0,12px)}
+.bk-rig[data-state="sit"] .bk-all{animation:bk-breathe 2.6s ease-in-out infinite}
+.bk-rig[data-state="sit"] .bk-shadow{animation:none;transform:scale(1.08,1)}
+.bk-rig[data-state="sit"] .bk-tail{animation-duration:.9s}
+.bk-rig[data-state="sit"] .bk-earL,.bk-rig[data-state="sit"] .bk-earR{animation-duration:2.6s}
+@keyframes bk-breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.01,1.025)}}
+/* Sleep */
+.bk-rig[data-state="sleep"] .bk-body-g{transform:scale(1.18,.62)}
+.bk-rig[data-state="sleep"] .bk-legs-g{transform:scale(1.1,.36)}
+.bk-rig[data-state="sleep"] .bk-footL{transform:translate(-16px,2px) scale(1.25)}
+.bk-rig[data-state="sleep"] .bk-footR{transform:translate(16px,2px) scale(1.25)}
+.bk-rig[data-state="sleep"] .bk-pose-head{transform:translate(0,44px) rotate(7deg)}
+.bk-rig[data-state="sleep"] .bk-all{animation:bk-breathe 3.6s ease-in-out infinite}
+.bk-rig[data-state="sleep"] .bk-shadow{animation:none;transform:scale(1.25,1)}
+.bk-rig[data-state="sleep"] .bk-tail{animation:none;transform:rotate(38deg);transition:transform .5s ease-in-out}
+.bk-rig[data-state="sleep"] .bk-tilt{animation:none}
+.bk-rig[data-state="sleep"] .bk-earL{animation:none;transform:rotate(14deg)}
+.bk-rig[data-state="sleep"] .bk-earR{animation:none;transform:rotate(-14deg)}
+.bk-rig[data-state="sleep"] .bk-eyes-open{display:none}
+.bk-rig[data-state="sleep"] .bk-eyes-sleep{display:block}
+.bk-rig[data-state="sleep"] .bk-zz{display:block;opacity:0;animation:bk-zz 3.6s ease-in-out infinite}
+.bk-rig[data-state="sleep"] .bk-z2{animation-delay:.9s}
+.bk-rig[data-state="sleep"] .bk-z3{animation-delay:1.8s}
+@keyframes bk-zz{0%{opacity:0;transform:translate(0,8px)}30%{opacity:1}70%{opacity:1}100%{opacity:0;transform:translate(6px,-14px)}}
+/* Happy */
+.bk-rig[data-state="happy"] .bk-all{animation:bk-hop .46s ease-in-out infinite}
+.bk-rig[data-state="happy"] .bk-shadow{animation:bk-hopShadow .46s ease-in-out infinite}
+.bk-rig[data-state="happy"] .bk-tail{animation-duration:.14s}
+.bk-rig[data-state="happy"] .bk-tilt{animation:none}
+.bk-rig[data-state="happy"] .bk-earL{animation:bk-earHopL .46s ease-in-out infinite}
+.bk-rig[data-state="happy"] .bk-earR{animation:bk-earHopR .46s ease-in-out infinite}
+.bk-rig[data-state="happy"] .bk-eyes-open,.bk-rig[data-state="happy"] .bk-smile{display:none}
+.bk-rig[data-state="happy"] .bk-eyes-happy,.bk-rig[data-state="happy"] .bk-mouth-open,.bk-rig[data-state="happy"] .bk-spark{display:block}
+.bk-rig[data-state="happy"] .bk-spark{animation:bk-spark .46s ease-in-out infinite alternate}
+@keyframes bk-hop{0%,100%{transform:translateY(0) scale(1.05,.93)}50%{transform:translateY(-22px) scale(.97,1.04)}}
+@keyframes bk-hopShadow{0%,100%{transform:scale(1.05)}50%{transform:scale(.7)}}
+@keyframes bk-earHopL{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(22deg)}}
+@keyframes bk-earHopR{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-22deg)}}
+@keyframes bk-spark{from{opacity:.3;transform:scale(.8)}to{opacity:1;transform:scale(1.1)}}
+.bk-spark{transform-box:fill-box;transform-origin:center}
+@media (prefers-reduced-motion:reduce){
+.bk-shadow,.bk-all,.bk-tail,.bk-tilt,.bk-earL,.bk-earR,.bk-blink,.bk-spark,.bk-w-leg,.bk-w-all,.bk-w-shadow,.bk-w-tail,.bk-w-headbob,.bk-w-earL,.bk-w-earR{animation:none!important}
+.bk-rig[data-state="sleep"] .bk-zz{animation:none;opacity:1}
+.bk-body-g,.bk-legs-g,.bk-footL,.bk-footR,.bk-pose-head{transition:none}
+.bk-look-head,.bk-look-eyes{transition:none}
+}

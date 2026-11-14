@@ -51,9 +51,10 @@ export default function PrivacyPage() {
             <tr><td><code>_ga_&lt;id&gt;</code></td><td>Google Analytics, when it is on</td><td>Keeps session state</td><td>2 years</td></tr>
             <tr><td><code>dotnetdevs-consent</code> (local storage)</td><td>{site.brand}</td><td>Remembers your cookie choice</td><td>Asked again after 12 months</td></tr>
             <tr><td><code>dotnetdevs-theme</code> (local storage)</td><td>{site.brand}</td><td>Remembers light or dark mode, if you pick one</td><td>Until you clear it</td></tr>
+            <tr><td><code>dotnetdevs-pet</code> (local storage)</td><td>{site.brand}</td><td>Remembers that you hid Bucksy, the site pet</td><td>Until you show him again or clear it</td></tr>
           </tbody>
         </table></div>
-        <p>The two local storage entries stay in your browser and are never sent to us. You can change your cookie choice at any time with <strong>Cookie settings</strong> at the bottom of every page. Choosing Reject removes the Google Analytics cookies.</p>
+        <p>The three local storage entries stay in your browser and are never sent to us. You can change your cookie choice at any time with <strong>Cookie settings</strong> at the bottom of every page. Choosing Reject removes the Google Analytics cookies.</p>
 
         <h2 id="processors">Services that process data for us</h2>
         <ul>
