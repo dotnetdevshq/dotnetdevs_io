@@ -42,6 +42,124 @@
   "note": "Read this before upgrading. For SQL Server: the default compatibility level moves to 160 (SQL Server 2022), so older servers need UseCompatibilityLevel set explicitly, and Microsoft.Data.SqlClient 7.0 moves Entra ID authentication into a separate package. Migrate() now throws when no migrations are found, and split queries throw on concurrent modifications instead of returning empty collections. The Azure Cosmos DB provider has the most changes, including one rated high impact."
  },
  {
+  "title": "Outbox processing in Postgres: workers or the WAL?",
+  "url": "https://milanjovanovic.tech/blog/outbox-pattern-postgres-workers-vs-wal",
+  "author": "Milan Jovanović",
+  "issue": 34,
+  "topics": [
+   "data",
+   "architecture"
+  ],
+  "note": "Compares concurrent polling workers, LISTEN/NOTIFY and reading the Postgres write-ahead log through logical replication, publishing outbox messages to RabbitMQ and measuring latency, throughput and crash recovery. The WAL reader lowers latency in his tests but adds replication-slot management and more duplicate deliveries after a hard kill, so both approaches need idempotent consumers. The WAL implementation is a prototype with failover untested."
+ },
+ {
+  "title": "Inside DuckDB.NET's faster date appends",
+  "url": "https://www.giorgi.dev/database/duckdb-net-1-5-6-1-appender-performance/",
+  "author": "Giorgi Dalakishvili",
+  "issue": 34,
+  "topics": [
+   "performance",
+   "data"
+  ],
+  "note": "Explains the changes behind DuckDB.NET 1.5.6.1's faster handling of dates, nullable values, enums and strings, with both compared versions on the same DuckDB engine. In one million-row timestamp benchmark, allocations fall from 2.8 GB to 93 KB. The sections on boxing, generic virtual calls and date conversion are worth reading even if DuckDB is not in your stack; the figures belong to the measured workloads."
+ },
+ {
+  "title": "Choosing a cache in .NET: FusionCache, Output Cache and the trade-offs",
+  "url": "https://antondevtips.com/blog/all-types-of-caching-in-dotnet-and-when-to-use-each-part2",
+  "author": "Anton Martyniuk",
+  "issue": 34,
+  "topics": [
+   "aspnet-core",
+   "performance"
+  ],
+  "note": "Part two of a caching guide: FusionCache and ASP.NET Core Output Cache, covering backplane invalidation across instances, serving stale values when dependencies fail, response-caching policies and tag-based eviction. The choice comes back to what you are caching, how many instances run the app and how much staleness the feature can tolerate."
+ },
+ {
+  "title": "Add Amazon S3 file storage to an ASP.NET Core API",
+  "url": "https://www.nikolatech.net/blogs/getting-started-with-amazon-s3-asp-dotnet-core",
+  "author": "Nikola Knezevic",
+  "issue": 34,
+  "topics": [
+   "aspnet-core"
+  ],
+  "note": "Upload, download and delete operations with the AWS SDK, strongly typed options and Minimal APIs. A small storage service keeps S3-specific requests out of the endpoints, and object metadata preserves the original filename for downloads. A starting point for files that must be available across instances; presigned URLs and multipart uploads are not covered."
+ },
+ {
+  "title": "Create reusable Claude skills for your .NET project",
+  "url": "https://www.roundthecode.com/dotnet-tutorials/best-way-create-claude-skills-dotnet",
+  "author": "David Grace",
+  "issue": 34,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": "Has Claude Code build two skills around an existing ASP.NET Core application: adding an EF Core entity and adding a Minimal API endpoint. Each skill defines its required inputs (table names, column types, string lengths), the project conventions to follow and how to verify the result."
+ },
+ {
+  "title": "Parse a heavily reused format string once",
+  "url": "https://dev.to/ssukhpinder/i-parsed-the-same-format-string-five-million-times-33n4",
+  "author": "Sukhpinder Singh",
+  "issue": 34,
+  "topics": [
+   "performance",
+   "csharp"
+  ],
+  "note": "Moves the parsing of a repeated string.Format template into a reusable CompositeFormat and compares formatting time and allocations over five million calls. Useful when a template comes from a variable or resource and sits on a measured hot path; an occasional formatting call is unlikely to justify the setup."
+ },
+ {
+  "title": "Smooth noisy data with a C# kernel implementation",
+  "url": "https://visualstudiomagazine.com/articles/2026/11/03/data-smoothing-with-the-nadaraya-watson-kernel-technique-using-c-sharp.aspx",
+  "author": "James McCaffrey",
+  "issue": 34,
+  "topics": [
+   "csharp"
+  ],
+  "note": "Demonstrates Nadaraya-Watson kernel smoothing, which estimates values from a weighted average of observations. The C# example uses a radial basis function to weight similar inputs more heavily, with a bandwidth parameter controlling the smoothing. Published in Visual Studio Magazine on November 3, 2026."
+ },
+ {
+  "title": "dotInsights: November's wider .NET reading list",
+  "url": "https://blog.jetbrains.com/dotnet/2026/11/05/dotinsights-november-2026/",
+  "author": "Rachel Appel",
+  "issue": 34,
+  "topics": [
+   "csharp",
+   "tooling"
+  ],
+  "note": "JetBrains' monthly roundup opens with F# units of measure, then collects community articles across .NET, databases, architecture and AI tooling, including NativeAOT dependency trimming, primary constructors and agent workflows. A broad collection, so some links overlap with articles already in this library."
+ },
+ {
+  "title": "Delivering skills in NuGet packages",
+  "url": "https://devblogs.microsoft.com/dotnet/delivering-skills-in-nuget-packages/",
+  "author": "Richard Lander",
+  "issue": 34,
+  "topics": [
+   "ai",
+   "tooling"
+  ],
+  "note": "Explores shipping SKILL.md files inside a library's NuGet package so agent guidance matches the version a project actually uses. Shows discovery with dotnet-inspect and copying skills into a repository with dotnet-package-skills. Bundling a skill does not by itself guarantee better results, so maintainers still need to measure the effect."
+ },
+ {
+  "title": "Get ready for .NET Conf 2026",
+  "url": "https://devblogs.microsoft.com/dotnet/get-ready-for-dotnet-conf-2026/",
+  "author": ".NET Team",
+  "issue": 34,
+  "topics": [
+   "releases"
+  ],
+  "note": "The free virtual conference ran November 10 to 13, 2026. The first two days featured Microsoft product teams and the .NET 11 launch; the last two were community-led. Sessions covered C#, ASP.NET Core and Blazor, Aspire, the .NET AI stack and the MCP C# SDK."
+ },
+ {
+  "title": "A deadline to check: .NET 8 and 9 support ends November 10",
+  "url": "https://dotnet.microsoft.com/en-us/platform/support/policy",
+  "author": null,
+  "issue": 34,
+  "topics": [
+   "releases",
+   "security"
+  ],
+  "note": "Microsoft's support policy page. .NET 8 and .NET 9 both reached end of support on November 10, 2026: applications keep running, but security servicing for those versions has stopped. For teams choosing an LTS target, .NET 10 is supported through November 14, 2028."
+ },
+ {
   "title": "Free Blazor components from Syncfusion",
   "url": "https://www.syncfusion.com/blogs/post/open-source-syncfusion-toolkit-for-blazor",
   "author": "Saravanan G",
