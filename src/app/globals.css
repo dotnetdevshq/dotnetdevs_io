@@ -254,6 +254,11 @@ html { scroll-padding-top: 92px; }
 .written-guide code { padding: 1px 5px; border-radius: 6px; background: var(--inset); border: 1px solid var(--inset-border); }
 .written-guide th code, .written-guide td code { white-space: nowrap; }
 .written-guide .table-wrap { margin: 12px 0; }
+.written-guide .takeaways { margin: 28px 0 8px; padding: 4px 24px 18px; border-radius: 18px; background: var(--tint); border: 1px solid var(--tint-border); }
+.written-guide .takeaways h2 { margin-top: 16px; font-size: 1.125rem; }
+.written-guide .takeaways + section { border-top: 0; }
+.faq-item h3 { margin: 24px 0 6px; font-size: 1.0625rem; line-height: 1.4; }
+.faq-item p { margin: 0; }
 .checklist { list-style: none; padding-left: 0 !important; }
 .checklist li { display: flex; gap: 12px; align-items: flex-start; }
 .check-box { flex: none; width: 18px; height: 18px; margin-top: 4px; border-radius: 5px; border: 2px solid var(--violet); }

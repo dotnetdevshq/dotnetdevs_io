@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { SiteChrome } from '@/components/SiteChrome';
 import { GuideCard } from '@/components/GuideCard';
-import { Block } from '@/components/RichText';
+import { Block, inline } from '@/components/RichText';
 import { site, externalProps } from '@/lib/site';
 import { writtenGuideStructuredData, serializeJsonLd } from '@/lib/seo';
-import { guides, writtenGuides, formatDate, type WrittenGuide } from '@/lib/content';
+import { guides, writtenGuides, formatDate, writtenGuideReadingMinutes, type WrittenGuide } from '@/lib/content';
 import legal from '@/content/legal.json';
 
 export function WrittenGuidePage({ guide }: { guide: WrittenGuide }) {
@@ -14,7 +14,7 @@ export function WrittenGuidePage({ guide }: { guide: WrittenGuide }) {
     <div className="container page">
       <nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/guides/">Guides</Link><span aria-hidden="true">/</span><span>{guide.title}</span></nav>
       <section className="guide-hero" aria-labelledby="page-title">
-        <p className="kicker">Written guide · {guide.sections.length} sections · Updated <time dateTime={guide.reviewed}>{guide.reviewedLabel}</time></p>
+        <p className="kicker">Written guide · {writtenGuideReadingMinutes(guide)} min read · Updated <time dateTime={guide.reviewed}>{guide.reviewedLabel}</time></p>
         <h1 id="page-title">{guide.title}</h1>
         <p className="lead">{guide.intro}</p>
         <p className="guide-byline">By <Link href="/about/">{legal.owner}</Link> · Published <time dateTime={guide.published}>{formatDate(guide.published)}</time>{guide.reviewed !== guide.published && <> · Updated <time dateTime={guide.reviewed}>{formatDate(guide.reviewed)}</time></>}</p>
@@ -36,6 +36,10 @@ export function WrittenGuidePage({ guide }: { guide: WrittenGuide }) {
 
         <div className="main-column">
           <article className="prose written-guide">
+            <section className="takeaways" aria-labelledby="takeaways-title">
+              <h2 id="takeaways-title">Key takeaways</h2>
+              <ul>{guide.takeaways.map(item => <li key={item}>{inline(item)}</li>)}</ul>
+            </section>
             {guide.sections.map((section, i) => <section key={section.id} id={section.id} aria-labelledby={`${section.id}-title`}>
               <h2 id={`${section.id}-title`}><span className="toc-number" aria-hidden="true">{i + 1}</span> {section.title}</h2>
               {section.blocks.map((block, b) => <Block key={b} block={block} />)}

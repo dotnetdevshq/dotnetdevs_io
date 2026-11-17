@@ -1,6 +1,6 @@
 import { site, socialLinks } from '@/lib/site';
 import legal from '@/content/legal.json';
-import { guideImagePath, linkByUrl, writtenGuideImagePath, type CuratedLink, type Guide, type WrittenGuide } from '@/lib/content';
+import { guideImagePath, linkByUrl, writtenGuideImages, writtenGuideWordCount, writtenGuideReadingMinutes, type CuratedLink, type Guide, type WrittenGuide } from '@/lib/content';
 
 const id = (fragment: string) => new URL(`#${fragment}`, site.canonicalUrl).href;
 
@@ -118,7 +118,9 @@ export function writtenGuideStructuredData(guide: WrittenGuide) {
         author: { '@type': 'Person', '@id': id('founder'), name: legal.owner, url: new URL('/about/', site.canonicalUrl).href },
         isPartOf: { '@id': id('website') }, publisher: { '@id': id('organization') },
         breadcrumb: { '@id': `${url}#breadcrumb` },
-        image: { '@type': 'ImageObject', url: new URL(writtenGuideImagePath(guide), site.canonicalUrl).href, width: 1200, height: 630 },
+        image: writtenGuideImages(guide).map(image => ({ '@type': 'ImageObject', url: new URL(image.path, site.canonicalUrl).href, width: image.width, height: image.height, caption: guide.imageAlt })),
+        wordCount: writtenGuideWordCount(guide), timeRequired: `PT${writtenGuideReadingMinutes(guide)}M`,
+        isAccessibleForFree: true, audience: { '@type': 'Audience', audienceType: 'Developers and technical content creators' },
         articleSection: guide.sections.map(section => section.title),
         citation: guide.sources.map(source => ({ '@type': 'CreativeWork', name: source.title, url: source.url })),
         ...(guide.about?.length ? { about: guide.about.map(name => ({ '@type': 'Thing', name })), keywords: guide.about.join(', ') } : {}),

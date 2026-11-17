@@ -20,6 +20,10 @@ export function Block({ block }: { block: WrittenBlock }) {
   if ('ul' in block) return <ul>{block.ul.map((item, i) => <li key={i}>{inline(item)}</li>)}</ul>;
   if ('ol' in block) return <ol>{block.ol.map((item, i) => <li key={i}>{inline(item)}</li>)}</ol>;
   if ('checklist' in block) return <ul className="checklist">{block.checklist.map((item, i) => <li key={i}><span className="check-box" aria-hidden="true" /><span>{inline(item)}</span></li>)}</ul>;
+  if ('faq' in block) return <div className="faq-list">{block.faq.map(item => <div key={item.q} className="faq-item">
+    <h3>{inline(item.q)}</h3>
+    <p>{inline(item.a)}</p>
+  </div>)}</div>;
   return <div className="table-wrap"><table>
     <thead><tr>{block.table.head.map(cell => <th key={cell} scope="col">{inline(cell)}</th>)}</tr></thead>
     <tbody>{block.table.rows.map((row, r) => <tr key={r}>{row.map((cell, c) => <td key={c}>{inline(cell)}</td>)}</tr>)}</tbody>

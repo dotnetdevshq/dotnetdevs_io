@@ -1,9 +1,12 @@
 import { site, socialLinks, isIndexable } from '@/lib/site';
+import legal from '@/content/legal.json';
 import { issues, issueUrl, topics, activeTopics, guides, writtenGuides, linkByUrl, type CuratedLink } from '@/lib/content';
 
 export const dynamic = 'force-static';
 
 const page = (path: string) => new URL(path, site.canonicalUrl).href;
+// Written-guide text uses **bold** and `code` markers; llms.txt gets the words without them.
+const strip = (text: string) => text.replace(/\*\*|`/g, '');
 
 export function GET() {
   const content = isIndexable ? [
@@ -42,10 +45,18 @@ export function GET() {
     ...writtenGuides.flatMap(guide => [
       `## Guide: ${guide.title}`,
       '',
-      `${guide.intro} Updated ${guide.reviewedLabel}. Full guide: ${page(`/guides/${guide.slug}/`)}`,
+      `${guide.intro} By ${legal.owner}. Updated ${guide.reviewedLabel}. Full guide: ${page(`/guides/${guide.slug}/`)}`,
       '',
+      '### Key takeaways',
+      ...guide.takeaways.map(item => `- ${strip(item)}`),
+      '',
+      '### Sections',
       ...guide.sections.map((section, i) => `- ${i + 1}. [${section.title}](${page(`/guides/${guide.slug}/#${section.id}`)})`),
       '',
+      ...guide.sections.flatMap(section => section.blocks.flatMap(block => 'faq' in block ? [
+        '### Frequently asked questions',
+        ...block.faq.flatMap(item => [`Q: ${item.q}`, `A: ${strip(item.a)}`, '']),
+      ] : [])),
       '### Sources',
       ...guide.sources.map(source => `- [${source.title}](${source.url}), ${source.publisher}`),
       '',

@@ -21,8 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = (await params).slug;
   const written = writtenGuideBySlug(slug);
   if (written) return pageMetadata(`/guides/${written.slug}/`, written.seoTitle ?? written.title, written.description, {
-    image: { path: writtenGuideImagePath(written), alt: `${written.title}: a written guide from ${site.name}` },
-    modified: written.reviewed,
+    image: { path: writtenGuideImagePath(written), alt: written.imageAlt },
+    modified: written.reviewed, published: written.published,
+    authors: [new URL('/about/', site.canonicalUrl).href], tags: written.about,
   });
   const guide = guideBySlug(slug);
   if (!guide) return {};

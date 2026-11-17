@@ -2,8 +2,8 @@
   {
     "slug": "dotnet-content-creation",
     "title": "Creating great .NET content",
-    "seoTitle": "Creating great .NET content: a guide for developer creators",
-    "description": "A practical guide for .NET bloggers, YouTubers and newsletter writers: what to write, how to structure it, and how to get found in search and AI answers.",
+    "seoTitle": "How to create great .NET content: writing, SEO and AI search",
+    "description": "How to write .NET blog posts, videos and newsletters developers trust, and get them found in Google and cited by ChatGPT, Copilot and other AI answers.",
     "about": [
       "Content creation",
       "Technical writing",
@@ -360,6 +360,40 @@
         ]
       },
       {
+        "id": "faq",
+        "title": "Frequently asked questions",
+        "blocks": [
+          {
+            "faq": [
+              {
+                "q": "Does AI-generated content hurt search rankings?",
+                "a": "Not by itself. Google says using AI is not disqualifying, but mass-produced text with little oversight is low effort, and using AI mainly to manipulate rankings breaks its spam policies. Disclose AI help where readers would wonder how the post was made ([Google, helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content))."
+              },
+              {
+                "q": "Do I need an llms.txt file for AI search?",
+                "a": "Not for Google. Google says its Search does not use llms.txt, and creating one neither helps nor hurts visibility in AI Overviews or AI Mode. Other tools may read it, so add one only if it costs you little ([Google](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide))."
+              },
+              {
+                "q": "How long should a technical blog post be?",
+                "a": "As long as the problem needs. Writing to a target word count is on Google's list of search-engine-first warning signs. A short post that fully solves one problem beats a long one padded to look thorough."
+              },
+              {
+                "q": "Should I cross-post to DEV Community and Medium?",
+                "a": "Yes, after the post is live on your own domain. Set `canonical_url` on DEV and use Medium's \"Import a story\" so both point back to your original, and give your site a few days' head start."
+              },
+              {
+                "q": "How do I know whether AI assistants cite my content?",
+                "a": "Bing Webmaster Tools has an AI Performance report with Copilot and Bing AI citations and the questions behind them. Your analytics show referrals from chatgpt.com, perplexity.ai and similar sites, and asking the assistants your post's questions shows who they cite."
+              },
+              {
+                "q": "When should I update an old post?",
+                "a": "When the advice changes, such as a new .NET version, a renamed API or a better approach. Retest, revise, update the modified date and say what changed. Changing only the date to look fresh is a warning sign for Google."
+              }
+            ]
+          }
+        ]
+      },
+      {
         "id": "checklist",
         "title": "Pre-publish checklist",
         "blocks": [
@@ -441,6 +475,14 @@
         "publisher": "DEV Community",
         "note": null
       }
+    ],
+    "imageAlt": "Creating great .NET content: a written guide from dotnetdevs.io covering writing, structure, SEO and AI search",
+    "takeaways": [
+      "Publish what only you can: tested results, real numbers and runnable code. Generic summaries are what Google calls commodity content.",
+      "Lead with the answer, and state the .NET version, packages and test date near the top.",
+      "Optimizing for AI answers is mostly SEO: be indexed, crawlable and fast. Google does not need llms.txt or special AI markup.",
+      "Make key claims quotable: self-contained sentences with numbers and links to primary sources.",
+      "Publish on your own domain first, cross-post with canonical links, and measure with Search Console and Bing's AI Performance report."
     ]
   }
 ]

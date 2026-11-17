@@ -70,17 +70,31 @@ export const guideImagePath = (guide: Guide) => `/og/guides/${guide.slug}.png`;
 // Inline text supports **bold**, `code` and [links](url); see src/components/RichText.tsx.
 export type WrittenBlock =
   | { p: string } | { ul: string[] } | { ol: string[] } | { checklist: string[] }
-  | { table: { head: string[]; rows: string[][] } };
+  | { table: { head: string[]; rows: string[][] } } | { faq: { q: string; a: string }[] };
 export type WrittenSection = { id: string; title: string; blocks: WrittenBlock[] };
 export type WrittenSource = { title: string; url: string; publisher: string; note: string | null };
 export type WrittenGuide = {
   slug: string; title: string; seoTitle?: string; description: string; about?: string[];
-  published: string; reviewed: string; reviewedLabel: string; intro: string;
-  sections: WrittenSection[]; sources: WrittenSource[];
+  published: string; reviewed: string; reviewedLabel: string; intro: string; imageAlt: string;
+  takeaways: string[]; sections: WrittenSection[]; sources: WrittenSource[];
 };
 export const writtenGuides = writtenGuidesData as unknown as WrittenGuide[];
 export const writtenGuideBySlug = (slug: string) => writtenGuides.find(guide => guide.slug === slug);
+// Rendered by scripts/render-brand-assets.mjs: the 1200 × 630 sharing card plus 4:3 and 1:1 crops for search.
 export const writtenGuideImagePath = (guide: WrittenGuide) => `/og/guides/${guide.slug}.png`;
+export const writtenGuideImages = (guide: WrittenGuide) => [
+  { path: writtenGuideImagePath(guide), width: 1200, height: 630 },
+  { path: `/og/guides/${guide.slug}-4x3.png`, width: 1200, height: 900 },
+  { path: `/og/guides/${guide.slug}-1x1.png`, width: 1200, height: 1200 },
+];
+// Word count of the visible text, for reading time and Article structured data.
+const blockText = (block: WrittenBlock): string[] =>
+  'p' in block ? [block.p] : 'ul' in block ? block.ul : 'ol' in block ? block.ol : 'checklist' in block ? block.checklist
+    : 'faq' in block ? block.faq.flatMap(item => [item.q, item.a]) : [...block.table.head, ...block.table.rows.flat()];
+export const writtenGuideWordCount = (guide: WrittenGuide) =>
+  [guide.intro, ...guide.takeaways, ...guide.sections.flatMap(section => [section.title, ...section.blocks.flatMap(blockText)])]
+    .join(' ').replace(/\]\([^)]*\)/g, ']').split(/\s+/).filter(Boolean).length;
+export const writtenGuideReadingMinutes = (guide: WrittenGuide) => Math.max(1, Math.round(writtenGuideWordCount(guide) / 230));
 
 export type Post = {
   slug: string; title: string; image: string; imageAlt: string; topics: string[];

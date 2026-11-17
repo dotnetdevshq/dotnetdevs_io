@@ -6,6 +6,10 @@ type PageMetaOptions = {
   image?: { path: string; alt: string };
   // Pages with a real review date are shared as articles with that modified time.
   modified?: string;
+  // Original articles also carry a publish date, an author and topic tags.
+  published?: string;
+  authors?: string[];
+  tags?: string[];
 };
 
 // Next.js replaces (not merges) openGraph/twitter objects from the root layout,
@@ -18,7 +22,10 @@ export function pageMetadata(path: string, title: string, description: string, o
   };
   const fullTitle = `${title} | ${site.name}`;
   const openGraph = options.modified
-    ? { type: 'article' as const, modifiedTime: options.modified }
+    ? { type: 'article' as const, modifiedTime: options.modified,
+        ...(options.published ? { publishedTime: options.published } : {}),
+        ...(options.authors?.length ? { authors: options.authors } : {}),
+        ...(options.tags?.length ? { tags: options.tags } : {}) }
     : { type: 'website' as const };
   return {
     title: fullTitle, description,
