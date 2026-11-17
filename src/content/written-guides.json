@@ -1,0 +1,488 @@
+[
+  {
+    "slug": "dotnet-content-creation",
+    "title": "Creating great .NET content",
+    "seoTitle": "How to create great .NET content: writing, SEO and AI search",
+    "description": "How to write .NET blog posts, videos and newsletters developers trust, and get them found in Google and cited by ChatGPT, Copilot and other AI answers.",
+    "about": [
+      "Content creation",
+      "Technical writing",
+      "SEO",
+      "GEO",
+      "AI search",
+      ".NET"
+    ],
+    "published": "2026-11-17",
+    "reviewed": "2026-11-17",
+    "reviewedLabel": "November 2026",
+    "intro": "Good developer content is original, specific and technically correct: work a reader could not get from a summary. That is also what search engines and AI assistants reward. This guide covers what to write, how to structure it, and how to make sure people find it, for anyone publishing about C# and .NET: bloggers, YouTubers, newsletter writers, speakers and library maintainers.",
+    "sections": [
+      {
+        "id": "how-content-is-found",
+        "title": "How readers find your work",
+        "blocks": [
+          {
+            "p": "Most readers reach developer content in one of three ways: a search, an answer from an AI assistant, or a share from someone they follow. Two terms describe the first two:"
+          },
+          {
+            "ul": [
+              "**SEO** (search engine optimization): being found and ranked in classic search results.",
+              "**GEO** (generative engine optimization): being retrieved, quoted and cited when someone asks ChatGPT, Copilot, Perplexity, Claude or Google AI Mode a question. The term comes from a [2023 Princeton paper](https://arxiv.org/abs/2311.09735)."
+            ]
+          },
+          {
+            "p": "The two overlap almost completely. Google describes optimizing for generative AI search as [\"still SEO\"](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), and AI assistants mostly retrieve pages through search indexes, so a page that is not indexed and worth ranking rarely gets cited. The extra GEO work is about making your best claims easy to lift and attribute."
+          }
+        ]
+      },
+      {
+        "id": "original-work",
+        "title": "Write what only you can write",
+        "blocks": [
+          {
+            "p": "Google's guidance calls the content to avoid \"commodity content\": generic material any model could produce, like a list of tips that restates what is already online. It contrasts that with first-hand pieces drawn from real experience ([Google, AI optimization guide](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide)). For .NET creators, the difference usually looks like this:"
+          },
+          {
+            "table": {
+              "head": [
+                "Commodity (skip or rethink)",
+                "Non-commodity (worth publishing)"
+              ],
+              "rows": [
+                [
+                  "\"10 EF Core performance tips\"",
+                  "\"How we cut a report query from seconds to milliseconds in EF Core: the profile, the fix, the trade-off\""
+                ],
+                [
+                  "\"What is .NET Aspire?\"",
+                  "\"Migrating a six-service app to Aspire: what broke and what we kept\""
+                ],
+                [
+                  "\"Minimal APIs vs controllers\"",
+                  "\"Benchmarks on our API with BenchmarkDotNet, and why we still use controllers for some endpoints\""
+                ],
+                [
+                  "A rewrite of the release notes",
+                  "The release notes tested on a real project, with the breaking change you hit"
+                ]
+              ]
+            }
+          },
+          {
+            "p": "Practical rules:"
+          },
+          {
+            "ul": [
+              "**Show the evidence.** Benchmarks with the BenchmarkDotNet output, a runnable repo, screenshots of the profiler, the exact error text.",
+              "**Say who you are and how you made it.** Google's \"Who, How, Why\" asks for a clear byline, an explanation of the process (including any AI use readers would wonder about) and a reason to exist beyond search traffic ([Google, helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content)).",
+              "**Use AI as an assistant, not the author.** AI use is not disqualifying in itself, but mass-produced text with little oversight is low effort, and using it mainly to manipulate rankings breaks Google's spam policies.",
+              "**Never invent experience.** If you did not run it in production, say \"in a sample app\"."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "topics",
+        "title": "Pick topics developers actually search and ask",
+        "blocks": [
+          {
+            "p": "Developers search with precise, problem-shaped queries, and AI assistants expand each question into several related searches (Google calls this \"query fan-out\"). A post that fully solves one real problem tends to match many of those sub-queries without chasing each phrasing."
+          },
+          {
+            "p": "Query types that work well for .NET content:"
+          },
+          {
+            "ul": [
+              "**Error messages and exceptions:** the exact text, such as an EF Core migration error or a `System.InvalidOperationException` message. Put it verbatim in the post.",
+              "**Version-specific how-tos:** \"in .NET 10\", \"EF Core 11\", \"C# 14\". Versions are a strong signal of freshness and relevance.",
+              "**Migrations and upgrades:** .NET Framework to .NET, Newtonsoft.Json to System.Text.Json, Swashbuckle to the built-in OpenAPI support.",
+              "**Comparisons and decisions:** \"X vs Y for Z\", with a clear recommendation and the conditions under which it flips.",
+              "**Integration recipes:** a .NET app plus a specific service, such as an MCP server in C# or Aspire with PostgreSQL."
+            ]
+          },
+          {
+            "p": "Where to find the real questions:"
+          },
+          {
+            "ul": [
+              "Questions in your own comments, DMs and newsletter replies.",
+              "GitHub issues and discussions on the repos you cover (dotnet/runtime, dotnet/aspnetcore, dotnet/efcore).",
+              "Google Search Console queries for posts you already have (see [Measure what is working](#measure)).",
+              "\"People also ask\" boxes and the follow-up questions AI assistants suggest after answering your topic."
+            ]
+          },
+          {
+            "p": "**One topic, one page.** Google calls creating a page for every fan-out query an ineffective long-term strategy, so write one strong page per problem rather than many near-duplicates."
+          }
+        ]
+      },
+      {
+        "id": "structure",
+        "title": "Structure each post so readers and machines can use it",
+        "blocks": [
+          {
+            "p": "Google's advice is to organize for humans: clear paragraphs, logical sections and descriptive headings. You do not need to \"chunk\" content, because Google can find the relevant part of a long page. The structure below is simply good technical writing that also happens to be easy to quote."
+          },
+          {
+            "ol": [
+              "**Title that names the problem and the version.** \"Fixing slow startup in ASP.NET Core 10 with ReadyToRun\" beats \"Make your app fly\".",
+              "**Answer in the first two or three sentences.** State the fix or conclusion, then explain. A reader skimming, and a model extracting, both get the point immediately.",
+              "**State the context up front.** .NET version, package versions, OS or hosting, and the date you tested. Example: \"Tested on .NET 10, EF Core 10, SQL Server 2022, November 2026.\"",
+              "**Descriptive headings.** Write them as the questions or steps they answer (\"Why the query is slow\", \"Adding a compiled query\").",
+              "**Real code in code blocks, never screenshots.** Text code can be indexed, copied and quoted; use language tags (`csharp`, `json`, `bash`). Keep samples complete enough to compile, and link the full repo.",
+              "**Name things precisely.** Use exact type, package and API names (`IHostedService`, `Microsoft.Extensions.AI`), and link to Microsoft Learn or the GitHub source the first time.",
+              "**Back claims with numbers and sources.** Benchmark tables, measured timings, links to the issue or docs.",
+              "**End with limits and next steps.** When not to use the approach, known issues, related posts of yours."
+            ]
+          },
+          {
+            "p": "For video, the same ideas apply: a specific title, a description that states the answer and versions, chapters, and an accurate transcript. Google recommends supporting text with relevant images and video, following its normal image and video SEO guidance."
+          }
+        ]
+      },
+      {
+        "id": "technical",
+        "title": "Get the technical basics right",
+        "blocks": [
+          {
+            "p": "The one hard gate for Google's AI Overviews and AI Mode is that a page is indexed and eligible to show with a snippet; there are no additional requirements ([Google, AI features](https://developers.google.com/search/docs/appearance/ai-features)). Most creator sites fail on basics, not on AI tricks."
+          },
+          {
+            "table": {
+              "head": [
+                "Area",
+                "What to do",
+                "Why"
+              ],
+              "rows": [
+                [
+                  "Crawling",
+                  "Allow Googlebot and Bingbot in robots.txt, and check that your CDN or host is not blocking them",
+                  "Google lists crawl access, including CDN and hosting, as a best practice"
+                ],
+                [
+                  "ChatGPT search",
+                  "Allow `OAI-SearchBot`. You can block `GPTBot` (training) separately",
+                  "Sites that opt out of OAI-SearchBot are not shown in ChatGPT search answers ([OpenAI](https://developers.openai.com/api/docs/bots))"
+                ],
+                [
+                  "Rendering",
+                  "Serve the article text in the HTML, not only after client-side JavaScript",
+                  "Google asks for important content to be available as text, and not every crawler renders JavaScript reliably"
+                ],
+                [
+                  "Titles and descriptions",
+                  "A unique title (problem plus version) and a meta description that states the answer",
+                  "Shown in search results and in AI citations"
+                ],
+                [
+                  "Canonical URL",
+                  "One canonical URL per post on your own domain",
+                  "Consolidates signals when the post is reachable at several URLs"
+                ],
+                [
+                  "Dates and author",
+                  "Visible published and updated dates, and a byline linking to an about page",
+                  "Supports the Who, How, Why trust signals"
+                ],
+                [
+                  "Structured data",
+                  "`BlogPosting` or `Article` JSON-LD with `author`, `datePublished` and `dateModified`, matching the visible page",
+                  "Optional for AI features, but helps Google show title, image and date ([Google, Article](https://developers.google.com/search/docs/data-types/article))"
+                ],
+                [
+                  "Internal links",
+                  "Link related posts and series to each other",
+                  "Google lists internal links as a way to make content findable"
+                ],
+                [
+                  "Performance",
+                  "Fast, mobile-friendly pages and compressed images",
+                  "Page experience is on Google's best-practice list"
+                ]
+              ]
+            }
+          },
+          {
+            "p": "**What you can skip for Google:** llms.txt files, special AI markup and \"AI-friendly\" rewrites. Google says it does not use llms.txt; creating one neither helps nor hurts Search. Other tools may read it, so add one only if it is cheap for you."
+          },
+          {
+            "p": "**Do not update dates without updating content.** Changing dates to look fresh is on Google's list of search-engine-first warning signs. Update `dateModified` when you actually retest or revise, and say what changed."
+          }
+        ]
+      },
+      {
+        "id": "ai-citations",
+        "title": "Make your work easy for AI answers to cite",
+        "blocks": [
+          {
+            "p": "AI assistants search, retrieve a handful of pages, and quote the passages that best support their answer. Your job is to be retrievable (the sections above) and then to be the most quotable, trustworthy source among the pages retrieved."
+          },
+          {
+            "p": "What the evidence says:"
+          },
+          {
+            "ul": [
+              "In the original [GEO study](https://arxiv.org/abs/2311.09735) (Aggarwal et al., KDD 2024), adding citations, quotations from relevant sources and statistics boosted a page's visibility in generative engine responses by over 40% across their benchmark. Keyword stuffing did not help. The study used test engines, so treat the numbers as direction, not a guarantee.",
+              "Google says content that people find unique, compelling and useful will likely matter more for AI search presence in the long run than any other suggestion in its guide, and that seeking inauthentic \"mentions\" does not help much ([Google](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide))."
+            ]
+          },
+          {
+            "p": "How to apply it to .NET content:"
+          },
+          {
+            "ul": [
+              "**Write self-contained key sentences.** \"In .NET 10, X is enabled by default, so you no longer need Y\" can be quoted alone. \"As mentioned above, this is now the default\" cannot.",
+              "**Put numbers next to claims.** Measured allocations, request rates and build times, with the setup that produced them.",
+              "**Cite primary sources.** Link the Microsoft Learn page, the GitHub PR or issue, the release notes or the spec, not another blog's summary.",
+              "**Be consistent about who you are.** Same name, photo and bio across your site, GitHub, LinkedIn, YouTube and conference pages, with links between them, so assistants can connect the work to one author.",
+              "**Publish the code.** A public GitHub repo with a clear README is itself a retrievable, citable source, and it backs up the post.",
+              "**Check what assistants say.** Ask ChatGPT, Copilot, Perplexity and Google AI Mode the questions your post answers. Note who they cite and what your post is missing compared with those sources."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "distribution",
+        "title": "Publish on your own domain first, then distribute",
+        "blocks": [
+          {
+            "p": "Your own site is the asset that builds over time; platforms are for reach. Publish the full post on your domain, then adapt it for each channel."
+          },
+          {
+            "table": {
+              "head": [
+                "Channel",
+                "How to cross-post",
+                "Notes"
+              ],
+              "rows": [
+                [
+                  "DEV Community",
+                  "Set `canonical_url` in the front matter (or post settings) to your original URL",
+                  "Supported directly by DEV ([DEV help](https://dev.to/help/writing-editing-scheduling))"
+                ],
+                [
+                  "Medium",
+                  "Use \"Import a story\" with your URL; pasting text manually does not set the canonical",
+                  "Check formatting and code blocks after import"
+                ],
+                [
+                  "Hashnode",
+                  "Set the original article URL in post settings",
+                  "Same idea as DEV"
+                ],
+                [
+                  "LinkedIn, X, Bluesky, Threads",
+                  "Share a native summary with the key finding, then link to the full post",
+                  "Readers get the point without clicking, and the curious ones click"
+                ],
+                [
+                  "YouTube",
+                  "Link the written post and repo in the description; reuse the same title wording and versions",
+                  "Add chapters and check the transcript for correct API names"
+                ],
+                [
+                  "Newsletters",
+                  "Link back to the original rather than pasting the whole post",
+                  "Lets the original collect the signals"
+                ]
+              ]
+            }
+          },
+          {
+            "p": "A caveat on canonicals: Google treats `rel=canonical` as a hint, and its documentation says it is not recommended for avoiding duplication by syndication partners; the most effective option is for the partner to block indexing of the copy ([Google, canonical guidance](https://developers.google.com/search/docs/crawling-indexing/canonicalization-troubleshooting)). For community sites you do not control, give your own domain a head start of a few days before cross-posting."
+          },
+          {
+            "p": "Being featured by others also helps: guest posts, conference talks, podcast appearances and newsletter features are genuine, earned mentions that assistants and search engines can find."
+          }
+        ]
+      },
+      {
+        "id": "measure",
+        "title": "Measure what is working",
+        "blocks": [
+          {
+            "p": "Check once a month; weekly is noise for most creators."
+          },
+          {
+            "table": {
+              "head": [
+                "Tool",
+                "What it shows",
+                "Use it to"
+              ],
+              "rows": [
+                [
+                  "[Google Search Console](https://search.google.com/search-console)",
+                  "Queries, impressions, clicks and indexing. AI Overviews and AI Mode traffic is included in the Performance report under \"Web\"",
+                  "Find queries where you rank 5 to 15 and improve those posts; fix indexing errors"
+                ],
+                [
+                  "[Bing Webmaster Tools](https://www.bing.com/webmasters)",
+                  "Search data, plus an AI Performance report (public preview since February 2026) with Copilot and Bing AI citations, cited pages and grounding queries",
+                  "See which posts Copilot cites and for which questions"
+                ],
+                [
+                  "Google Analytics or similar",
+                  "Referrals from chatgpt.com, perplexity.ai, copilot.microsoft.com and others",
+                  "Track AI referral traffic and what those visitors read next"
+                ],
+                [
+                  "Manual prompt checks",
+                  "What assistants answer and cite for your topics",
+                  "Spot gaps against the sources they prefer"
+                ]
+              ]
+            }
+          },
+          {
+            "p": "Pick a few outcome measures that fit your goal, such as newsletter sign-ups, GitHub stars or returning readers, instead of chasing raw pageviews. AI answers can reduce clicks even when they cite you, so citations and sign-ups are often the better signal."
+          }
+        ]
+      },
+      {
+        "id": "avoid",
+        "title": "What to avoid",
+        "blocks": [
+          {
+            "ul": [
+              "**AI-written posts published as-is.** Fluent but generic text is exactly the commodity content that neither Google nor AI assistants need, and it often gets .NET details wrong (old APIs, invented methods, mixed versions).",
+              "**Rewriting release notes or other blogs.** Link to them and add what you found by trying it.",
+              "**Keyword stuffing and \"for AI\" rewrites.** They did nothing in the GEO study, and Google says its systems understand synonyms.",
+              "**Publishing on everything.** Covering many unrelated topics hoping some rank is a Google warning sign. Stay close to what you work with.",
+              "**Stale versions without a note.** If a post targets .NET 8 and the advice changed in .NET 10, update it or add a dated note at the top.",
+              "**Fake freshness.** Changing the date without changing the content.",
+              "**Manufactured mentions.** Paid link lists, comment spam and self-promotional answers on forums.",
+              "**Code as images.** It cannot be searched, copied or quoted."
+            ]
+          }
+        ]
+      },
+      {
+        "id": "faq",
+        "title": "Frequently asked questions",
+        "blocks": [
+          {
+            "faq": [
+              {
+                "q": "Does AI-generated content hurt search rankings?",
+                "a": "Not by itself. Google says using AI is not disqualifying, but mass-produced text with little oversight is low effort, and using AI mainly to manipulate rankings breaks its spam policies. Disclose AI help where readers would wonder how the post was made ([Google, helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content))."
+              },
+              {
+                "q": "Do I need an llms.txt file for AI search?",
+                "a": "Not for Google. Google says its Search does not use llms.txt, and creating one neither helps nor hurts visibility in AI Overviews or AI Mode. Other tools may read it, so add one only if it costs you little ([Google](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide))."
+              },
+              {
+                "q": "How long should a technical blog post be?",
+                "a": "As long as the problem needs. Writing to a target word count is on Google's list of search-engine-first warning signs. A short post that fully solves one problem beats a long one padded to look thorough."
+              },
+              {
+                "q": "Should I cross-post to DEV Community and Medium?",
+                "a": "Yes, after the post is live on your own domain. Set `canonical_url` on DEV and use Medium's \"Import a story\" so both point back to your original, and give your site a few days' head start."
+              },
+              {
+                "q": "How do I know whether AI assistants cite my content?",
+                "a": "Bing Webmaster Tools has an AI Performance report with Copilot and Bing AI citations and the questions behind them. Your analytics show referrals from chatgpt.com, perplexity.ai and similar sites, and asking the assistants your post's questions shows who they cite."
+              },
+              {
+                "q": "When should I update an old post?",
+                "a": "When the advice changes, such as a new .NET version, a renamed API or a better approach. Retest, revise, update the modified date and say what changed. Changing only the date to look fresh is a warning sign for Google."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "checklist",
+        "title": "Pre-publish checklist",
+        "blocks": [
+          {
+            "checklist": [
+              "The post contains something I tested, measured or built myself",
+              "Title names the problem and the .NET or package version",
+              "The answer or conclusion is in the first two or three sentences",
+              "Versions, environment and test date are stated near the top",
+              "Headings describe what each section answers",
+              "Code is text in tagged code blocks, and the full sample is on GitHub",
+              "Key claims carry a number and a link to a primary source",
+              "Exact error messages and API names appear verbatim",
+              "Byline, published date and updated date are visible",
+              "Unique title tag, meta description and canonical URL are set",
+              "`BlogPosting` JSON-LD matches the visible page",
+              "The article text is in the HTML without JavaScript",
+              "robots.txt and the CDN allow Googlebot, Bingbot and OAI-SearchBot",
+              "Linked from at least one related post of mine",
+              "Cross-posts set a canonical to the original and go out a few days later",
+              "Any significant AI help is disclosed where readers would wonder"
+            ]
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "Optimizing your website for generative AI features on Google Search",
+        "url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+        "publisher": "Google Search Central",
+        "note": "Updated July 10, 2026"
+      },
+      {
+        "title": "AI features and your website",
+        "url": "https://developers.google.com/search/docs/appearance/ai-features",
+        "publisher": "Google Search Central",
+        "note": "Updated December 10, 2025"
+      },
+      {
+        "title": "Creating helpful, reliable, people-first content",
+        "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+        "publisher": "Google Search Central",
+        "note": "Updated October 5, 2026"
+      },
+      {
+        "title": "Article structured data",
+        "url": "https://developers.google.com/search/docs/data-types/article",
+        "publisher": "Google Search Central",
+        "note": null
+      },
+      {
+        "title": "Fix canonicalization issues",
+        "url": "https://developers.google.com/search/docs/crawling-indexing/canonicalization-troubleshooting",
+        "publisher": "Google Search Central",
+        "note": null
+      },
+      {
+        "title": "Overview of OpenAI crawlers",
+        "url": "https://developers.openai.com/api/docs/bots",
+        "publisher": "OpenAI",
+        "note": null
+      },
+      {
+        "title": "GEO: Generative Engine Optimization",
+        "url": "https://arxiv.org/abs/2311.09735",
+        "publisher": "Aggarwal et al., KDD 2024",
+        "note": null
+      },
+      {
+        "title": "Inside Bing's new AI Performance report",
+        "url": "https://www.searchinfluence.com/blog/bing-ai-performance-report-copilot-citations/",
+        "publisher": "Search Influence",
+        "note": "February 2026"
+      },
+      {
+        "title": "Writing, editing and scheduling posts",
+        "url": "https://dev.to/help/writing-editing-scheduling",
+        "publisher": "DEV Community",
+        "note": null
+      }
+    ],
+    "imageAlt": "Creating great .NET content: a written guide from dotnetdevs.io covering writing, structure, SEO and AI search",
+    "takeaways": [
+      "Publish what only you can: tested results, real numbers and runnable code. Generic summaries are what Google calls commodity content.",
+      "Lead with the answer, and state the .NET version, packages and test date near the top.",
+      "Optimizing for AI answers is mostly SEO: be indexed, crawlable and fast. Google does not need llms.txt or special AI markup.",
+      "Make key claims quotable: self-contained sentences with numbers and links to primary sources.",
+      "Publish on your own domain first, cross-post with canonical links, and measure with Search Console and Bing's AI Performance report."
+    ]
+  }
+]

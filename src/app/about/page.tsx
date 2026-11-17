@@ -4,7 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { SiteChrome } from '@/components/SiteChrome';
 import { pageMetadata } from '@/lib/page-meta';
 import { site, socialLinks, externalProps, validDestination } from '@/lib/site';
-import { issues, links, guides, formatDate } from '@/lib/content';
+import { issues, links, guides, writtenGuides, formatDate } from '@/lib/content';
 import { aboutStructuredData, serializeJsonLd } from '@/lib/seo';
 import legal from '@/content/legal.json';
 
@@ -31,6 +31,7 @@ export default function AboutPage() {
           <li><Link href="/newsletter/">{site.newsletter.title}</Link>: a roundup of .NET news, practical articles and developer tools, with {issues.length} issues since {formatDate(first.date)}.</li>
           <li><Link href="/links/">The library</Link>: {links.length} articles featured in the newsletter, organized by topic and credited to their authors.</li>
           <li><Link href="/guides/">Reading guides</Link>: {guides.length} step-by-step reading orders through a single topic.</li>
+          {writtenGuides.length > 0 && <li><Link href="/guides/">Written guides</Link>: our own how-tos, with sources listed and a date on every update.</li>}
           <li><Link href="/posts/">Posts</Link>: visual explainers from our social channels, each linked to the original article.</li>
         </ul>
 

@@ -105,6 +105,43 @@ for (const guide of JSON.parse(readFileSync('src/content/guides.json', 'utf8')))
   if (!preview) assert(llms.includes(`## Guide: ${guide.title}`), `llms.txt missing guide outline: ${guide.slug}`);
 }
 
+// Written guides: own sharing image, article metadata, one Article graph with a real author and the sources it cites.
+for (const guide of JSON.parse(readFileSync('src/content/written-guides.json', 'utf8'))) {
+  const url = new URL(`/guides/${guide.slug}/`, site.canonicalUrl).href;
+  const imagePath = `og/guides/${guide.slug}.png`;
+  assert(existsSync(`out/${imagePath}`), `Written guide sharing image missing: run ASSETS_ONLY=og/ npm run assets`);
+  const guideHtml = readFileSync(`out/guides/${guide.slug}/index.html`, 'utf8');
+  const guideMeta = new Map([...guideHtml.matchAll(/<meta\s+[^>]*>/g)].map(([tag]) => [tag.match(/(?:name|property)="([^"]+)"/)?.[1], decode(tag.match(/content="([^"]*)"/)?.[1] ?? '')]));
+  assert.equal(guideMeta.get('og:image'), new URL(imagePath, site.canonicalUrl).href);
+  assert.equal(guideMeta.get('twitter:image'), new URL(imagePath, site.canonicalUrl).href);
+  assert.equal(guideMeta.get('og:image:alt'), guide.imageAlt);
+  for (const suffix of ['-4x3', '-1x1']) assert(existsSync(`out/og/guides/${guide.slug}${suffix}.png`), `Written guide image missing: ${guide.slug}${suffix}.png`);
+  assert.equal(guideMeta.get('og:type'), 'article');
+  assert.equal(guideMeta.get('article:published_time'), guide.published);
+  assert.equal(guideMeta.get('article:modified_time'), guide.reviewed);
+  assert.equal(guideMeta.get('description'), guide.description);
+  assert(guide.description.length <= 160, `Written guide description over 160 characters: ${guide.slug}`);
+  assert(guideHtml.includes(`<link rel="canonical" href="${url}"/>`), `Written guide canonical missing: ${guide.slug}`);
+  const [guideSchema, ...extra] = [...guideHtml.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+  assert(guideSchema && !extra.length, 'Exactly one JSON-LD graph on each written guide');
+  const article = guideSchema['@graph'].find(n => n['@type'] === 'Article');
+  assert.equal(article.url, url);
+  assert.equal(article.datePublished, guide.published);
+  assert.equal(article.dateModified, guide.reviewed);
+  assert.equal(article.isPartOf['@id'], website['@id']);
+  assert.equal(article.publisher['@id'], org['@id']);
+  assert.equal(article.citation.length, guide.sources.length);
+  assert.equal(article.image.length, 3, 'Written guide Article needs 16:9, 4:3 and 1:1 images');
+  assert(article.wordCount > 0 && /^PT\d+M$/.test(article.timeRequired), 'Written guide needs wordCount and timeRequired');
+  assert(guideHtml.includes('Key takeaways'), `Written guide ${guide.slug} must show its key takeaways`);
+  for (const source of guide.sources) assert(guideHtml.includes(`href="${source.url.replace(/&/g, '&amp;')}"`), `Written guide ${guide.slug} must show source ${source.url}`);
+  for (const section of guide.sections) assert(guideHtml.includes(`id="${section.id}"`), `Written guide ${guide.slug} missing section anchor ${section.id}`);
+  if (!preview) {
+    assert(llms.includes(`## Guide: ${guide.title}`), `llms.txt missing written guide outline: ${guide.slug}`);
+    assert(llms.includes('### Key takeaways'), 'llms.txt missing written guide takeaways');
+  }
+}
+
 const notFound = readFileSync('out/404.html', 'utf8');
 assert.match(notFound, /name="robots" content="noindex"/);
 assert(!notFound.includes('application/ld+json'), '404 must not describe itself as the community homepage');

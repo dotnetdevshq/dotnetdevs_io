@@ -1,33 +1,32 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import { SiteChrome } from '@/components/SiteChrome';
+import { GuideCard } from '@/components/GuideCard';
 import { pageMetadata } from '@/lib/page-meta';
-import { guides } from '@/lib/content';
+import { guides, writtenGuides } from '@/lib/content';
 
 export const metadata: Metadata = pageMetadata('/guides/', 'Guides for .NET developers',
-  'Reading paths that put the best articles featured in The .NET Insider into a sensible order, topic by topic.');
+  'Reading paths through the best articles featured in The .NET Insider, plus written guides from dotnetdevs.io for .NET developers and creators.');
 
 export default function GuidesPage() {
   return <SiteChrome current="/guides/">
     <div className="container page">
     <section className="page-intro" aria-labelledby="page-title">
       <p className="eyebrow">Guides</p>
-      <h1 id="page-title">Reading paths</h1>
-      <p className="lead">Each guide puts articles we have featured in The .NET Insider into an order worth reading them in. Links go to the original authors.</p>
+      <h1 id="page-title">Guides</h1>
+      <p className="lead">Reading paths put articles we have featured in The .NET Insider into an order worth reading them in, with links to the original authors. Written guides are our own how-tos.</p>
     </section>
-    <section className="content-section" aria-label="All guides">
+    <section className="content-section" aria-labelledby="reading-heading">
+      <h2 id="reading-heading" className="sidebar-heading">Reading paths</h2>
       <ul className="guide-list">
-        {guides.map(guide => <li key={guide.slug}>
-          <Link className="guide-card" href={`/guides/${guide.slug}/`}>
-            <span className="kicker">Guide · {guide.sections.length} steps · Reviewed {guide.reviewedLabel}</span>
-            <span className="guide-card-title">{guide.title}</span>
-            <span className="muted">{guide.description}</span>
-            <span className="card-action">Read the guide<ArrowRight size={16} aria-hidden="true" /></span>
-          </Link>
-        </li>)}
+        {guides.map(guide => <li key={guide.slug}><GuideCard guide={guide} /></li>)}
       </ul>
     </section>
+    {writtenGuides.length > 0 && <section className="content-section" aria-labelledby="written-heading">
+      <h2 id="written-heading" className="sidebar-heading">Written guides</h2>
+      <ul className="guide-list">
+        {writtenGuides.map(guide => <li key={guide.slug}><GuideCard guide={guide} written /></li>)}
+      </ul>
+    </section>}
     </div>
   </SiteChrome>;
 }
