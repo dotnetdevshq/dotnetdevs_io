@@ -49,6 +49,7 @@ External destinations consistently open in the same tab. Cards are single links,
 | `/newsletter/` | `src/content/issues.json` (all published issues, linking to dotnet.news) |
 | `/links/` and `/links/<topic>/` | `src/content/links.json`; topics are defined in `src/lib/content.ts` |
 | `/guides/` and `/guides/<slug>/` | `src/content/guides.json`; each section lists URLs that must exist in `links.json` |
+| `/guides/<slug>/` (written guides) | `src/content/written-guides.json`; original how-tos made of structured blocks, with their sources |
 | `/posts/` | `src/content/posts.json`; card images live in `public/posts/` |
 | `/sponsor/` | `src/content/media-kit.json`; contact from `site.json` |
 
@@ -63,6 +64,7 @@ Topic pages are generated only for topics that have at least one link. Everythin
 ## Guides and posts
 
 - A guide is an ordered reading path. Add one to `guides.json` with sections of library URLs; the build fails if a URL is not in `links.json`. Update `reviewed` / `reviewedLabel` whenever you revisit it.
+- A written guide is an original how-to in `written-guides.json`: sections of blocks (`p`, `ul`, `ol`, `checklist`, `table`) whose text supports `**bold**`, `` `code` `` and `[links](url)`. List every source it relies on in `sources`; the build checks that each one is linked on the page. Update `reviewed` / `reviewedLabel` when you revise it, and re-render its share card with `ASSETS_ONLY=og/ npm run assets`.
 - A post is a social card. Add the exported image to `public/posts/`, then an entry to `posts.json` with the source article, author and publish date. Write the summary only after reading the source article, and keep it clearly yours.
 
 ## Sponsor page figures

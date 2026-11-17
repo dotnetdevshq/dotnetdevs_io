@@ -37,6 +37,21 @@ for (const guide of guides) {
     <ol style="flex:none;width:400px;margin:0;padding:32px 32px;list-style:none;display:flex;flex-direction:column;justify-content:center;gap:18px;border-radius:28px;background:#fff;border:1px solid #e6e1ee;box-shadow:0 20px 50px rgba(60,40,110,.08);font-size:22px;font-weight:600;line-height:1.2">${steps}</ol>
   </div>`];
 }
+// One sharing card per written guide: title, a one-line summary and topics on the left, the sections on the right.
+const writtenGuides = JSON.parse(readFileSync('src/content/written-guides.json', 'utf8'));
+for (const guide of writtenGuides) {
+  const sections = guide.sections.map((s, i) => `<li style="display:flex;align-items:center;gap:12px"><span style="flex:none;width:28px;height:28px;border-radius:50%;background:#6341b5;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center">${i + 1}</span><span>${escape(s.title)}</span></li>`).join('');
+  const chips = (guide.about || []).slice(0, 3).map(t => `<span style="padding:8px 16px;border-radius:999px;background:#efe8fb;color:#4b2f93;font-size:20px;font-weight:600;white-space:nowrap">${escape(t)}</span>`).join('');
+  pages[`og/guides/${guide.slug}.png`] = [1200, 630, `<div style="width:1200px;height:630px;box-sizing:border-box;padding:64px 72px;display:flex;gap:44px;font-family:${font};color:#272331;background:#faf9f6 radial-gradient(ellipse at 15% 0%,#e9dffa 0%,rgba(250,249,246,0) 60%)">
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:16px"><img src="${markUri}" width="64" height="64"><span style="font-size:30px;font-weight:700;letter-spacing:-0.5px">${site.brand}</span></div>
+      <div><div style="font-size:20px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6341b5">Written guide · ${guide.sections.length} sections</div>
+      <div style="margin-top:18px;font-size:64px;font-weight:750;letter-spacing:-2.5px;line-height:1.05">${escape(guide.title).replace(/-/g, '‑')}</div></div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px">${chips}</div>
+    </div>
+    <ol style="flex:none;width:420px;margin:0;padding:26px 28px;list-style:none;display:flex;flex-direction:column;justify-content:center;gap:10px;border-radius:28px;background:#fff;border:1px solid #e6e1ee;box-shadow:0 20px 50px rgba(60,40,110,.08);font-size:17px;font-weight:600;line-height:1.2">${sections}</ol>
+  </div>`];
+}
 const only = process.env.ASSETS_ONLY;
 const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
 for (const [name, [width, height, body]] of Object.entries(pages)) {

@@ -2,6 +2,7 @@ import issuesData from '@/content/issues.json';
 import linksData from '@/content/links.json';
 import mediaKitData from '@/content/media-kit.json';
 import guidesData from '@/content/guides.json';
+import writtenGuidesData from '@/content/written-guides.json';
 import postsData from '@/content/posts.json';
 import { site } from '@/lib/site';
 
@@ -64,6 +65,22 @@ export const guideBySlug = (slug: string) => guides.find(guide => guide.slug ===
 export const linkByUrl = (url: string) => links.find(link => link.url === url);
 // Rendered by scripts/render-brand-assets.mjs; one 1200 × 630 card per guide.
 export const guideImagePath = (guide: Guide) => `/og/guides/${guide.slug}.png`;
+
+// Written guides are original dotnetdevs.io how-tos, rendered from structured blocks.
+// Inline text supports **bold**, `code` and [links](url); see src/components/RichText.tsx.
+export type WrittenBlock =
+  | { p: string } | { ul: string[] } | { ol: string[] } | { checklist: string[] }
+  | { table: { head: string[]; rows: string[][] } };
+export type WrittenSection = { id: string; title: string; blocks: WrittenBlock[] };
+export type WrittenSource = { title: string; url: string; publisher: string; note: string | null };
+export type WrittenGuide = {
+  slug: string; title: string; seoTitle?: string; description: string; about?: string[];
+  published: string; reviewed: string; reviewedLabel: string; intro: string;
+  sections: WrittenSection[]; sources: WrittenSource[];
+};
+export const writtenGuides = writtenGuidesData as unknown as WrittenGuide[];
+export const writtenGuideBySlug = (slug: string) => writtenGuides.find(guide => guide.slug === slug);
+export const writtenGuideImagePath = (guide: WrittenGuide) => `/og/guides/${guide.slug}.png`;
 
 export type Post = {
   slug: string; title: string; image: string; imageAlt: string; topics: string[];

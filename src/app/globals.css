@@ -242,6 +242,28 @@ html { scroll-padding-top: 92px; }
 .guide-list { list-style: none; margin: 32px 0 0; padding: 0; display: grid; gap: 16px; }
 .guide-list .guide-card { min-height: 0; }
 
+/* Written guides: original how-tos set as one long article beside the table of contents. */
+.guide-byline { margin: 16px 0 0; font-size: 0.875rem; color: var(--muted); }
+.prose.written-guide { max-width: none; padding: 8px 40px 28px; border-radius: 24px; background: var(--surface); border: 1px solid var(--card-border); }
+.written-guide section { scroll-margin-top: 100px; }
+.written-guide section + section { margin-top: 8px; padding-top: 4px; border-top: 1px solid var(--line); }
+.written-guide h2 { display: flex; align-items: baseline; gap: 10px; }
+.written-guide h2 .toc-number { font-size: 0.9375rem; }
+.written-guide ol { padding-left: 22px; }
+.written-guide strong { font-weight: 680; }
+.written-guide code { padding: 1px 5px; border-radius: 6px; background: var(--inset); border: 1px solid var(--inset-border); }
+.written-guide th code, .written-guide td code { white-space: nowrap; }
+.written-guide .table-wrap { margin: 12px 0; }
+.checklist { list-style: none; padding-left: 0 !important; }
+.checklist li { display: flex; gap: 12px; align-items: flex-start; }
+.check-box { flex: none; width: 18px; height: 18px; margin-top: 4px; border-radius: 5px; border: 2px solid var(--violet); }
+.source-list li { font-size: 0.9375rem; }
+@media (max-width: 640px) {
+  .written-guide { padding: 4px 20px 20px; border-radius: 20px; }
+  .written-guide table { font-size: 0.8125rem; }
+  .written-guide th, .written-guide td { padding-right: 10px; }
+}
+
 /* Newsletter archive */
 .content-section { margin-top: 40px; }
 .issue-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }

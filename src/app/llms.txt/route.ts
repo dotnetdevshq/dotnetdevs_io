@@ -1,5 +1,5 @@
 import { site, socialLinks, isIndexable } from '@/lib/site';
-import { issues, issueUrl, topics, activeTopics, guides, linkByUrl, type CuratedLink } from '@/lib/content';
+import { issues, issueUrl, topics, activeTopics, guides, writtenGuides, linkByUrl, type CuratedLink } from '@/lib/content';
 
 export const dynamic = 'force-static';
 
@@ -17,6 +17,7 @@ export function GET() {
     `- [Link library](${page('/links/')}): Curated articles and releases featured in ${site.newsletter.title}, with author credit.`,
     ...activeTopics.map(topic => `- [${topics[topic].label} links](${page(`/links/${topic}/`)}): ${topics[topic].description}`),
     ...guides.map(guide => `- [${guide.title}](${page(`/guides/${guide.slug}/`)}): ${guide.description}`),
+    ...writtenGuides.map(guide => `- [${guide.title}](${page(`/guides/${guide.slug}/`)}): ${guide.description}`),
     `- [Posts](${page('/posts/')}): Visual explainers from our social channels, with links to the original articles.`,
     `- [Sponsor](${page('/sponsor/')}): Audience figures and sponsorship options.`,
     `- [About](${page('/about/')}): Who runs the site, how articles are chosen and credited, and how sponsored content is labeled.`,
@@ -36,6 +37,18 @@ export function GET() {
           .map(link => `- [${link.title}](${link.url})${link.author ? ` by ${link.author}` : ''}`),
         '',
       ]),
+    ]),
+    // Written guides: the section outline and sources, so answer engines can cite the right section.
+    ...writtenGuides.flatMap(guide => [
+      `## Guide: ${guide.title}`,
+      '',
+      `${guide.intro} Updated ${guide.reviewedLabel}. Full guide: ${page(`/guides/${guide.slug}/`)}`,
+      '',
+      ...guide.sections.map((section, i) => `- ${i + 1}. [${section.title}](${page(`/guides/${guide.slug}/#${section.id}`)})`),
+      '',
+      '### Sources',
+      ...guide.sources.map(source => `- [${source.title}](${source.url}), ${source.publisher}`),
+      '',
     ]),
     '## Newsletter',
     `- [${site.newsletter.title}](${site.newsletter.url}): ${site.newsletter.description}`,

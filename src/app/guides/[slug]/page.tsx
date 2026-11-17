@@ -1,23 +1,30 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { SiteChrome } from '@/components/SiteChrome';
 import { LinkCard } from '@/components/LinkCard';
+import { GuideCard } from '@/components/GuideCard';
+import { WrittenGuidePage } from '@/components/WrittenGuidePage';
 import { pageMetadata } from '@/lib/page-meta';
 import { site, externalProps } from '@/lib/site';
 import { guideStructuredData, serializeJsonLd } from '@/lib/seo';
-import { guides, guideBySlug, guideImagePath, linkByUrl, type CuratedLink } from '@/lib/content';
+import { guides, guideBySlug, guideImagePath, writtenGuides, writtenGuideBySlug, writtenGuideImagePath, linkByUrl, type CuratedLink } from '@/lib/content';
 
 type Props = { params: Promise<{ slug: string }> };
 
 export const dynamicParams = false;
 export function generateStaticParams() {
-  return guides.map(guide => ({ slug: guide.slug }));
+  return [...guides, ...writtenGuides].map(guide => ({ slug: guide.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const guide = guideBySlug((await params).slug);
+  const slug = (await params).slug;
+  const written = writtenGuideBySlug(slug);
+  if (written) return pageMetadata(`/guides/${written.slug}/`, written.seoTitle ?? written.title, written.description, {
+    image: { path: writtenGuideImagePath(written), alt: `${written.title}: a written guide from ${site.name}` },
+    modified: written.reviewed,
+  });
+  const guide = guideBySlug(slug);
   if (!guide) return {};
   return pageMetadata(`/guides/${guide.slug}/`, guide.seoTitle ?? guide.title, guide.description, {
     image: { path: guideImagePath(guide), alt: `${guide.title}: a reading guide from ${site.name}` },
@@ -26,7 +33,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function GuidePage({ params }: Props) {
-  const guide = guideBySlug((await params).slug);
+  const slug = (await params).slug;
+  const written = writtenGuideBySlug(slug);
+  if (written) return <WrittenGuidePage guide={written} />;
+  const guide = guideBySlug(slug);
   if (!guide) notFound();
   const articleCount = guide.sections.reduce((n, s) => n + s.links.length, 0);
   return <SiteChrome current="/guides/">
@@ -64,17 +74,11 @@ export default async function GuidePage({ params }: Props) {
             </div>
             <div className="row-list">{section.links.map(linkByUrl).filter((l): l is CuratedLink => !!l).map(link => <LinkCard key={link.url} link={link} />)}</div>
           </section>)}
-          {guides.length > 1 && <nav className="more-guides" aria-labelledby="more-guides-heading">
-            <h2 id="more-guides-heading" className="sidebar-heading">More reading guides</h2>
+          {guides.length + writtenGuides.length > 1 && <nav className="more-guides" aria-labelledby="more-guides-heading">
+            <h2 id="more-guides-heading" className="sidebar-heading">More guides</h2>
             <ul className="guide-list">
-              {guides.filter(other => other.slug !== guide.slug).map(other => <li key={other.slug}>
-                <Link className="guide-card" href={`/guides/${other.slug}/`}>
-                  <span className="kicker">Guide · {other.sections.length} steps · Reviewed {other.reviewedLabel}</span>
-                  <span className="guide-card-title">{other.title}</span>
-                  <span className="muted">{other.description}</span>
-                  <span className="card-action">Read the guide<ArrowRight size={16} aria-hidden="true" /></span>
-                </Link>
-              </li>)}
+              {guides.filter(other => other.slug !== guide.slug).map(other => <li key={other.slug}><GuideCard guide={other} /></li>)}
+              {writtenGuides.map(other => <li key={other.slug}><GuideCard guide={other} written /></li>)}
             </ul>
           </nav>}
           <p className="page-note">Step introductions are dotnetdevs.io commentary. Every article belongs to its author; see <Link href="/links/">the full library</Link> for everything we have featured.</p>

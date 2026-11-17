@@ -1,6 +1,6 @@
 import { site, socialLinks } from '@/lib/site';
 import legal from '@/content/legal.json';
-import { guideImagePath, linkByUrl, type CuratedLink, type Guide } from '@/lib/content';
+import { guideImagePath, linkByUrl, writtenGuideImagePath, type CuratedLink, type Guide, type WrittenGuide } from '@/lib/content';
 
 const id = (fragment: string) => new URL(`#${fragment}`, site.canonicalUrl).href;
 
@@ -90,6 +90,38 @@ export function guideStructuredData(guide: Guide) {
             ...(link.author ? { author: { '@type': 'Person', name: link.author } } : {}),
           },
         })),
+      },
+      {
+        '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: site.name, item: site.canonicalUrl },
+          { '@type': 'ListItem', position: 2, name: 'Guides', item: new URL('/guides/', site.canonicalUrl).href },
+          { '@type': 'ListItem', position: 3, name: guide.title, item: url },
+        ],
+      },
+    ],
+  };
+}
+
+// A written guide is an original article by the site owner: an Article with a real author,
+// published and modified dates, and the sources it cites. It refers back to the homepage graph by @id.
+export function writtenGuideStructuredData(guide: WrittenGuide) {
+  const url = new URL(`/guides/${guide.slug}/`, site.canonicalUrl).href;
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Article', '@id': `${url}#article`,
+        headline: guide.title, name: guide.seoTitle ?? guide.title, url, mainEntityOfPage: url,
+        description: guide.description, abstract: guide.intro, inLanguage: 'en',
+        datePublished: guide.published, dateModified: guide.reviewed,
+        author: { '@type': 'Person', '@id': id('founder'), name: legal.owner, url: new URL('/about/', site.canonicalUrl).href },
+        isPartOf: { '@id': id('website') }, publisher: { '@id': id('organization') },
+        breadcrumb: { '@id': `${url}#breadcrumb` },
+        image: { '@type': 'ImageObject', url: new URL(writtenGuideImagePath(guide), site.canonicalUrl).href, width: 1200, height: 630 },
+        articleSection: guide.sections.map(section => section.title),
+        citation: guide.sources.map(source => ({ '@type': 'CreativeWork', name: source.title, url: source.url })),
+        ...(guide.about?.length ? { about: guide.about.map(name => ({ '@type': 'Thing', name })), keywords: guide.about.join(', ') } : {}),
       },
       {
         '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`,
