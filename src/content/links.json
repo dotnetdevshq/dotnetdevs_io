@@ -10,6 +10,136 @@
   "note": ".NET 11 is a Standard Term Support release with two years of support, and .NET 8 and .NET 9 reach end of support on the same day, November 10, 2026. Headline changes include C# 15 union types and closed hierarchies, a Native AOT CLI host and warm MSBuild server in the SDK, async validation and OpenAPI 3.2 in ASP.NET Core, and CoreCLR as the default runtime for .NET MAUI. Runtime Async and the Blazor AI components remain preview or experimental."
  },
  {
+  "title": "Explore .NET 11 and C# 15 with Anton",
+  "url": "https://antondevtips.com/blog/new-features-in-dotnet-11-and-csharp-15",
+  "author": "Anton Martyniuk",
+  "issue": 35,
+  "topics": [
+   "releases",
+   "csharp"
+  ],
+  "note": "A walkthrough of the language, runtime, libraries, ASP.NET Core and EF Core changes, with a section on breaking changes before upgrading. A more practical route through the release than the announcement lists: start with unions and closed hierarchies, then move to the areas your application uses. Read the breaking-change section alongside the examples, because that is where an upgrade plan becomes specific."
+ },
+ {
+  "title": "What .NET 11 changes for controllers and Minimal APIs",
+  "url": "https://www.roundthecode.com/dotnet-tutorials/dotnet-11-new-features",
+  "author": "David Grace",
+  "issue": 35,
+  "topics": [
+   "aspnet-core",
+   "releases"
+  ],
+  "note": "Demonstrates controller short-circuiting and union response types, then uses an email lookup to explore asynchronous validation in Minimal APIs. The examples show where the new features fit in an existing API. One boundary to note: the asynchronous validation example works in Minimal APIs, while his controller example still invokes synchronous validation, so check the behavior for the endpoint style you use."
+ },
+ {
+  "title": "Choose an approach for reading Excel files in C#",
+  "url": "https://khalidabuhakmeh.com/posts/csharp-read-excel-file/",
+  "author": "Khalid Abuhakmeh",
+  "issue": 35,
+  "topics": [
+   "csharp",
+   "data"
+  ],
+  "note": "Compares ExcelDataReader, ExcelMapper, ClosedXML and lower-level options, using the same data model across the examples. The choice depends on whether you need to stream rows, map them into objects, or read and edit a workbook. He also shows what parsing an .xlsx file without a library involves. A useful reference before adding the next import endpoint or background job."
+ },
+ {
+  "title": "Rider 2026.3 brings .NET 11 support and JetBrains Air",
+  "url": "https://blog.jetbrains.com/dotnet/2026/11/10/rider-2026-3-release/",
+  "author": "Michael Hawker and Alexander Kurakin",
+  "issue": 35,
+  "topics": [
+   "tooling",
+   "ai"
+  ],
+  "note": "Rider supports .NET 11 and C# 15 from launch, including help with the new language features and debugging support for Runtime Async. JetBrains Air adds a workspace for directing agents and reviewing their work inside the IDE. For teams already using coding agents, the workflow changes are the part to look at: agents can run tests through Rider's MCP integration, and local project configuration can be copied into Git worktrees."
+ },
+ {
+  "title": "Uno Platform 7.0 expands cross-platform UI options",
+  "url": "https://platform.uno/blog/uno-platform-7-0/",
+  "author": "Uno Platform Team",
+  "issue": 35,
+  "topics": [
+   "clients",
+   "releases"
+  ],
+  "note": "Uno 7.0 brings a unified rendering pipeline based on SkiaSharp 4, an experimental WebGPU option, .NET 11 support and Apple TV as a target. It also extends the use of third-party .NET MAUI controls across Uno targets, including web and Linux. The speed and size improvements over 6.7 come from the team's own benchmarks, so test your own screens and workloads."
+ },
+ {
+  "title": "November servicing: check packages as well as runtimes",
+  "url": "https://devblogs.microsoft.com/dotnet/dotnet-and-dotnet-framework-november-2026-servicing-updates/",
+  "author": "Rahul Bhandari and Tara Overfield",
+  "issue": 35,
+  "topics": [
+   "releases",
+   "security"
+  ],
+  "note": "Collects the November 2026 security advisories, release notes and downloads for .NET, with links to the .NET Framework updates. Two details are easy to miss: one advisory requires a separate update to the System.Formats.Cbor package, and another concerns Identity scaffolding and templates, including previously generated application code. Updating an installed runtime alone does not cover every fix, so follow the remediation instructions for each advisory."
+ },
+ {
+  "title": "Use your own AI models in Visual Studio",
+  "url": "https://devblogs.microsoft.com/visualstudio/bring-your-own-model-is-now-generally-available-in-visual-studio/",
+  "author": "Praveen Sethuraman",
+  "issue": 35,
+  "topics": [
+   "tooling",
+   "ai"
+  ],
+  "note": "Bring Your Own Model is generally available in Visual Studio 18.12. You can configure multiple connections to the same provider, connect custom or local endpoints, and select an API format that matches the model service. Relevant when a team has an approved internal endpoint or wants separate work and personal configurations. GitHub sign-in is not required for BYOM, although endpoint authentication, network access and organizational policies still apply."
+ },
+ {
+  "title": "A modern C# reference to keep nearby",
+  "url": "https://khalidabuhakmeh.com/posts/csharp-cheat-sheet/",
+  "author": "Khalid Abuhakmeh",
+  "issue": 35,
+  "topics": [
+   "csharp"
+  ],
+  "note": "A cheat sheet with examples for collections, records, pattern matching, LINQ, asynchronous code and null handling, organized for jumping to the syntax you need. The examples target .NET 10 and C# 14, so it covers everyday work and onboarding and does not include the C# 15 additions."
+ },
+ {
+  "title": "Visual Studio LTSC 18.11: a servicing choice for teams",
+  "url": "https://devblogs.microsoft.com/visualstudio/announcing-visual-studio-2026-ltsc-1811/",
+  "author": "Jamshed Damkewala",
+  "issue": 35,
+  "topics": [
+   "tooling",
+   "releases"
+  ],
+  "note": "Visual Studio 2026 LTSC 18.11 is supported through November 14, 2028 and includes the .NET 10 LTS toolsets. It is intended for organizations that need a fixed feature baseline while continuing to receive security and critical fixes; the Stable channel continues with monthly feature and quality updates. The Visual Studio 18.12 AI features belong to a different release from LTSC 18.11."
+ },
+ {
+  "title": "What changed in Visual Studio's Copilot experience",
+  "url": "https://devblogs.microsoft.com/visualstudio/copilot-in-visual-studio-just-got-a-major-upgrade/",
+  "author": "Dalia Abo Sheasha",
+  "issue": 35,
+  "topics": [
+   "tooling",
+   "ai"
+  ],
+  "note": "Visual Studio 18.12 moves Copilot Chat onto an SDK-based execution engine. You can steer it while a task is running, inspect tool results, follow subagent activity and see request costs. Microsoft reports improved results on its own C# task benchmark using the same models, so try the updated workflow on representative tasks from your codebase and review the resulting changes and tests."
+ },
+ {
+  "title": "Rider's game development update: Godot, debugging and new plugins",
+  "url": "https://blog.jetbrains.com/dotnet/2026/11/11/rider-2026-3-for-gamedev/",
+  "author": "Anna Ruban",
+  "issue": 35,
+  "topics": [
+   "tooling"
+  ],
+  "note": "A detailed walkthrough of the game development side of Rider 2026.3: a closer connection with the Godot Editor, improvements to C++ debugging, support for Unity CoreCLR Players and shared command-line argument presets. Lua and Verse plugins are available in beta. For Godot and C# work, start with debugging the current scene through the editor with Rider attached from the first frame."
+ },
+ {
+  "title": "Find .NET 8 and 9 in your container inventory",
+  "url": "https://dev.to/silpa_nallagopula_4d02cde/net-8-and-9-lose-support-on-nov-10-your-image-tags-wont-tell-you-which-pods-run-them-el9",
+  "author": "Silpa Nallagopula",
+  "issue": 35,
+  "topics": [
+   "security",
+   "tooling"
+  ],
+  "note": ".NET 8 and 9 reached end of support on November 10, 2026. This article looks at how to identify the runtime inside images whose tags only describe your application version. It uses inherited image configuration as an initial check and discusses SBOM scanning for self-contained applications. A starting point for an inventory, with coverage gaps to account for."
+ },
+ {
   "title": "What's new in .NET 11",
   "url": "https://learn.microsoft.com/dotnet/core/whats-new/dotnet-11/overview",
   "author": null,
