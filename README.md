@@ -64,7 +64,7 @@ Topic pages are generated only for topics that have at least one link. Everythin
 ## Guides and posts
 
 - A guide is an ordered reading path. Add one to `guides.json` with sections of library URLs; the build fails if a URL is not in `links.json`. Update `reviewed` / `reviewedLabel` whenever you revisit it.
-- A written guide is an original how-to in `written-guides.json`: sections of blocks (`p`, `ul`, `ol`, `checklist`, `table`) whose text supports `**bold**`, `` `code` `` and `[links](url)`. List every source it relies on in `sources`; the build checks that each one is linked on the page. Update `reviewed` / `reviewedLabel` when you revise it, and re-render its share card with `ASSETS_ONLY=og/ npm run assets`.
+- A written guide is an original how-to in `written-guides.json`: sections of blocks (`p`, `ul`, `ol`, `checklist`, `table`) whose text supports `**bold**`, `` `code` `` and `[links](url)`. List every source it relies on in `sources`; the build checks that each one is linked on the page. Update `reviewed` / `reviewedLabel` when you revise it, and re-render its images (the 1200 × 630 share card plus `-4x3` and `-1x1` versions for search) with `ASSETS_ONLY=og/ npm run assets`. Each written guide also needs `takeaways` (shown first and in llms.txt) and an `imageAlt`.
 - A post is a social card. Add the exported image to `public/posts/`, then an entry to `posts.json` with the source article, author and publish date. Write the summary only after reading the source article, and keep it clearly yours.
 
 ## Sponsor page figures
